@@ -2,7 +2,7 @@
 """
 strip-unity-ai.py — Unity AI Assistant 계열 패키지 제거
 
-ARENA BREAK 프로젝트에서는 Unity AI Assistant를 사용하지 않는다.
+showDown 프로젝트에서는 Unity AI Assistant를 사용하지 않는다.
 MCP for Unity와 System.Collections.Immutable 버전이 충돌하기 때문이다.
   Unity AI Assistant -> v10
   MCP for Unity      -> v9  (CodeAnalysis 의존)

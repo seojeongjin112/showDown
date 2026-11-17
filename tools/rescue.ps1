@@ -1,5 +1,5 @@
 ﻿# ==========================================================
-#  ARENA BREAK - 완성 시점으로 점프 (Windows PowerShell)
+#  showDown - 완성 시점으로 점프 (Windows PowerShell)
 #  사용법: ./tools/rescue.ps1 w2-complete
 #  실행 정책 오류가 나면:
 #     powershell -ExecutionPolicy Bypass -File .\tools\rescue.ps1 w2-complete
@@ -32,7 +32,7 @@ Set-Location $Root
 
 Write-Host ""
 Write-Host "=========================================="
-Write-Host " ARENA BREAK 점프"
+Write-Host " showDown 점프"
 Write-Host "=========================================="
 Write-Host ""
 

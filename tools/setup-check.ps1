@@ -1,5 +1,5 @@
 ﻿# ==========================================================
-#  ARENA BREAK - 환경 점검 (Windows PowerShell)
+#  showDown - 환경 점검 (Windows PowerShell)
 #  사용법: ./tools/setup-check.ps1
 #  실행 정책 오류가 나면:
 #     powershell -ExecutionPolicy Bypass -File .\tools\setup-check.ps1
@@ -19,7 +19,7 @@ function Has-Cmd($name) { $null -ne (Get-Command $name -ErrorAction SilentlyCont
 
 Write-Host ""
 Write-Host "=========================================="
-Write-Host " ARENA BREAK 환경 점검"
+Write-Host " showDown 환경 점검"
 Write-Host " 프로젝트: $Root"
 Write-Host "=========================================="
 Write-Host ""

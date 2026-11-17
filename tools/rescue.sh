@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================================
-#  ARENA BREAK - 완성 시점으로 점프 (Git Bash / macOS / Linux)
+#  showDown - 완성 시점으로 점프 (Git Bash / macOS / Linux)
 #  사용법: ./tools/rescue.sh w2-complete
 #
 #  실행 전에 Unity를 닫으세요. 씬 파일이 바뀌는데 Unity가
@@ -31,7 +31,7 @@ TAG_DESCS=(
 
 echo
 echo "=========================================="
-echo " ARENA BREAK 점프"
+echo " showDown 점프"
 echo "=========================================="
 echo
 

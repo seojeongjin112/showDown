@@ -1,4 +1,4 @@
-# ARENA BREAK — 프로젝트 규약
+# showDown — 프로젝트 규약
 
 > 이 파일은 Claude Code가 이 프로젝트에서 작업할 때 자동으로 읽는 컨텍스트다.
 > **수업 중 이 파일을 함께 다듬는 것이 1장의 핵심 활동이다.** 규약이 바뀌면 여기부터 고친다.
@@ -7,7 +7,7 @@
 
 ## 프로젝트 개요
 
-3D 1인칭 웨이브 방어 슈터. 아레나 하나에서 몰려오는 적을 처치하고 5웨이브 생존이 목표.
+2D 3인칭 웨이브 방어 슈터. 아레나 하나에서 몰려오는 적을 처치하고 5웨이브 생존이 목표.
 
 **코어 루프**: 웨이브 스폰 → 적 처치 → 웨이브 클리어 → 강화 선택 → 다음 웨이브
 
@@ -27,7 +27,7 @@
 ## 코딩 규약
 
 ### 네이밍
-- 네임스페이스: `ArenaBreak.Player` / `ArenaBreak.Enemy` / `ArenaBreak.Core` / `ArenaBreak.UI`
+- 네임스페이스: `Player` / `Enemy` / `.Core` / `UI`
 - private 필드: `_camelCase` + `[SerializeField]`
 - **public 필드 금지** — 필요하면 프로퍼티를 쓸 것
 - 클래스·메서드: `PascalCase`, 지역 변수·매개변수: `camelCase`

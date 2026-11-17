@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================================
-#  ARENA BREAK — 환경 점검 (macOS / Linux)
+#  showDown — 환경 점검 (macOS / Linux)
 #  사용법: bash tools/setup-check.sh
 # ==========================================================
 
@@ -19,7 +19,7 @@ warn() { yellow "[주의] $1"; }
 
 echo ""
 echo "=========================================="
-echo " ARENA BREAK 환경 점검"
+echo " showDown 환경 점검"
 echo " 프로젝트: $ROOT"
 echo "=========================================="
 echo ""
