@@ -65,6 +65,13 @@ namespace ArenaBreak.Player
                 _animator = GetComponentInChildren<PixelCharacterAnimator>();
             }
 
+            if (_inputActions == null || _camera == null || _animator == null)
+            {
+                Debug.LogError("PlayerController25D: 입력 에셋, 카메라, 애니메이터 참조가 비어 있습니다", this);
+                enabled = false;
+                return;
+            }
+
             _renderer = _animator.GetComponent<SpriteRenderer>();
 
             InputActionMap map = _inputActions.FindActionMap(ActionMapName, true);
@@ -85,9 +92,15 @@ namespace ArenaBreak.Player
 
         private void OnDisable()
         {
-            _moveAction.Disable();
-            _rollAction.Disable();
+            _moveAction?.Disable();
+            _rollAction?.Disable();
             _isRolling = false;
+
+            // 구르는 도중에 꺼지면 구르기용으로 올려 둔 재생 속도가 남아 다시 켰을 때 걷기가 빨라진다
+            if (_animator != null)
+            {
+                _animator.speed = 1f;
+            }
         }
 
         private void Update()

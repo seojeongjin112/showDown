@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 namespace ArenaBreak.Player
 {
+    // Billboard와 OcclusionFader가 이 프레임에 확정된 카메라 위치·회전을 읽어야 하므로 가장 먼저 실행한다
+    [DefaultExecutionOrder(-100)]
     public class CameraFollow : MonoBehaviour
     {
         private const string ActionMapName = "Player";
@@ -38,6 +40,13 @@ namespace ArenaBreak.Player
 
         private void Awake()
         {
+            if (_inputActions == null || _target == null)
+            {
+                Debug.LogError("CameraFollow: 입력 에셋 또는 추적 대상 참조가 비어 있습니다", this);
+                enabled = false;
+                return;
+            }
+
             InputActionMap map = _inputActions.FindActionMap(ActionMapName, true);
             _lookAction = map.FindAction(LookActionName, true);
         }
@@ -56,6 +65,11 @@ namespace ArenaBreak.Player
 
         private void OnDisable()
         {
+            if (_lookAction == null)
+            {
+                return;
+            }
+
             _lookAction.Disable();
 
             if (_lockCursor)
@@ -85,7 +99,7 @@ namespace ArenaBreak.Player
                 return;
             }
 
-            Vector2 look = Vector2.ClampMagnitude(_lookAction.ReadValue<Vector2>(), _maxLookDeltaPerFrame);
+            Vector2 look = ReadLook();
             _yaw += look.x * _lookSensitivity;
             if (_yawLimit > 0f)
             {
@@ -102,6 +116,25 @@ namespace ArenaBreak.Player
             // 어깨 오프셋은 카메라 로컬 축으로 더해야 회전해도 캐릭터가 항상 같은 화면 위치에 남는다
             Vector3 localOffset = new Vector3(_shoulderOffset.x, _shoulderOffset.y, -_distance);
             transform.SetPositionAndRotation(_focusPoint + rotation * localOffset, rotation);
+        }
+
+        // Esc로 커서가 풀린 동안에도 포인터 이동량은 계속 들어오므로, 잠겨 있을 때만 카메라를 돌린다.
+        // 풀린 뒤에는 왼쪽 클릭으로 다시 잠가야 카메라 조작을 되찾을 수 있다
+        private Vector2 ReadLook()
+        {
+            if (_lockCursor && Cursor.lockState != CursorLockMode.Locked)
+            {
+                Mouse mouse = Mouse.current;
+                if (mouse != null && mouse.leftButton.wasPressedThisFrame)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+
+                return Vector2.zero;
+            }
+
+            return Vector2.ClampMagnitude(_lookAction.ReadValue<Vector2>(), _maxLookDeltaPerFrame);
         }
     }
 }

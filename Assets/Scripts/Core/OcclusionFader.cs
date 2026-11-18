@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace ArenaBreak.Core
 {
+    // 카메라와 Billboard가 움직인 뒤의 건물 범위로 가림을 판정해야 하므로 가장 늦게 실행한다
+    [DefaultExecutionOrder(200)]
     public class OcclusionFader : MonoBehaviour
     {
         // URP 블렌드 값. 알파 블렌드는 (SrcAlpha, OneMinusSrcAlpha)
@@ -49,6 +51,13 @@ namespace ArenaBreak.Core
             if (_camera == null)
             {
                 _camera = Camera.main;
+            }
+
+            if (_camera == null || _target == null || _fadeRoots == null)
+            {
+                Debug.LogError("OcclusionFader: 카메라, 추적 대상, 페이드 대상 참조가 비어 있습니다", this);
+                enabled = false;
+                return;
             }
 
             foreach (Transform root in _fadeRoots)
@@ -154,6 +163,12 @@ namespace ArenaBreak.Core
         {
             foreach (SpriteRenderer sprite in group.Sprites)
             {
+                // 건물이 게임 중에 파괴될 수 있으므로, 파괴된 렌더러는 건너뛴다
+                if (sprite == null)
+                {
+                    continue;
+                }
+
                 Color color = sprite.color;
                 if (!Mathf.Approximately(color.a, group.Alpha))
                 {
@@ -173,7 +188,10 @@ namespace ArenaBreak.Core
                 {
                     for (int i = 0; i < group.Meshes.Count; i++)
                     {
-                        group.Meshes[i].sharedMaterials = group.Originals[i];
+                        if (group.Meshes[i] != null)
+                        {
+                            group.Meshes[i].sharedMaterials = group.Originals[i];
+                        }
                     }
 
                     group.UsingFade = false;
@@ -186,7 +204,10 @@ namespace ArenaBreak.Core
             {
                 for (int i = 0; i < group.Meshes.Count; i++)
                 {
-                    group.Meshes[i].sharedMaterials = group.Fades[i];
+                    if (group.Meshes[i] != null)
+                    {
+                        group.Meshes[i].sharedMaterials = group.Fades[i];
+                    }
                 }
 
                 group.UsingFade = true;
@@ -212,7 +233,7 @@ namespace ArenaBreak.Core
             bool hasBounds = false;
             foreach (Renderer renderer in group.Renderers)
             {
-                if (!renderer.enabled || !renderer.gameObject.activeInHierarchy)
+                if (renderer == null || !renderer.enabled || !renderer.gameObject.activeInHierarchy)
                 {
                     continue;
                 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace ArenaBreak.Core
 {
+    // CameraFollow가 카메라를 옮긴 뒤에 실행해야 같은 프레임의 회전을 따라간다
+    [DefaultExecutionOrder(100)]
     public class Billboard : MonoBehaviour
     {
         private Transform _camera;
