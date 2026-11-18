@@ -73,3 +73,23 @@ crashlytics-build.properties
 # 학생 개인 작업 메모
 /scratch/
 /_personal/
+
+# ==========================================================
+#  라이선스 에셋 (공개 저장소에 올리지 않는다)
+#  Asset Store 에셋은 재배포가 금지되어 있다. 팀원은 각자 임포트한다.
+# ==========================================================
+/[Aa]ssets/Codematik/
+/[Aa]ssets/Codematik.meta
+/[Aa]ssets/InfiniteCharacterForgeWildWest/
+/[Aa]ssets/InfiniteCharacterForgeWildWest.meta
+
+# 위 에셋의 그림에서 잘라 만든 가공본(건물 이미지)
+/[Aa]ssets/Sprites/Buildings/
+/[Aa]ssets/Sprites/Buildings.meta
+
+# 확인용 임시 스크린샷
+/[Aa]ssets/Screenshots/
+/[Aa]ssets/Screenshots.meta
+
+# 내 PC 경로가 들어간 MCP 설정
+/.mcp.json
