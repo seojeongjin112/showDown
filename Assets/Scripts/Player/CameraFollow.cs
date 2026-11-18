@@ -20,6 +20,8 @@ namespace ArenaBreak.Player
         [Header("Look")]
         [SerializeField] private InputActionAsset _inputActions;
         [SerializeField] private float _lookSensitivity = 0.1f;
+        // 시작 방향 기준 좌우 한계(도). 0 이하면 제한 없음. 적이 뒤에서 올 수 있어 기본은 360도 회전이다
+        [SerializeField] private float _yawLimit = 0f;
         [SerializeField] private float _startPitch = 12f;
         [SerializeField] private float _minPitch = 5f;
         [SerializeField] private float _maxPitch = 30f;
@@ -29,6 +31,7 @@ namespace ArenaBreak.Player
 
         private InputAction _lookAction;
         private float _yaw;
+        private float _centerYaw;
         private float _pitch;
         private Vector3 _focusPoint;
         private Vector3 _velocity;
@@ -65,6 +68,7 @@ namespace ArenaBreak.Player
         private void Start()
         {
             _yaw = transform.eulerAngles.y;
+            _centerYaw = _yaw;
             _pitch = Mathf.Clamp(_startPitch, _minPitch, _maxPitch);
 
             if (_target != null)
@@ -83,6 +87,11 @@ namespace ArenaBreak.Player
 
             Vector2 look = Vector2.ClampMagnitude(_lookAction.ReadValue<Vector2>(), _maxLookDeltaPerFrame);
             _yaw += look.x * _lookSensitivity;
+            if (_yawLimit > 0f)
+            {
+                _yaw = Mathf.Clamp(_yaw, _centerYaw - _yawLimit, _centerYaw + _yawLimit);
+            }
+
             _pitch = Mathf.Clamp(_pitch - look.y * _lookSensitivity, _minPitch, _maxPitch);
 
             // 회전은 입력에 바로 반응해야 하므로 위치만 부드럽게 따라간다
