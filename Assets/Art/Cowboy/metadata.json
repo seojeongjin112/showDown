@@ -1,0 +1,32 @@
+{
+  "group_id": "f647efac-c14f-4558-84cf-761c133f9d3a",
+  "states": [
+    {
+      "character": {
+        "id": "d27c2bbe-e989-4d54-b8f5-e773b27c6064",
+        "name": "Idle",
+        "prompt": "cowboy with a brown hat, red bandana, tan vest, blue jeans, boots, holding a revolver",
+        "size": {
+          "width": 48,
+          "height": 48
+        },
+        "template_id": "mannequin",
+        "directions": 4,
+        "view": "low top-down",
+        "created_at": "2026-11-19T10:57:09.457158+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "west": "Idle/rotations/west.png",
+          "east": "Idle/rotations/east.png",
+          "north": "Idle/rotations/north.png"
+        },
+        "animations": {}
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-11-19T10:59:04.933051"
+}
