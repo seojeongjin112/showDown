@@ -37,6 +37,24 @@ namespace ArenaBreak.Player
         private float _pitch;
         private Vector3 _focusPoint;
         private Vector3 _velocity;
+        private bool _isLookSuspended;
+
+        public bool IsLookSuspended => _isLookSuspended;
+
+        // 상점처럼 마우스로 UI를 눌러야 하는 동안 쓴다. 커서 잠금도 여기서 함께 다뤄야
+        // 아래 ReadLook의 "클릭하면 다시 잠금"이 UI 클릭을 가로채지 않는다
+        public void SetLookSuspended(bool suspended)
+        {
+            _isLookSuspended = suspended;
+
+            if (!_lockCursor)
+            {
+                return;
+            }
+
+            Cursor.lockState = suspended ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = suspended;
+        }
 
         private void Awake()
         {
@@ -122,6 +140,11 @@ namespace ArenaBreak.Player
         // 풀린 뒤에는 왼쪽 클릭으로 다시 잠가야 카메라 조작을 되찾을 수 있다
         private Vector2 ReadLook()
         {
+            if (_isLookSuspended)
+            {
+                return Vector2.zero;
+            }
+
             if (_lockCursor && Cursor.lockState != CursorLockMode.Locked)
             {
                 Mouse mouse = Mouse.current;

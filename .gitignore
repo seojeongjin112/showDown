@@ -93,3 +93,7 @@ crashlytics-build.properties
 
 # 내 PC 경로가 들어간 MCP 설정
 /.mcp.json
+
+# 생성 이미지로 만든 상점창 프레임
+/[Aa]ssets/Sprites/UI/StoreFrame.png
+/[Aa]ssets/Sprites/UI/StoreFrame.png.meta
