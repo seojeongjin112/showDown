@@ -93,7 +93,3 @@ crashlytics-build.properties
 
 # 내 PC 경로가 들어간 MCP 설정
 /.mcp.json
-
-# 외부 폰트(Galmuri, OFL-1.1)
-/[Aa]ssets/Fonts/
-/[Aa]ssets/Fonts.meta
