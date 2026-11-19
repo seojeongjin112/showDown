@@ -30,6 +30,7 @@ namespace ArenaBreak.Player
         private Collider _collider;
         private Vector3 _direction;
         private int _damage;
+        private Transform _owner;
         private float _expireTime;
         private bool _released;
         private Action<Bullet> _release;
@@ -63,10 +64,11 @@ namespace ArenaBreak.Player
             }
         }
 
-        public void Initialize(Vector3 position, Vector3 direction, int damage, Action<Bullet> release)
+        public void Initialize(Vector3 position, Vector3 direction, int damage, Transform owner, Action<Bullet> release)
         {
             _direction = direction.normalized;
             _damage = damage;
+            _owner = owner;
             _release = release;
             _released = false;
             _expireTime = Time.time + _lifetime;
@@ -88,6 +90,12 @@ namespace ArenaBreak.Player
 
         private void OnTriggerEnter(Collider other)
         {
+            // 플레이어와 적이 같은 레이어라 레이어 마스크로는 쏜 사람을 거를 수 없다
+            if (_owner != null && other.transform.IsChildOf(_owner))
+            {
+                return;
+            }
+
             if ((_hitLayers.value & (1 << other.gameObject.layer)) == 0)
             {
                 return;

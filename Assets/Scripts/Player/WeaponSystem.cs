@@ -140,7 +140,7 @@ namespace ArenaBreak.Player
             Vector3 direction = (FindAimPoint() - muzzle).normalized;
 
             Bullet bullet = _pool.Get();
-            bullet.Initialize(muzzle, direction, _damage, ReleaseBullet);
+            bullet.Initialize(muzzle, direction, _damage, transform, ReleaseBullet);
         }
 
         // 총구가 카메라와 떨어져 있어 카메라 정면으로 쏘면 조준선과 어긋나므로, 조준선이 가리키는 월드 지점으로 향한다
