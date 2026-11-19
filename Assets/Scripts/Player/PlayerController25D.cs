@@ -164,6 +164,12 @@ namespace ArenaBreak.Player
                 UpdateFacing(direction);
             }
 
+            // 사격 클립이 끝나기 전에 걷기·대기로 덮어쓰면 총을 쏘는 모습이 한 프레임도 안 보인다
+            if (_animator.CurrentAnimation == ForgeAnimation.Shoot)
+            {
+                return;
+            }
+
             _animator.Play(isMoving ? ForgeAnimation.Walk : ForgeAnimation.Idle);
         }
 
