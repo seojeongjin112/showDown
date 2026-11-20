@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1866207233427788322}
   - component: {fileID: 4299840685292417975}
   - component: {fileID: 8368799943682655441}
+  - component: {fileID: 7407030968312563170}
+  - component: {fileID: 4637038975268805506}
   m_Layer: 0
   m_Name: Outlaw
   m_TagString: Untagged
@@ -95,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.ChaseMovement
   _moveSpeed: 2
+  _repathInterval: 0.25
 --- !u!114 &1866207233427788322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +147,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
   _destroyDelay: 0
+--- !u!195 &7407030968312563170
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4637038975268805506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a2a9803077cce4982563d3ccc6212c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.CoinDropper
+  _coinPrefab: {fileID: 1412816660463850402, guid: dd54ab7c34b20ba4e93a0752ed00868b, type: 3}
+  _count: 1
+  _scatterRadius: 1.2
+  _spawnHeight: 1
+  _snapDistance: 1.5
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0
