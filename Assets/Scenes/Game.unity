@@ -60865,8 +60865,8 @@ Transform:
   m_GameObject: {fileID: 1101179708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65978736, y: -0.20091788, z: 0.6}
-  m_LocalScale: {x: 0.5412659, y: 0.5412659, z: 1}
+  m_LocalPosition: {x: 0.16494684, y: -0.05022947, z: 0.15}
+  m_LocalScale: {x: 0.13531648, y: 0.13531648, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1179476179}
@@ -60943,7 +60943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelAnchor
   _camera: {fileID: 1179476181}
-  _distance: 0.6
+  _distance: 0.15
   _heightFraction: 0.5
   _overhangFraction: 0.08
 --- !u!114 &1101179712
@@ -63277,8 +63277,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 300
   field of view: 60
   orthographic: 0
   orthographic size: 5

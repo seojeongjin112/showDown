@@ -9,8 +9,8 @@ namespace ArenaBreak.Player
     public class ViewmodelAnchor : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
-        // 카메라 근평면보다 멀고 벽보다 가까워야 한다
-        [SerializeField] private float _distance = 0.6f;
+        // 카메라 근평면보다 멀고, 벽에 바짝 붙었을 때의 벽까지 거리(약 0.29)보다 가까워야 팔이 벽에 가려지지 않는다
+        [SerializeField] private float _distance = 0.15f;
         // 팔 높이가 화면 높이에서 차지하는 비율
         [SerializeField] private float _heightFraction = 0.5f;
         // 소매 끝의 잘린 단면이 보이지 않도록 화면 밖으로 내보내는 비율(팔 높이 기준)
