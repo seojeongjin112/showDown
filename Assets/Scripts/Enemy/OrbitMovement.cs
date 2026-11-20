@@ -1,0 +1,33 @@
+using UnityEngine;
+
+namespace ArenaBreak.Enemy
+{
+    public class OrbitMovement : MonoBehaviour, IEnemyMovement
+    {
+        [SerializeField] private float _moveSpeed = 6f;
+        [SerializeField] private float _orbitRadius = 8f;
+        [SerializeField] private bool _clockwise = true;
+
+        // 사거리와 무관하게 궤도 반지름을 유지해야 마차가 멈추지 않고 계속 돌며 쏜다
+        public void Tick(Transform target, float attackRange)
+        {
+            Vector3 toTarget = target.position - transform.position;
+            toTarget.y = 0f;
+
+            float distance = toTarget.magnitude;
+            if (distance < Mathf.Epsilon)
+            {
+                return;
+            }
+
+            Vector3 radial = toTarget / distance;
+            Vector3 tangent = Vector3.Cross(Vector3.up, radial) * (_clockwise ? 1f : -1f);
+
+            // 반지름에서 벗어난 만큼 안팎으로 보정해 원이 찌그러지지 않게 한다
+            float correction = Mathf.Clamp((distance - _orbitRadius) / _orbitRadius, -1f, 1f);
+            Vector3 direction = Vector3.ClampMagnitude(tangent + radial * correction, 1f);
+
+            transform.position += direction * (_moveSpeed * Time.deltaTime);
+        }
+    }
+}
