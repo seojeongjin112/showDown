@@ -11,6 +11,7 @@ namespace ArenaBreak.Enemy
         [SerializeField] private float _muzzleHeight = 1f;
         // 플레이어 루트는 발밑이라 그대로 조준하면 탄이 바닥을 향한다
         [SerializeField] private float _aimHeight = 1.5f;
+        [SerializeField] private int _damage = 1;
 
         private float _nextAttackTime;
 
@@ -36,7 +37,7 @@ namespace ArenaBreak.Enemy
             Vector3 aimPoint = target.position + Vector3.up * _aimHeight;
 
             EnemyProjectile projectile = Instantiate(_projectilePrefab, muzzle, Quaternion.identity);
-            projectile.Launch(aimPoint - muzzle);
+            projectile.Launch(aimPoint - muzzle, target, _aimHeight, _damage);
 
             Attacked?.Invoke(target);
         }

@@ -10,6 +10,7 @@ namespace ArenaBreak.Enemy
         [SerializeField] private float _cooldown = 3f;
         [SerializeField] private float _throwHeight = 1.2f;
         [SerializeField] private float _flightTime = 1.2f;
+        [SerializeField] private int _damage = 3;
 
         private float _nextAttackTime;
 
@@ -35,7 +36,7 @@ namespace ArenaBreak.Enemy
             Vector3 landing = target.position;
 
             EnemyBomb bomb = Instantiate(_bombPrefab, origin, Quaternion.identity);
-            bomb.Launch(CalculateVelocity(origin, landing), landing.y);
+            bomb.Launch(CalculateVelocity(origin, landing), landing.y, target, _damage);
 
             Attacked?.Invoke(target);
         }
