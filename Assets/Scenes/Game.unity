@@ -4523,6 +4523,8 @@ GameObject:
   - component: {fileID: 293452410}
   - component: {fileID: 293452414}
   - component: {fileID: 293452415}
+  - component: {fileID: 293452416}
+  - component: {fileID: 293452417}
   m_Layer: 0
   m_Name: DynamiteThrower
   m_TagString: Untagged
@@ -4560,6 +4562,7 @@ MonoBehaviour:
   _cooldown: 3
   _throwHeight: 1.2
   _flightTime: 1.2
+  _damage: 3
 --- !u!114 &293452412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4614,6 +4617,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 2
+--- !u!136 &293452416
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293452409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &293452417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293452409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d4e8529fb39554eac83210acb6512a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
+  _destroyDelay: 0
 --- !u!1 &295772428
 GameObject:
   m_ObjectHideFlags: 0
@@ -53166,6 +53205,8 @@ GameObject:
   - component: {fileID: 732643384}
   - component: {fileID: 732643388}
   - component: {fileID: 732643389}
+  - component: {fileID: 732643390}
+  - component: {fileID: 732643391}
   m_Layer: 0
   m_Name: NativeWarrior
   m_TagString: Untagged
@@ -53255,6 +53296,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 3
+--- !u!136 &732643390
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732643383}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &732643391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732643383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d4e8529fb39554eac83210acb6512a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
+  _destroyDelay: 0
 --- !u!1 &733881298
 GameObject:
   m_ObjectHideFlags: 0
@@ -55648,6 +55725,8 @@ GameObject:
   - component: {fileID: 883398884}
   - component: {fileID: 883398883}
   - component: {fileID: 883398888}
+  - component: {fileID: 883398889}
+  - component: {fileID: 883398890}
   m_Layer: 0
   m_Name: OutlawWagon
   m_TagString: Untagged
@@ -55700,6 +55779,7 @@ MonoBehaviour:
   _cooldown: 2
   _muzzleHeight: 1.5
   _aimHeight: 1.5
+  _damage: 1
 --- !u!114 &883398886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55741,6 +55821,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 8
+--- !u!136 &883398889
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883398882}
+  m_Material: {fileID: 934061725}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &883398890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883398882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d4e8529fb39554eac83210acb6512a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
+  _destroyDelay: 0
 --- !u!1 &891503957
 GameObject:
   m_ObjectHideFlags: 0
@@ -56476,6 +56592,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928030166}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!134 &934061725
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!1 &935283324
 GameObject:
   m_ObjectHideFlags: 0
@@ -58813,6 +58942,7 @@ GameObject:
   - component: {fileID: 1101179710}
   - component: {fileID: 1101179711}
   - component: {fileID: 1101179712}
+  - component: {fileID: 1101179713}
   m_Layer: 0
   m_Name: KnifeArm
   m_TagString: Untagged
@@ -58933,6 +59063,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ddd490fef9835445b5a80788af7ac73, type: 3}
   - {fileID: 21300000, guid: f61f8007d6b4d7d4b9bed65a4787bbd3, type: 3}
   _framesPerSecond: 18
+--- !u!114 &1101179713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101179708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c6639b6f2304b45b4dc314b6effada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.KnifeDamage
+  _camera: {fileID: 0}
+  _range: 2
+  _damage: 1
 --- !u!1 &1101678422
 GameObject:
   m_ObjectHideFlags: 0
@@ -76024,6 +76169,8 @@ GameObject:
   - component: {fileID: 1974569389}
   - component: {fileID: 1974569393}
   - component: {fileID: 1974569394}
+  - component: {fileID: 1974569395}
+  - component: {fileID: 1974569396}
   m_Layer: 0
   m_Name: NativeGunman
   m_TagString: Untagged
@@ -76061,6 +76208,7 @@ MonoBehaviour:
   _cooldown: 2
   _muzzleHeight: 1
   _aimHeight: 1.5
+  _damage: 1
 --- !u!114 &1974569391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76115,6 +76263,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 2
+--- !u!136 &1974569395
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974569388}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1974569396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974569388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d4e8529fb39554eac83210acb6512a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
+  _destroyDelay: 0
 --- !u!1 &1984167241
 GameObject:
   m_ObjectHideFlags: 0
