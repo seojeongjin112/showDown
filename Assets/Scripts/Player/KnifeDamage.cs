@@ -1,3 +1,4 @@
+using System;
 using ArenaBreak.Core;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ namespace ArenaBreak.Player
         [SerializeField] private Camera _camera;
         [SerializeField] private float _range = 2f;
         [SerializeField] private int _damage = 1;
+
+        // 명중 표시(HUD)가 칼 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
+        public event Action<bool> Hit;
 
         private KnifeAttackAnimation _animation;
 
@@ -47,7 +51,14 @@ namespace ArenaBreak.Player
                 return;
             }
 
-            hit.collider.GetComponentInParent<IDamageable>()?.TakeDamage(_damage);
+            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+            if (damageable == null)
+            {
+                return;
+            }
+
+            damageable.TakeDamage(_damage);
+            Hit?.Invoke(damageable is Health health && health.IsDead);
         }
     }
 }
