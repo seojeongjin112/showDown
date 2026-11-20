@@ -32,9 +32,11 @@ namespace ArenaBreak.Enemy
         private void Update()
         {
             _velocity += Physics.gravity * Time.deltaTime;
+            Vector3 previous = transform.position;
             transform.position += _velocity * Time.deltaTime;
 
-            if (transform.position.y <= _landingHeight)
+            // 건물 위나 벽을 지나쳐 날아가지 않고 부딪힌 자리에서 터진다
+            if (transform.position.y <= _landingHeight || ProjectileObstacle.IsBlocked(previous, transform.position))
             {
                 Explode();
             }

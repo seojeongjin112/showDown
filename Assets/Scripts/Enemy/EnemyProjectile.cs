@@ -30,7 +30,15 @@ namespace ArenaBreak.Enemy
 
         private void Update()
         {
+            Vector3 previous = transform.position;
             transform.position += _direction * (_speed * Time.deltaTime);
+
+            // 한 프레임에 건물을 뚫고 지나가지 않도록 이동한 구간 전체를 검사한다
+            if (ProjectileObstacle.IsBlocked(previous, transform.position))
+            {
+                Destroy(gameObject);
+                return;
+            }
 
             // 플레이어 루트는 발밑이라 조준한 높이 기준으로 맞아야 눈높이로 날아온 탄이 닿는다
             Vector3 hitPoint = _target.position + Vector3.up * _targetHeight;
