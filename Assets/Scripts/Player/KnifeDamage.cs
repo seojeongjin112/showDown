@@ -8,7 +8,10 @@ namespace ArenaBreak.Player
     public class KnifeDamage : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
-        [SerializeField] private float _range = 2f;
+        [SerializeField] private float _range = 4f;
+
+        // 두께 없는 선은 스프라이트 가장자리를 겨냥해도 더 좁은 콜라이더를 지나쳐서 허공을 벤 것처럼 된다
+        [SerializeField] private float _hitRadius = 0.7f;
         [SerializeField] private int _damage = 1;
 
         // 명중 표시(HUD)가 칼 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
@@ -42,11 +45,11 @@ namespace ArenaBreak.Player
             _animation.Swung -= OnSwung;
         }
 
-        // 적 콜라이더는 트리거라서 트리거도 맞도록 명시한다. 플레이어 몸 안에서 시작한 레이는 자기 몸을 맞히지 않는다
+        // 트리거 콜라이더도 맞도록 명시한다. 플레이어 몸과 겹친 채 시작한 캐스트는 자기 몸을 맞히지 않는다
         private void OnSwung()
         {
             Transform view = _camera.transform;
-            if (!Physics.Raycast(view.position, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            if (!Physics.SphereCast(view.position, _hitRadius, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
             {
                 return;
             }
