@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,9 @@ namespace ArenaBreak.Player
         private bool _isPlaying;
 
         public bool IsPlaying => _isPlaying;
+
+        // 입력 처리를 여기서 이미 하므로 피해 판정은 이 이벤트를 구독해서 같은 입력을 중복으로 읽지 않는다
+        public event Action Swung;
 
         private void Awake()
         {
@@ -73,6 +77,7 @@ namespace ArenaBreak.Player
                     _isPlaying = true;
                     _elapsed = 0f;
                     _renderer.sprite = _frames[0];
+                    Swung?.Invoke();
                 }
 
                 return;
