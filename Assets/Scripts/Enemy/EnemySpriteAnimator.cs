@@ -1,3 +1,4 @@
+using ArenaBreak.Core;
 using UnityEngine;
 
 namespace ArenaBreak.Enemy
@@ -8,7 +9,8 @@ namespace ArenaBreak.Enemy
         {
             Locomotion,
             Shoot,
-            Reload
+            Reload,
+            Death
         }
 
         [SerializeField] private SpriteRenderer _renderer;
@@ -17,10 +19,12 @@ namespace ArenaBreak.Enemy
         [SerializeField] private Sprite[] _walkShoot;
         [SerializeField] private Sprite[] _reload;
         [SerializeField] private Sprite[] _walkReload;
+        [SerializeField] private Sprite[] _death;
         [SerializeField] private float _framesPerSecond = 12f;
         [SerializeField] private float _movingSpeedThreshold = 0.1f;
 
         private IEnemyAttack _attack;
+        private Health _health;
         private Action _action;
         private float _actionElapsed;
         private Vector3 _lastPosition;
@@ -31,8 +35,9 @@ namespace ArenaBreak.Enemy
         private void Awake()
         {
             _attack = GetComponent<IEnemyAttack>();
+            _health = GetComponent<Health>();
 
-            if (_attack == null || _renderer == null || IsEmpty(_walk) || IsEmpty(_shoot))
+            if (_attack == null || _health == null || _renderer == null || IsEmpty(_walk) || IsEmpty(_shoot))
             {
                 Debug.LogError("EnemySpriteAnimator: IEnemyAttack 또는 렌더러, 걷기/공격 프레임이 비어 있습니다", this);
                 enabled = false;
@@ -57,11 +62,13 @@ namespace ArenaBreak.Enemy
         {
             _lastPosition = transform.position;
             _attack.Attacked += OnAttacked;
+            _health.Died += OnDied;
         }
 
         private void OnDisable()
         {
             _attack.Attacked -= OnAttacked;
+            _health.Died -= OnDied;
         }
 
         private void Update()
@@ -69,6 +76,14 @@ namespace ArenaBreak.Enemy
             float deltaTime = Time.deltaTime;
             if (deltaTime <= 0f)
             {
+                return;
+            }
+
+            if (_action == Action.Death)
+            {
+                _actionElapsed += deltaTime;
+                int last = _death.Length - 1;
+                _renderer.sprite = _death[Mathf.Min((int)(_actionElapsed * _framesPerSecond), last)];
                 return;
             }
 
@@ -84,7 +99,24 @@ namespace ArenaBreak.Enemy
 
         private void OnAttacked(Transform target)
         {
+            if (_action == Action.Death)
+            {
+                return;
+            }
+
             _action = Action.Shoot;
+            _actionElapsed = 0f;
+        }
+
+        private void OnDied()
+        {
+            // 사망 프레임이 없는 적은 기존처럼 마지막 자세에서 그대로 사라진다
+            if (IsEmpty(_death))
+            {
+                return;
+            }
+
+            _action = Action.Death;
             _actionElapsed = 0f;
         }
 

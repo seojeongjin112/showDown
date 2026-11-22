@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d4e8529fb39554eac83210acb6512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyDeath
-  _destroyDelay: 0
+  _destroyDelay: 1.9
 --- !u!114 &6499540232168538871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +283,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bbcc99b1c87f2644d93fbe35eeea29d8, type: 3}
   - {fileID: 21300000, guid: cecb79d0779ca514c908f8244a7cc43b, type: 3}
   - {fileID: 21300000, guid: 86763e0c8662bae4881e1120000de358, type: 3}
+  _death:
+  - {fileID: 21300000, guid: 48fe4f6161a3d144faf60225e309a99f, type: 3}
+  - {fileID: 21300000, guid: b3339737774653b4b84cc92a3cfae215, type: 3}
+  - {fileID: 21300000, guid: 99c97136f30b29a40b8277201032ea50, type: 3}
+  - {fileID: 21300000, guid: 5833155519b891a49b3692ea43d8b2bc, type: 3}
+  - {fileID: 21300000, guid: 3eace4d3d6d495242aa46e1fcae4de4c, type: 3}
+  - {fileID: 21300000, guid: 2df9577154ea56149bec48b5c9b992fb, type: 3}
+  - {fileID: 21300000, guid: 3111902778bbd114293229a946387022, type: 3}
+  - {fileID: 21300000, guid: edf08a7279443f4478f5500b2b9fc282, type: 3}
+  - {fileID: 21300000, guid: 076e60704e6969949837d717bfdcf978, type: 3}
+  - {fileID: 21300000, guid: 83655afe34389fb4589b4ef61a07ac3e, type: 3}
+  - {fileID: 21300000, guid: 639a57891b35d014a87e66740dfac8c3, type: 3}
+  - {fileID: 21300000, guid: 71c21cc31a06dd0488b9d4a7362cc6b3, type: 3}
+  - {fileID: 21300000, guid: eac1e9d9462de1c419e3acea91e0fd2b, type: 3}
+  - {fileID: 21300000, guid: 639a3c76caa9f1943864c32046bf7ff2, type: 3}
+  - {fileID: 21300000, guid: 24bb41ff786feaa48909fe0f93cf72eb, type: 3}
+  - {fileID: 21300000, guid: 7bd76f40708ffb34aa1bcbdd748df084, type: 3}
   _framesPerSecond: 12
   _movingSpeedThreshold: 0.1
 --- !u!1 &6531012234371240222
