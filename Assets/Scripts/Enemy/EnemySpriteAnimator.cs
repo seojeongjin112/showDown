@@ -5,6 +5,9 @@ namespace ArenaBreak.Enemy
 {
     public class EnemySpriteAnimator : MonoBehaviour
     {
+        // 판을 바닥에 눕히는 회전각(눕힌 그림의 머리가 카메라 반대쪽을 향한다)
+        private const float FlatPitch = 90f;
+
         private enum Action
         {
             Locomotion,
@@ -22,20 +25,29 @@ namespace ArenaBreak.Enemy
         [SerializeField] private Sprite[] _death;
         [SerializeField] private float _framesPerSecond = 12f;
         [SerializeField] private float _movingSpeedThreshold = 0.1f;
+        // 바닥 메시와 같은 높이면 깜빡이므로 시체를 살짝 띄운다
+        [SerializeField] private float _corpseLift = 0.02f;
+        // 마차처럼 사망 그림이 누운 모습이 아니라 세워서 본 모습이면 끈다
+        [SerializeField] private bool _layCorpseFlat = true;
+        // 마지막 사망 프레임에서 기준점(발밑)부터 몸 중심까지의 거리(스프라이트 로컬 단위)
+        [SerializeField] private float _corpseCenterY;
 
         private IEnemyAttack _attack;
         private Health _health;
+        private YawBillboard _billboard;
         private Action _action;
         private float _actionElapsed;
         private Vector3 _lastPosition;
         private bool _isMoving;
         // 폭탄병처럼 장전 모션이 없는 적은 사격 뒤 바로 이동 상태로 돌아간다
         private bool _hasReload;
+        private float _corpseShift;
 
         private void Awake()
         {
             _attack = GetComponent<IEnemyAttack>();
             _health = GetComponent<Health>();
+            _billboard = GetComponent<YawBillboard>();
 
             if (_attack == null || _health == null || _renderer == null || IsEmpty(_walk) || IsEmpty(_shoot))
             {
@@ -82,8 +94,14 @@ namespace ArenaBreak.Enemy
             if (_action == Action.Death)
             {
                 _actionElapsed += deltaTime;
+                float progress = Mathf.Clamp01(_actionElapsed * _framesPerSecond / _death.Length);
                 int last = _death.Length - 1;
                 _renderer.sprite = _death[Mathf.Min((int)(_actionElapsed * _framesPerSecond), last)];
+                if (_layCorpseFlat)
+                {
+                    TiltCorpse(progress);
+                }
+
                 return;
             }
 
@@ -118,6 +136,28 @@ namespace ArenaBreak.Enemy
 
             _action = Action.Death;
             _actionElapsed = 0f;
+
+            if (!_layCorpseFlat)
+            {
+                return;
+            }
+
+            // 시체가 카메라를 따라 돌면 눕힌 판이 같이 돌아가므로 쓰러진 방향에서 멈춘다
+            if (_billboard != null)
+            {
+                _billboard.enabled = false;
+            }
+
+            // 눕히면 그림이 발밑에서 앞으로 뻗으므로 몸 중심이 적 위치에 오도록 되돌린다
+            _corpseShift = -_corpseCenterY * _renderer.transform.localScale.y;
+        }
+
+        // 사망 그림은 누운 모습을 위에서 본 것이라, 세워 둔 판 그대로 두면 시체가 공중에 선 것처럼 보인다
+        private void TiltCorpse(float progress)
+        {
+            Transform sprite = _renderer.transform;
+            sprite.localRotation = Quaternion.Euler(Mathf.Lerp(0f, FlatPitch, progress), 0f, 0f);
+            sprite.localPosition = new Vector3(0f, _corpseLift * progress, _corpseShift * progress);
         }
 
         // 사격 직후 쿨다운 동안이 장전이므로 사격이 끝나면 곧바로 장전으로 잇는다
