@@ -12,6 +12,11 @@ namespace ArenaBreak.UI
         [Tooltip("왼쪽부터 채워진다. 적마다 최대 체력이 달라서 칸 수 대신 비율로 채운다")]
         [SerializeField] private Image[] _cells;
 
+        // 한 레이에 겹치는 콜라이더가 이만큼이면 앞에서부터 충분하다
+        private const int MaxRayHits = 8;
+
+        private readonly RaycastHit[] _hits = new RaycastHit[MaxRayHits];
+        private Transform _selfRoot;
         private Collider _lastCollider;
         private Health _target;
 
@@ -29,6 +34,7 @@ namespace ArenaBreak.UI
                 return;
             }
 
+            _selfRoot = _camera.transform.root;
             _root.SetActive(false);
         }
 
@@ -39,11 +45,7 @@ namespace ArenaBreak.UI
 
         private void Update()
         {
-            Transform view = _camera.transform;
-            // 적 콜라이더는 트리거라서 KnifeDamage와 같이 트리거도 맞도록 한다
-            Collider hitCollider = Physics.Raycast(view.position, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide)
-                ? hit.collider
-                : null;
+            Collider hitCollider = FindNearestOtherCollider();
 
             // 매 프레임 GetComponent를 피하려고 바라보는 콜라이더가 바뀔 때만 Health를 찾는다
             if (hitCollider != _lastCollider)
@@ -51,6 +53,27 @@ namespace ArenaBreak.UI
                 _lastCollider = hitCollider;
                 SetTarget(hitCollider != null ? hitCollider.GetComponentInParent<Health>() : null);
             }
+        }
+
+        // 시점이 아래를 향하면 레이가 플레이어 자신의 콜라이더에 맞아 내 체력이 적 체력처럼 뜨므로 자기 몸은 건너뛴다
+        private Collider FindNearestOtherCollider()
+        {
+            Transform view = _camera.transform;
+            int count = Physics.RaycastNonAlloc(view.position, view.forward, _hits, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+
+            Collider nearest = null;
+            float nearestDistance = float.MaxValue;
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit hit = _hits[i];
+                if (hit.distance < nearestDistance && !hit.collider.transform.IsChildOf(_selfRoot))
+                {
+                    nearest = hit.collider;
+                    nearestDistance = hit.distance;
+                }
+            }
+
+            return nearest;
         }
 
         private void SetTarget(Health target)
