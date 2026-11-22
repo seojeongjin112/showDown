@@ -36,6 +36,9 @@ namespace ArenaBreak.Player
         // 명중 표시(HUD)가 총 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
         public event Action<bool> Hit;
 
+        // 총구 화염처럼 발사 순간에 맞춰 재생하는 연출이 입력을 중복으로 읽지 않고 구독하도록 알린다
+        public event Action Fired;
+
         // 팔이 꺼져 있어도 탄약을 읽고 쓸 수 있도록 탄약 상태는 인벤토리가 만들어 넘겨 준다
         public void Bind(WeaponAmmo ammo)
         {
@@ -131,6 +134,7 @@ namespace ArenaBreak.Player
             _ammo.Consume();
             Shoot();
             Play(State.Firing, _data.FireFrames);
+            Fired?.Invoke();
         }
 
         private void TryReload()

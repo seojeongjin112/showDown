@@ -27,6 +27,10 @@ namespace ArenaBreak.Player
         // 명중 표시(HUD)가 칼 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
         public event Action<bool> Hit;
 
+        // 칼 반경 안에 겹칠 수 있는 콜라이더 수의 상한
+        private const int MaxOverlaps = 8;
+
+        private readonly Collider[] _overlaps = new Collider[MaxOverlaps];
         private KnifeAttackAnimation _animation;
 
         private void Awake()
@@ -58,13 +62,7 @@ namespace ArenaBreak.Player
         // 트리거 콜라이더도 맞도록 명시한다. 플레이어 몸과 겹친 채 시작한 캐스트는 자기 몸을 맞히지 않는다
         private void OnSwung()
         {
-            Transform view = _camera.transform;
-            if (!Physics.SphereCast(view.position, _hitRadius, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
-            {
-                return;
-            }
-
-            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+            IDamageable damageable = FindOverlappingTarget() ?? FindCastTarget();
             if (damageable == null)
             {
                 return;
@@ -72,6 +70,53 @@ namespace ArenaBreak.Player
 
             damageable.TakeDamage(_damage);
             Hit?.Invoke(damageable is Health health && health.IsDead);
+        }
+
+        // 적이 몸에 바짝 붙으면 스피어 시작 위치부터 겹쳐서 캐스트가 그 적을 건너뛰므로, 겹친 대상을 먼저 찾는다
+        private IDamageable FindOverlappingTarget()
+        {
+            Transform view = _camera.transform;
+            int count = Physics.OverlapSphereNonAlloc(view.position, _hitRadius, _overlaps, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+
+            IDamageable nearest = null;
+            float nearestDistance = float.MaxValue;
+            for (int i = 0; i < count; i++)
+            {
+                Collider overlap = _overlaps[i];
+                if (overlap.transform.IsChildOf(view.root))
+                {
+                    continue;
+                }
+
+                IDamageable candidate = overlap.GetComponentInParent<IDamageable>();
+                if (candidate == null)
+                {
+                    continue;
+                }
+
+                // 등 뒤에 붙은 적까지 베면 안 되므로 시선 앞쪽에 있는 것만 본다
+                Vector3 toTarget = overlap.bounds.center - view.position;
+                if (Vector3.Dot(view.forward, toTarget) <= 0f || toTarget.sqrMagnitude >= nearestDistance)
+                {
+                    continue;
+                }
+
+                nearest = candidate;
+                nearestDistance = toTarget.sqrMagnitude;
+            }
+
+            return nearest;
+        }
+
+        private IDamageable FindCastTarget()
+        {
+            Transform view = _camera.transform;
+            if (!Physics.SphereCast(view.position, _hitRadius, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            {
+                return null;
+            }
+
+            return hit.collider.GetComponentInParent<IDamageable>();
         }
     }
 }
