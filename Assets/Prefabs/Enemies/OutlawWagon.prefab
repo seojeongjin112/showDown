@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7882167224274040960}
-  - component: {fileID: 7151801447418339993}
-  - component: {fileID: 4342269760172501223}
+  - component: {fileID: 6668911968849615111}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -28,35 +27,28 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 3.6, y: 3, z: 1}
+  m_LocalScale: {x: 1.875, y: 1.875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2863567297529521256}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7151801447418339993
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610119430781073280}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4342269760172501223
-MeshRenderer:
+--- !u!212 &6668911968849615111
+SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610119430781073280}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
@@ -66,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 956f024ad90a2e94b94f3bedfc7ae959, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,11 +67,11 @@ MeshRenderer:
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -87,9 +79,18 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 37267fb49880b78468c874c9a99788bc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.92, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &5692560830494277734
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +110,7 @@ GameObject:
   - component: {fileID: 4361401226538532636}
   - component: {fileID: 3664377224646552946}
   - component: {fileID: 1403027303117869139}
+  - component: {fileID: 6165159052903531330}
   m_Layer: 0
   m_Name: OutlawWagon
   m_TagString: Untagged
@@ -296,3 +298,47 @@ MonoBehaviour:
   _scatterRadius: 3
   _spawnHeight: 1
   _snapDistance: 1.5
+--- !u!114 &6165159052903531330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241d0b60cd154c245a874ed6044d5b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySpriteAnimator
+  _renderer: {fileID: 6668911968849615111}
+  _walk:
+  - {fileID: 21300000, guid: 37267fb49880b78468c874c9a99788bc, type: 3}
+  - {fileID: 21300000, guid: e887bcdb6c3aa5e4f8ce5a2460d0e167, type: 3}
+  - {fileID: 21300000, guid: 8d9a6cd8e6fb4cc4ba5a494a5510a152, type: 3}
+  - {fileID: 21300000, guid: aa70b061004db784bb1bc430ac463f58, type: 3}
+  - {fileID: 21300000, guid: ae0c8449464ac8f45bd6a34f39b896b4, type: 3}
+  - {fileID: 21300000, guid: b8360f1e3aad6a74ea7c531926adc8a8, type: 3}
+  - {fileID: 21300000, guid: d5c72fde36dfb8e4484b7d6654eac739, type: 3}
+  - {fileID: 21300000, guid: 83758b1779a037d4db6bb9b417b666ca, type: 3}
+  _shoot:
+  - {fileID: 21300000, guid: 82ce967f02961e74a9bebc418d54fba2, type: 3}
+  - {fileID: 21300000, guid: 797ef062f4e0d17438719ac50ec6d1e7, type: 3}
+  - {fileID: 21300000, guid: d16dbdf8534682046a2b1fe08a81b59a, type: 3}
+  - {fileID: 21300000, guid: 84bb6beb8f796ec41b85f667a07b57d3, type: 3}
+  - {fileID: 21300000, guid: 1a796509653ab214ab3d392480c7a7c8, type: 3}
+  - {fileID: 21300000, guid: 99ab3244c31543648990fae43c8178c7, type: 3}
+  - {fileID: 21300000, guid: 96d2641983db0234990fd28236fc1fe9, type: 3}
+  - {fileID: 21300000, guid: 7abcfe05453107d44b56a0b63357e30f, type: 3}
+  _walkShoot:
+  - {fileID: 21300000, guid: eee19510bd7594245ac2cd71d00c20e5, type: 3}
+  - {fileID: 21300000, guid: cc7b4c025be0db84189a9d67dba977e8, type: 3}
+  - {fileID: 21300000, guid: f19b25c6398f35442bde5df31c12f086, type: 3}
+  - {fileID: 21300000, guid: 8e9191e16f38d2e4f8b832aed2af26ed, type: 3}
+  - {fileID: 21300000, guid: 4606b14ca4538cc468433cd88aee9b3c, type: 3}
+  - {fileID: 21300000, guid: 38a9ddad42819ca4c94c1a84e21b38e2, type: 3}
+  - {fileID: 21300000, guid: a54c31cbd7d1ac7439cc1b55b5675b33, type: 3}
+  - {fileID: 21300000, guid: a5803cf1b9ef0534b85ba5e4a92795b5, type: 3}
+  _reload: []
+  _walkReload: []
+  _framesPerSecond: 12
+  _movingSpeedThreshold: 0.1
