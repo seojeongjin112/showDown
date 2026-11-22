@@ -8,7 +8,7 @@ namespace ArenaBreak.Player
 {
     // 칼의 우클릭 입력과 같은 방식으로 발사하고, R로 장전한다
     [RequireComponent(typeof(SpriteRenderer))]
-    public class GunWeapon : MonoBehaviour
+    public class GunWeapon : MonoBehaviour, IAmmoWeapon
     {
         // 입력 에셋의 Player 맵에는 우클릭과 장전 액션이 없어서 여기서 직접 바인딩한다
         private const string FireBinding = "<Mouse>/rightButton";

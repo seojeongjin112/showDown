@@ -9,6 +9,7 @@ namespace ArenaBreak.UI
     {
         [SerializeField] private KnifeDamage _knife;
         [SerializeField] private GunWeapon[] _guns;
+        [SerializeField] private DynamiteWeapon[] _dynamites;
         [SerializeField] private Image _marker;
         [SerializeField] private Sprite _hitSprite;
         [SerializeField] private Sprite _killSprite;
@@ -34,6 +35,11 @@ namespace ArenaBreak.UI
             {
                 gun.Hit += OnHit;
             }
+
+            foreach (DynamiteWeapon dynamite in _dynamites)
+            {
+                dynamite.Hit += OnHit;
+            }
         }
 
         private void OnDisable()
@@ -46,6 +52,11 @@ namespace ArenaBreak.UI
             foreach (GunWeapon gun in _guns)
             {
                 gun.Hit -= OnHit;
+            }
+
+            foreach (DynamiteWeapon dynamite in _dynamites)
+            {
+                dynamite.Hit -= OnHit;
             }
         }
 

@@ -122,9 +122,9 @@ namespace ArenaBreak.Player
                     _ammo[i] = new WeaponAmmo(_slots[i].Data);
 
                     // 팔 오브젝트가 꺼져 있어도 탄약 상태를 넘길 수 있다
-                    if (_slots[i].Viewmodel.TryGetComponent(out GunWeapon gun))
+                    if (_slots[i].Viewmodel.TryGetComponent(out IAmmoWeapon weapon))
                     {
-                        gun.Bind(_ammo[i]);
+                        weapon.Bind(_ammo[i]);
                     }
                 }
 

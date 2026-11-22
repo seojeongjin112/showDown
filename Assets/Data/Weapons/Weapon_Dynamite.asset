@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e091b1762979e44791aaab138a9d1e2, type: 3}
+  m_Name: Weapon_Dynamite
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
+  _displayName: "\uB2E4\uC774\uB108\uB9C8\uC774\uD2B8"
+  _icon: {fileID: 21300000, guid: 86c7c11ab062fdb479a0dcd0fb8a703a, type: 3}
+  _ammoIcon: {fileID: 21300000, guid: dbc2bd87106a8dd438bec82e8b382efd, type: 3}
+  _damage: 6
+  _range: 40
+  _pellets: 1
+  _spreadDegrees: 0
+  _magazineSize: 1
+  _startReserve: 4
+  _maxReserve: 12
+  _fireFrames:
+  - {fileID: 21300000, guid: fb3d556cf788fb6438de70ee00a2e2cd, type: 3}
+  - {fileID: 21300000, guid: 73b562a1ab7e70d4b89e1399ac3b3f76, type: 3}
+  - {fileID: 21300000, guid: 625880db3b0109845b81da6a0fa1d2c8, type: 3}
+  - {fileID: 21300000, guid: cfc985ec1cf52c5498342d6dee338811, type: 3}
+  - {fileID: 21300000, guid: 3719ced694200864d98f5c7755ea427b, type: 3}
+  - {fileID: 21300000, guid: 86ea4f4a9e28e334d873c9f77a080218, type: 3}
+  - {fileID: 21300000, guid: 21c3783dbe3b9df4cba30fcb7cf7664b, type: 3}
+  - {fileID: 21300000, guid: f9a4d61ed867b10489b46d4a7b00d0d9, type: 3}
+  - {fileID: 21300000, guid: 47dcf95e80f6da844a2e394ee21fdc26, type: 3}
+  - {fileID: 21300000, guid: 39ebc2d9a67cb484a86db3b5212e9999, type: 3}
+  - {fileID: 21300000, guid: 193ba0fad513d784ab62ed5354f733b9, type: 3}
+  _reloadFrames: []
+  _framesPerSecond: 18
