@@ -12,19 +12,26 @@ namespace ArenaBreak.Enemy
         // 플레이어 루트는 발밑이라 그대로 조준하면 탄이 바닥을 향한다
         [SerializeField] private float _aimHeight = 1.5f;
         [SerializeField] private int _damage = 1;
-        // 비어 있거나 조준 시간이 0이면 예전처럼 즉시 발사한다
+        // 비어 있으면 조준 단계 없이 곧바로 사격 동작에 들어간다
         [SerializeField] private AimLaser _aimLaser;
         [SerializeField] private float _aimDuration = 0.8f;
+        // 사격 애니메이션이 시작된 뒤 총구 화염 프레임까지 걸리는 시간이라 이때 맞춰 총알을 낸다.
+        // 프레임 번호 / 애니메이션 초당 프레임 수(Outlaw·Gunslinger 4/12, Sniper 5/12)
+        [SerializeField] private float _fireDelay = 0.33f;
 
         private float _nextAttackTime;
-        private float _aimStartTime;
-        private bool _isAiming;
-        private Transform _aimTarget;
+        private float _attackStartTime;
+        private bool _isAttacking;
+        private bool _animationStarted;
+        private Transform _attackTarget;
 
         public float Range => _range;
         public bool IsReady => Time.time >= _nextAttackTime;
 
+        // 사격 애니메이션 시작 시점에 나간다. 총알은 _fireDelay 뒤 화염 프레임에 맞춰 나간다
         public event Action<Transform> Attacked;
+
+        private float AimTime => _aimLaser == null ? 0f : _aimDuration;
 
         private void Awake()
         {
@@ -37,48 +44,69 @@ namespace ArenaBreak.Enemy
 
         private void OnDisable()
         {
-            CancelAim();
+            CancelAttack();
         }
 
         public void Execute(Transform target)
         {
-            // 조준 중에는 쿨다운이 이미 걸려 있어 다시 호출되지 않는다
-            _nextAttackTime = Time.time + _aimDuration + _cooldown;
+            // 진행 중에는 쿨다운이 이미 걸려 있어 다시 호출되지 않는다
+            _nextAttackTime = Time.time + AimTime + _fireDelay + _cooldown;
 
-            if (_aimLaser == null || _aimDuration <= 0f)
-            {
-                Fire(target);
-                return;
-            }
+            _isAttacking = true;
+            _animationStarted = false;
+            _attackTarget = target;
+            _attackStartTime = Time.time;
 
-            _isAiming = true;
-            _aimTarget = target;
-            _aimStartTime = Time.time;
+            // 대기 시간이 없으면 다음 프레임을 기다리지 않고 바로 진행한다
+            Advance();
         }
 
         private void Update()
         {
-            if (!_isAiming)
+            Advance();
+        }
+
+        private void Advance()
+        {
+            if (!_isAttacking)
             {
                 return;
             }
 
-            float progress = (Time.time - _aimStartTime) / _aimDuration;
-            if (progress >= 1f)
+            // 조준 도중 타겟이 사라지면 쏠 대상이 없다
+            if (_attackTarget == null)
             {
-                Transform target = _aimTarget;
-                CancelAim();
+                CancelAttack();
+                return;
+            }
+
+            float elapsed = Time.time - _attackStartTime;
+
+            if (!_animationStarted && elapsed >= AimTime)
+            {
+                _animationStarted = true;
+                Attacked?.Invoke(_attackTarget);
+            }
+
+            if (elapsed >= AimTime + _fireDelay)
+            {
+                Transform target = _attackTarget;
+                CancelAttack();
                 Fire(target);
                 return;
             }
 
-            _aimLaser.Show(GetMuzzle(), GetAimPoint(_aimTarget), progress);
+            if (_aimLaser != null)
+            {
+                float progress = AimTime > 0f ? Mathf.Clamp01(elapsed / AimTime) : 1f;
+                _aimLaser.Show(GetMuzzle(), GetAimPoint(_attackTarget), progress);
+            }
         }
 
-        private void CancelAim()
+        private void CancelAttack()
         {
-            _isAiming = false;
-            _aimTarget = null;
+            _isAttacking = false;
+            _attackTarget = null;
             if (_aimLaser != null)
             {
                 _aimLaser.Hide();
@@ -96,8 +124,6 @@ namespace ArenaBreak.Enemy
 
             EnemyProjectile projectile = Instantiate(_projectilePrefab, muzzle, Quaternion.identity);
             projectile.Launch(aimPoint - muzzle, target, _aimHeight, _damage);
-
-            Attacked?.Invoke(target);
         }
     }
 }
