@@ -183963,6 +183963,8 @@ GameObject:
   - component: {fileID: 569589932}
   - component: {fileID: 569589931}
   - component: {fileID: 569589934}
+  - component: {fileID: 569589936}
+  - component: {fileID: 569589935}
   m_Layer: 0
   m_Name: ShotgunArm
   m_TagString: Untagged
@@ -184092,6 +184094,45 @@ MonoBehaviour:
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
   _blendSpeed: 8
+--- !u!114 &569589935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569589929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5209bfd8bfffea499aa5a9f2e1ed994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelDeath
+  _playerHealth: {fileID: 1854700181}
+  _frames:
+  - {fileID: 21300000, guid: e33eaf51bdec7b84681baf9389dd01b7, type: 3}
+  - {fileID: 21300000, guid: 1d54e8aa8925e3541b5c669b57ecda21, type: 3}
+  - {fileID: 21300000, guid: 676e8581aa122ff4b840f1f945f408de, type: 3}
+  - {fileID: 21300000, guid: a240a14e9c0812543aa7e3fe9a3f1e66, type: 3}
+  - {fileID: 21300000, guid: b32a02d8250042345a6481d42da3f833, type: 3}
+  - {fileID: 21300000, guid: 7d40dc3b302991e4eb32417c8e2f102c, type: 3}
+  - {fileID: 21300000, guid: 6a070012cbae2ed4e96bcb08f528c727, type: 3}
+  - {fileID: 21300000, guid: 442fd31acdad97b48902be580717e3ac, type: 3}
+  - {fileID: 21300000, guid: 2240e75025d2d6a4fb124c5a45283294, type: 3}
+  _framesPerSecond: 12
+--- !u!114 &569589936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569589929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a46b2ee74ca22478af1d8e31972e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelHitKick
+  _playerHealth: {fileID: 1854700181}
+  _kickOffset: {x: 0.04, y: -0.12}
+  _recoverSpeed: 10
 --- !u!1 &576616502
 GameObject:
   m_ObjectHideFlags: 0
@@ -186285,6 +186326,7 @@ MonoBehaviour:
   - {fileID: 1854700178}
   - {fileID: 1854700177}
   - {fileID: 1101179712}
+  _showDelay: 1.2
 --- !u!1 &623196292
 GameObject:
   m_ObjectHideFlags: 0
@@ -193286,6 +193328,8 @@ GameObject:
   - component: {fileID: 810286531}
   - component: {fileID: 810286530}
   - component: {fileID: 810286534}
+  - component: {fileID: 810286536}
+  - component: {fileID: 810286535}
   m_Layer: 0
   m_Name: RevolverArm
   m_TagString: Untagged
@@ -193415,6 +193459,41 @@ MonoBehaviour:
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
   _blendSpeed: 8
+--- !u!114 &810286535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810286529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5209bfd8bfffea499aa5a9f2e1ed994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelDeath
+  _playerHealth: {fileID: 1854700181}
+  _frames:
+  - {fileID: 21300000, guid: 6674dffd4fee36d43a83fbc294ce7d2c, type: 3}
+  - {fileID: 21300000, guid: ebe899a6d9359904c96635d73a340f18, type: 3}
+  - {fileID: 21300000, guid: a740af21a2154c440ab57e9e149ab680, type: 3}
+  - {fileID: 21300000, guid: 10d1702654e7a2040baf6cb9274a0631, type: 3}
+  - {fileID: 21300000, guid: 0f08f0f56f04b254c9c6f410bf2dd9d5, type: 3}
+  _framesPerSecond: 12
+--- !u!114 &810286536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810286529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a46b2ee74ca22478af1d8e31972e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelHitKick
+  _playerHealth: {fileID: 1854700181}
+  _kickOffset: {x: 0.04, y: -0.12}
+  _recoverSpeed: 10
 --- !u!1 &812369943
 GameObject:
   m_ObjectHideFlags: 0
@@ -201732,6 +201811,8 @@ GameObject:
   - component: {fileID: 1101179712}
   - component: {fileID: 1101179713}
   - component: {fileID: 1101179714}
+  - component: {fileID: 1101179716}
+  - component: {fileID: 1101179715}
   m_Layer: 0
   m_Name: KnifeArm
   m_TagString: Untagged
@@ -201886,6 +201967,45 @@ MonoBehaviour:
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
   _blendSpeed: 8
+--- !u!114 &1101179715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101179708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5209bfd8bfffea499aa5a9f2e1ed994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelDeath
+  _playerHealth: {fileID: 1854700181}
+  _frames:
+  - {fileID: 21300000, guid: 680719c1fb178b348a66987f587f7883, type: 3}
+  - {fileID: 21300000, guid: d3b966120dec51e4d95d6915821e58ab, type: 3}
+  - {fileID: 21300000, guid: a2ed11e21d68e5a47b3b8afa2f0f2e6d, type: 3}
+  - {fileID: 21300000, guid: ac1af76aece9cd644853adffd0db6223, type: 3}
+  - {fileID: 21300000, guid: 71788e1bb990e8d4daa092d5fb71b54f, type: 3}
+  - {fileID: 21300000, guid: 641acb6c791a4a34980d3ef13c20846d, type: 3}
+  - {fileID: 21300000, guid: 73d5c9d1370010c4e96c0fd6d6d4b496, type: 3}
+  - {fileID: 21300000, guid: a1895578fa177b94c8383947879e17fd, type: 3}
+  - {fileID: 21300000, guid: ada774b5cfb82484399dc38629434be3, type: 3}
+  _framesPerSecond: 12
+--- !u!114 &1101179716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101179708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a46b2ee74ca22478af1d8e31972e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelHitKick
+  _playerHealth: {fileID: 1854700181}
+  _kickOffset: {x: 0.04, y: -0.12}
+  _recoverSpeed: 10
 --- !u!1 &1103891707
 GameObject:
   m_ObjectHideFlags: 0
@@ -212734,6 +212854,8 @@ GameObject:
   - component: {fileID: 1416417335}
   - component: {fileID: 1416417334}
   - component: {fileID: 1416417338}
+  - component: {fileID: 1416417340}
+  - component: {fileID: 1416417339}
   m_Layer: 0
   m_Name: DynamiteArm
   m_TagString: Untagged
@@ -212868,6 +212990,42 @@ MonoBehaviour:
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
   _blendSpeed: 8
+--- !u!114 &1416417339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416417333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5209bfd8bfffea499aa5a9f2e1ed994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelDeath
+  _playerHealth: {fileID: 1854700181}
+  _frames:
+  - {fileID: 21300000, guid: ad35f65cc78766d4db8b48bffba9b94f, type: 3}
+  - {fileID: 21300000, guid: 6e5acea2bc418c94292cd7b3fb87a6fc, type: 3}
+  - {fileID: 21300000, guid: d257b0fdc6900c7498e4e1e221e96b74, type: 3}
+  - {fileID: 21300000, guid: 1514e501a6aa89f42b66877b5a742f21, type: 3}
+  - {fileID: 21300000, guid: ae87de9e42779c346a5ae289bd2df8d0, type: 3}
+  - {fileID: 21300000, guid: 03f7cef4d4783d34fad8001999bc3086, type: 3}
+  _framesPerSecond: 12
+--- !u!114 &1416417340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416417333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a46b2ee74ca22478af1d8e31972e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelHitKick
+  _playerHealth: {fileID: 1854700181}
+  _kickOffset: {x: 0.04, y: -0.12}
+  _recoverSpeed: 10
 --- !u!1 &1419137731
 GameObject:
   m_ObjectHideFlags: 0
@@ -214408,6 +214566,8 @@ GameObject:
   - component: {fileID: 1460797994}
   - component: {fileID: 1460797993}
   - component: {fileID: 1460797997}
+  - component: {fileID: 1460797999}
+  - component: {fileID: 1460797998}
   m_Layer: 0
   m_Name: WinchesterArm
   m_TagString: Untagged
@@ -214537,6 +214697,45 @@ MonoBehaviour:
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
   _blendSpeed: 8
+--- !u!114 &1460797998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460797992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5209bfd8bfffea499aa5a9f2e1ed994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelDeath
+  _playerHealth: {fileID: 1854700181}
+  _frames:
+  - {fileID: 21300000, guid: accc451a9239e3f4aac73c55fb57aeeb, type: 3}
+  - {fileID: 21300000, guid: e379ecdd9384d8a488bdaf38ba423339, type: 3}
+  - {fileID: 21300000, guid: 9f819390a622d6f478c7d753d6c44b13, type: 3}
+  - {fileID: 21300000, guid: 8260b176f90f19943bd8fe16fb49fe4a, type: 3}
+  - {fileID: 21300000, guid: fddd88f8c3a39d64098650a6e365acf7, type: 3}
+  - {fileID: 21300000, guid: 22f79703545c56d498f005bf8d5520b2, type: 3}
+  - {fileID: 21300000, guid: 377836abe71b6bb4eb23913f2ba68afb, type: 3}
+  - {fileID: 21300000, guid: 5f50b1daeb6ce524ab1cdbfb3db26c1d, type: 3}
+  - {fileID: 21300000, guid: e2268d6e1c9b1d84391cea4cb46a9fa9, type: 3}
+  _framesPerSecond: 12
+--- !u!114 &1460797999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460797992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a46b2ee74ca22478af1d8e31972e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelHitKick
+  _playerHealth: {fileID: 1854700181}
+  _kickOffset: {x: 0.04, y: -0.12}
+  _recoverSpeed: 10
 --- !u!1 &1462255486
 GameObject:
   m_ObjectHideFlags: 0
@@ -227809,6 +228008,7 @@ GameObject:
   - component: {fileID: 1854700183}
   - component: {fileID: 1854700184}
   - component: {fileID: 1854700185}
+  - component: {fileID: 1854700186}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -227969,6 +228169,24 @@ MonoBehaviour:
   - _data: {fileID: 11400000, guid: 8d958da78f3f4a649bc8be9c2aeea337, type: 2}
     _viewmodel: {fileID: 1416417333}
     _ownedAtStart: 0
+--- !u!114 &1854700186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854700176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33de2b876b2890746b244b8044a75e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.PlayerDeathFall
+  _playerHealth: {fileID: 1854700181}
+  _cameraTransform: {fileID: 1179476179}
+  _fallPitch: 80
+  _dropHeight: 1.1
+  _rollDegrees: 12
+  _duration: 0.9
 --- !u!1 &1858703849
 GameObject:
   m_ObjectHideFlags: 0

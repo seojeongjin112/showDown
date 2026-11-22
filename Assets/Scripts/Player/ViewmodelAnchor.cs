@@ -21,6 +21,9 @@ namespace ArenaBreak.Player
         // 걷기 흔들림처럼 기준 위치에 더하는 오프셋. 해상도와 무관하도록 팔 높이에 대한 비율로 받는다
         public Vector2 OffsetFraction { get; set; }
 
+        // 피격 반동은 걷기 흔들림과 동시에 일어나므로 같은 값을 덮어쓰지 않도록 따로 둔다
+        public Vector2 ImpactOffsetFraction { get; set; }
+
         private void OnEnable()
         {
             _renderer = GetComponent<SpriteRenderer>();
@@ -47,10 +50,12 @@ namespace ArenaBreak.Player
             float armWidth = spriteSize.x * scale;
             float overhang = armHeight * _overhangFraction;
 
+            Vector2 offset = (OffsetFraction + ImpactOffsetFraction) * armHeight;
+
             // 스프라이트 피벗이 중앙이므로 오른쪽 아래 모서리가 화면 모서리에 닿도록 반 크기만큼 안쪽으로 둔다
             transform.localPosition = new Vector3(
-                halfViewWidth - armWidth * 0.5f + overhang + OffsetFraction.x * armHeight,
-                -halfViewHeight + armHeight * 0.5f - overhang + OffsetFraction.y * armHeight,
+                halfViewWidth - armWidth * 0.5f + overhang + offset.x,
+                -halfViewHeight + armHeight * 0.5f - overhang + offset.y,
                 _distance);
             transform.localScale = new Vector3(scale, scale, 1f);
         }
