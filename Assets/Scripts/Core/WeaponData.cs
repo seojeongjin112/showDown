@@ -13,6 +13,10 @@ namespace ArenaBreak.Core
         [SerializeField] private Sprite _ammoIcon;
         [SerializeField] private int _damage = 2;
         [SerializeField] private float _range = 40f;
+        [Tooltip("한 발에 나가는 알갱이 수. 산탄총은 여러 개, 나머지는 1")]
+        [SerializeField] private int _pellets = 1;
+        [Tooltip("알갱이가 조준선에서 퍼지는 최대 각도(도). 0이면 정확히 조준선으로 나간다")]
+        [SerializeField] private float _spreadDegrees;
         [SerializeField] private int _magazineSize;
         [SerializeField] private int _startReserve;
         [SerializeField] private int _maxReserve;
@@ -25,6 +29,8 @@ namespace ArenaBreak.Core
         public Sprite AmmoIcon => _ammoIcon;
         public int Damage => _damage;
         public float Range => _range;
+        public int Pellets => _pellets;
+        public float SpreadDegrees => _spreadDegrees;
         public int MagazineSize => _magazineSize;
         public int StartReserve => _startReserve;
         public int MaxReserve => _maxReserve;

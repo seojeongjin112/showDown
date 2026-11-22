@@ -24,6 +24,7 @@ namespace ArenaBreak.Player
 
         // 입력 에셋에 무기 전환 액션이 없어서 숫자키와 휠을 직접 바인딩한다
         private const string ScrollBinding = "<Mouse>/scroll";
+        // 숫자키의 컨트롤 이름은 digit1이 아니라 1이라서 슬롯 번호를 그대로 쓴다
         private const string KeyBindingFormat = "<Keyboard>/{0}";
 
         [SerializeField] private Slot[] _slots;
@@ -127,7 +128,7 @@ namespace ArenaBreak.Player
                     }
                 }
 
-                _selectActions[i] = new InputAction("Weapon" + i, InputActionType.Button, string.Format(KeyBindingFormat, "digit" + (i + 1)));
+                _selectActions[i] = new InputAction("Weapon" + i, InputActionType.Button, string.Format(KeyBindingFormat, i + 1));
                 _slots[i].Viewmodel.SetActive(i == SelectedIndex);
             }
 

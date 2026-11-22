@@ -2,6 +2,7 @@ using System;
 using ArenaBreak.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace ArenaBreak.Player
 {
@@ -143,20 +144,37 @@ namespace ArenaBreak.Player
         private void Shoot()
         {
             Transform view = _camera.transform;
-            if (!Physics.Raycast(view.position, view.forward, out RaycastHit hit, _data.Range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            bool anyHit = false;
+            bool anyKill = false;
+
+            for (int i = 0; i < _data.Pellets; i++)
             {
-                return;
+                // 알갱이마다 원뿔 안에서 방향을 흩어야 산탄이 한 점으로 모이지 않는다
+                Vector2 jitter = Random.insideUnitCircle * _data.SpreadDegrees;
+                Vector3 direction = view.rotation * Quaternion.Euler(jitter.y, jitter.x, 0f) * Vector3.forward;
+
+                if (!Physics.Raycast(view.position, direction, out RaycastHit hit, _data.Range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+                {
+                    continue;
+                }
+
+                // 건물 같은 장애물이 먼저 맞으면 피해를 받는 대상이 아니라서 알갱이가 거기서 멈춘다
+                IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+                if (damageable == null)
+                {
+                    continue;
+                }
+
+                damageable.TakeDamage(_data.Damage);
+                anyHit = true;
+                anyKill |= damageable is Health health && health.IsDead;
             }
 
-            // 건물 같은 장애물이 먼저 맞으면 피해를 받는 대상이 아니라서 총알이 거기서 멈춘다
-            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
-            if (damageable == null)
+            // 알갱이마다 표시하면 산탄 한 발에 명중 표시가 여러 번 깜빡이므로 발사 한 번에 한 번만 알린다
+            if (anyHit)
             {
-                return;
+                Hit?.Invoke(anyKill);
             }
-
-            damageable.TakeDamage(_data.Damage);
-            Hit?.Invoke(damageable is Health health && health.IsDead);
         }
 
         private void Play(State state, Sprite[] frames)
