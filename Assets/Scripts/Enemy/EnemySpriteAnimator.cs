@@ -24,6 +24,8 @@ namespace ArenaBreak.Enemy
         [SerializeField] private Sprite[] _walkReload;
         [SerializeField] private Sprite[] _death;
         [SerializeField] private float _framesPerSecond = 12f;
+        // 사망 프레임은 16장 안팎이라 걷기와 같은 속도면 쓰러지는 데 1초가 넘게 걸려서 따로 빠르게 둔다
+        [SerializeField] private float _deathFramesPerSecond = 20f;
         [SerializeField] private float _movingSpeedThreshold = 0.1f;
         // 바닥 메시와 같은 높이면 깜빡이므로 시체를 살짝 띄운다
         [SerializeField] private float _corpseLift = 0.02f;
@@ -94,9 +96,9 @@ namespace ArenaBreak.Enemy
             if (_action == Action.Death)
             {
                 _actionElapsed += deltaTime;
-                float progress = Mathf.Clamp01(_actionElapsed * _framesPerSecond / _death.Length);
+                float progress = Mathf.Clamp01(_actionElapsed * _deathFramesPerSecond / _death.Length);
                 int last = _death.Length - 1;
-                _renderer.sprite = _death[Mathf.Min((int)(_actionElapsed * _framesPerSecond), last)];
+                _renderer.sprite = _death[Mathf.Min((int)(_actionElapsed * _deathFramesPerSecond), last)];
                 if (_layCorpseFlat)
                 {
                     TiltCorpse(progress);
@@ -142,12 +144,6 @@ namespace ArenaBreak.Enemy
                 return;
             }
 
-            // 시체가 카메라를 따라 돌면 눕힌 판이 같이 돌아가므로 쓰러진 방향에서 멈춘다
-            if (_billboard != null)
-            {
-                _billboard.enabled = false;
-            }
-
             // 눕히면 그림이 발밑에서 앞으로 뻗으므로 몸 중심이 적 위치에 오도록 되돌린다
             _corpseShift = -_corpseCenterY * _renderer.transform.localScale.y;
         }
@@ -155,6 +151,12 @@ namespace ArenaBreak.Enemy
         // 사망 그림은 누운 모습을 위에서 본 것이라, 세워 둔 판 그대로 두면 시체가 공중에 선 것처럼 보인다
         private void TiltCorpse(float progress)
         {
+            // 쓰러지는 동안은 카메라 정면을 보게 두고, 바닥에 닿은 뒤에는 시체가 카메라를 따라 돌지 않도록 그 방향에서 멈춘다
+            if (progress >= 1f && _billboard != null)
+            {
+                _billboard.enabled = false;
+            }
+
             Transform sprite = _renderer.transform;
             sprite.localRotation = Quaternion.Euler(Mathf.Lerp(0f, FlatPitch, progress), 0f, 0f);
             sprite.localPosition = new Vector3(0f, _corpseLift * progress, _corpseShift * progress);

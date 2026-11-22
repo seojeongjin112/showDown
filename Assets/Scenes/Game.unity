@@ -184090,7 +184090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
   _controller: {fileID: 0}
-  _stepsPerMeter: 0.5
+  _stepsPerMeter: 0.12
   _fullBobSpeed: 5
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
@@ -193478,7 +193478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
   _controller: {fileID: 0}
-  _stepsPerMeter: 0.5
+  _stepsPerMeter: 0.12
   _fullBobSpeed: 5
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
@@ -202009,7 +202009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
   _controller: {fileID: 0}
-  _stepsPerMeter: 0.5
+  _stepsPerMeter: 0.12
   _fullBobSpeed: 5
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
@@ -213147,7 +213147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
   _controller: {fileID: 0}
-  _stepsPerMeter: 0.5
+  _stepsPerMeter: 0.12
   _fullBobSpeed: 5
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03
@@ -214877,7 +214877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
   _controller: {fileID: 0}
-  _stepsPerMeter: 0.5
+  _stepsPerMeter: 0.12
   _fullBobSpeed: 5
   _horizontalAmplitude: 0.02
   _verticalAmplitude: 0.03

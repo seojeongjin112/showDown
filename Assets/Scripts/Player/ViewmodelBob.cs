@@ -7,7 +7,7 @@ namespace ArenaBreak.Player
     {
         [SerializeField] private CharacterController _controller;
         // 걸음 수는 시간이 아니라 이동 거리에 비례해야 속도 버프를 받아도 발걸음과 흔들림이 맞는다
-        [SerializeField] private float _stepsPerMeter = 0.5f;
+        [SerializeField] private float _stepsPerMeter = 0.12f;
         // 이 속도 이상이면 흔들림이 최대 진폭이 된다
         [SerializeField] private float _fullBobSpeed = 5f;
         // 팔 높이에 대한 비율
