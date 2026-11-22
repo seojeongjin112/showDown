@@ -7,6 +7,7 @@ namespace ArenaBreak.Enemy
     {
         float Range { get; }
         bool IsReady { get; }
+        event System.Action<Transform> Attacked;
         void Execute(Transform target);
     }
 }

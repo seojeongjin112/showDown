@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace ArenaBreak.Enemy
 {
-    [RequireComponent(typeof(RangedAttack))]
     public class EnemySpriteAnimator : MonoBehaviour
     {
         private enum Action
@@ -21,19 +20,21 @@ namespace ArenaBreak.Enemy
         [SerializeField] private float _framesPerSecond = 12f;
         [SerializeField] private float _movingSpeedThreshold = 0.1f;
 
-        private RangedAttack _attack;
+        private IEnemyAttack _attack;
         private Action _action;
         private float _actionElapsed;
         private Vector3 _lastPosition;
         private bool _isMoving;
+        // 폭탄병처럼 장전 모션이 없는 적은 사격 뒤 바로 이동 상태로 돌아간다
+        private bool _hasReload;
 
         private void Awake()
         {
-            _attack = GetComponent<RangedAttack>();
+            _attack = GetComponent<IEnemyAttack>();
 
-            if (_renderer == null || IsEmpty(_walk) || IsEmpty(_shoot) || IsEmpty(_reload))
+            if (_attack == null || _renderer == null || IsEmpty(_walk) || IsEmpty(_shoot))
             {
-                Debug.LogError("EnemySpriteAnimator: 렌더러 또는 걷기/사격/장전 프레임이 비어 있습니다", this);
+                Debug.LogError("EnemySpriteAnimator: IEnemyAttack 또는 렌더러, 걷기/공격 프레임이 비어 있습니다", this);
                 enabled = false;
                 return;
             }
@@ -48,6 +49,8 @@ namespace ArenaBreak.Enemy
             {
                 _walkReload = _reload;
             }
+
+            _hasReload = !IsEmpty(_reload);
         }
 
         private void OnEnable()
@@ -100,7 +103,7 @@ namespace ArenaBreak.Enemy
             }
 
             _actionElapsed = 0f;
-            _action = _action == Action.Shoot ? Action.Reload : Action.Locomotion;
+            _action = _action == Action.Shoot && _hasReload ? Action.Reload : Action.Locomotion;
         }
 
         private Sprite PickFrame()
