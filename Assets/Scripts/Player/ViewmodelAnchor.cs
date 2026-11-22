@@ -18,6 +18,9 @@ namespace ArenaBreak.Player
 
         private SpriteRenderer _renderer;
 
+        // 걷기 흔들림처럼 기준 위치에 더하는 오프셋. 해상도와 무관하도록 팔 높이에 대한 비율로 받는다
+        public Vector2 OffsetFraction { get; set; }
+
         private void OnEnable()
         {
             _renderer = GetComponent<SpriteRenderer>();
@@ -46,8 +49,8 @@ namespace ArenaBreak.Player
 
             // 스프라이트 피벗이 중앙이므로 오른쪽 아래 모서리가 화면 모서리에 닿도록 반 크기만큼 안쪽으로 둔다
             transform.localPosition = new Vector3(
-                halfViewWidth - armWidth * 0.5f + overhang,
-                -halfViewHeight + armHeight * 0.5f - overhang,
+                halfViewWidth - armWidth * 0.5f + overhang + OffsetFraction.x * armHeight,
+                -halfViewHeight + armHeight * 0.5f - overhang + OffsetFraction.y * armHeight,
                 _distance);
             transform.localScale = new Vector3(scale, scale, 1f);
         }

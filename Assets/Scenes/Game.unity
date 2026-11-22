@@ -183962,6 +183962,7 @@ GameObject:
   - component: {fileID: 569589933}
   - component: {fileID: 569589932}
   - component: {fileID: 569589931}
+  - component: {fileID: 569589934}
   m_Layer: 0
   m_Name: ShotgunArm
   m_TagString: Untagged
@@ -184073,6 +184074,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &569589934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569589929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ecd1d90080f1d45a41d29065e3df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
+  _controller: {fileID: 0}
+  _stepsPerMeter: 0.5
+  _fullBobSpeed: 5
+  _horizontalAmplitude: 0.02
+  _verticalAmplitude: 0.03
+  _blendSpeed: 8
 --- !u!1 &576616502
 GameObject:
   m_ObjectHideFlags: 0
@@ -193266,6 +193285,7 @@ GameObject:
   - component: {fileID: 810286532}
   - component: {fileID: 810286531}
   - component: {fileID: 810286530}
+  - component: {fileID: 810286534}
   m_Layer: 0
   m_Name: RevolverArm
   m_TagString: Untagged
@@ -193377,6 +193397,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1179476179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &810286534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810286529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ecd1d90080f1d45a41d29065e3df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
+  _controller: {fileID: 0}
+  _stepsPerMeter: 0.5
+  _fullBobSpeed: 5
+  _horizontalAmplitude: 0.02
+  _verticalAmplitude: 0.03
+  _blendSpeed: 8
 --- !u!1 &812369943
 GameObject:
   m_ObjectHideFlags: 0
@@ -201693,6 +201731,7 @@ GameObject:
   - component: {fileID: 1101179711}
   - component: {fileID: 1101179712}
   - component: {fileID: 1101179713}
+  - component: {fileID: 1101179714}
   m_Layer: 0
   m_Name: KnifeArm
   m_TagString: Untagged
@@ -201829,6 +201868,24 @@ MonoBehaviour:
   _range: 4
   _hitRadius: 0.7
   _damage: 1
+--- !u!114 &1101179714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101179708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ecd1d90080f1d45a41d29065e3df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
+  _controller: {fileID: 0}
+  _stepsPerMeter: 0.5
+  _fullBobSpeed: 5
+  _horizontalAmplitude: 0.02
+  _verticalAmplitude: 0.03
+  _blendSpeed: 8
 --- !u!1 &1103891707
 GameObject:
   m_ObjectHideFlags: 0
@@ -212676,6 +212733,7 @@ GameObject:
   - component: {fileID: 1416417336}
   - component: {fileID: 1416417335}
   - component: {fileID: 1416417334}
+  - component: {fileID: 1416417338}
   m_Layer: 0
   m_Name: DynamiteArm
   m_TagString: Untagged
@@ -212792,6 +212850,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1179476179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1416417338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416417333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ecd1d90080f1d45a41d29065e3df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
+  _controller: {fileID: 0}
+  _stepsPerMeter: 0.5
+  _fullBobSpeed: 5
+  _horizontalAmplitude: 0.02
+  _verticalAmplitude: 0.03
+  _blendSpeed: 8
 --- !u!1 &1419137731
 GameObject:
   m_ObjectHideFlags: 0
@@ -214331,6 +214407,7 @@ GameObject:
   - component: {fileID: 1460797995}
   - component: {fileID: 1460797994}
   - component: {fileID: 1460797993}
+  - component: {fileID: 1460797997}
   m_Layer: 0
   m_Name: WinchesterArm
   m_TagString: Untagged
@@ -214442,6 +214519,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1179476179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460797997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460797992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ecd1d90080f1d45a41d29065e3df80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.ViewmodelBob
+  _controller: {fileID: 0}
+  _stepsPerMeter: 0.5
+  _fullBobSpeed: 5
+  _horizontalAmplitude: 0.02
+  _verticalAmplitude: 0.03
+  _blendSpeed: 8
 --- !u!1 &1462255486
 GameObject:
   m_ObjectHideFlags: 0
