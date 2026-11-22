@@ -1,0 +1,220 @@
+using System;
+using ArenaBreak.Core;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
+
+namespace ArenaBreak.Player
+{
+    // 칼의 우클릭 입력과 같은 방식으로 발사하고, R로 장전한다
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class GunWeapon : MonoBehaviour, IAmmoWeapon
+    {
+        // 입력 에셋의 Player 맵에는 우클릭과 장전 액션이 없어서 여기서 직접 바인딩한다
+        private const string FireBinding = "<Mouse>/rightButton";
+        private const string ReloadBinding = "<Keyboard>/r";
+
+        private enum State
+        {
+            Idle,
+            Firing,
+            Reloading
+        }
+
+        [SerializeField] private WeaponData _data;
+        [SerializeField] private Camera _camera;
+
+        private SpriteRenderer _renderer;
+        private InputAction _fireAction;
+        private InputAction _reloadAction;
+        private Sprite _idleSprite;
+        private WeaponAmmo _ammo;
+        private State _state;
+        private Sprite[] _frames;
+        private float _elapsed;
+
+        // 명중 표시(HUD)가 총 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
+        public event Action<bool> Hit;
+
+        // 팔이 꺼져 있어도 탄약을 읽고 쓸 수 있도록 탄약 상태는 인벤토리가 만들어 넘겨 준다
+        public void Bind(WeaponAmmo ammo)
+        {
+            _ammo = ammo;
+        }
+
+        private void Awake()
+        {
+            _renderer = GetComponent<SpriteRenderer>();
+            _idleSprite = _renderer.sprite;
+
+            if (_camera == null)
+            {
+                _camera = GetComponentInParent<Camera>();
+            }
+
+            if (_data == null || _camera == null)
+            {
+                Debug.LogError("GunWeapon: 무기 데이터와 카메라 참조가 비어 있습니다", this);
+                enabled = false;
+                return;
+            }
+
+            _fireAction = new InputAction("GunFire", InputActionType.Button, FireBinding);
+            _reloadAction = new InputAction("GunReload", InputActionType.Button, ReloadBinding);
+        }
+
+        private void OnEnable()
+        {
+            _fireAction.Enable();
+            _reloadAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            if (_fireAction == null)
+            {
+                return;
+            }
+
+            _fireAction.Disable();
+            _reloadAction.Disable();
+
+            // 장전이나 발사 도중에 무기를 바꿔도 다음에 꺼냈을 때 중간 자세로 굳어 있지 않도록 되돌린다
+            _state = State.Idle;
+            _renderer.sprite = _idleSprite;
+        }
+
+        private void OnDestroy()
+        {
+            _fireAction?.Dispose();
+            _reloadAction?.Dispose();
+        }
+
+        private void Update()
+        {
+            if (_state == State.Idle)
+            {
+                ReadInput();
+                return;
+            }
+
+            Animate();
+        }
+
+        private void ReadInput()
+        {
+            // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 발사로 쓰지 않는다
+            if (_ammo == null || Cursor.lockState != CursorLockMode.Locked)
+            {
+                return;
+            }
+
+            if (_fireAction.WasPressedThisFrame())
+            {
+                TryFire();
+            }
+            else if (_reloadAction.WasPressedThisFrame())
+            {
+                TryReload();
+            }
+        }
+
+        private void TryFire()
+        {
+            // 빈 탄창으로 쏘면 헛방 대신 바로 장전을 시작해 준다
+            if (!_ammo.CanFire)
+            {
+                TryReload();
+                return;
+            }
+
+            _ammo.Consume();
+            Shoot();
+            Play(State.Firing, _data.FireFrames);
+        }
+
+        private void TryReload()
+        {
+            if (_ammo.CanReload)
+            {
+                Play(State.Reloading, _data.ReloadFrames);
+            }
+        }
+
+        private void Shoot()
+        {
+            Transform view = _camera.transform;
+            bool anyHit = false;
+            bool anyKill = false;
+
+            for (int i = 0; i < _data.Pellets; i++)
+            {
+                // 알갱이마다 원뿔 안에서 방향을 흩어야 산탄이 한 점으로 모이지 않는다
+                Vector2 jitter = Random.insideUnitCircle * _data.SpreadDegrees;
+                Vector3 direction = view.rotation * Quaternion.Euler(jitter.y, jitter.x, 0f) * Vector3.forward;
+
+                if (!Physics.Raycast(view.position, direction, out RaycastHit hit, _data.Range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+                {
+                    continue;
+                }
+
+                // 건물 같은 장애물이 먼저 맞으면 피해를 받는 대상이 아니라서 알갱이가 거기서 멈춘다
+                IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+                if (damageable == null)
+                {
+                    continue;
+                }
+
+                damageable.TakeDamage(_data.Damage);
+                anyHit = true;
+                anyKill |= damageable is Health health && health.IsDead;
+            }
+
+            // 알갱이마다 표시하면 산탄 한 발에 명중 표시가 여러 번 깜빡이므로 발사 한 번에 한 번만 알린다
+            if (anyHit)
+            {
+                Hit?.Invoke(anyKill);
+            }
+        }
+
+        private void Play(State state, Sprite[] frames)
+        {
+            if (frames == null || frames.Length == 0)
+            {
+                // 프레임이 없으면 애니메이션 없이 바로 끝난 것으로 처리해 장전이 영영 안 끝나는 일이 없게 한다
+                if (state == State.Reloading)
+                {
+                    _ammo.Reload();
+                }
+
+                return;
+            }
+
+            _state = state;
+            _frames = frames;
+            _elapsed = 0f;
+            _renderer.sprite = frames[0];
+        }
+
+        private void Animate()
+        {
+            _elapsed += Time.deltaTime;
+            int frameIndex = (int)(_elapsed * _data.FramesPerSecond);
+
+            if (frameIndex >= _frames.Length)
+            {
+                // 장전은 애니메이션이 끝나는 순간에 탄이 들어가야 도중에 무기를 바꿔도 탄이 공짜로 차지 않는다
+                if (_state == State.Reloading)
+                {
+                    _ammo.Reload();
+                }
+
+                _state = State.Idle;
+                _renderer.sprite = _idleSprite;
+                return;
+            }
+
+            _renderer.sprite = _frames[frameIndex];
+        }
+    }
+}

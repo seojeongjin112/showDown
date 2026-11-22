@@ -8,12 +8,24 @@ namespace ArenaBreak.Player
     {
         private const string ActionMapName = "Player";
         private const string MoveActionName = "Move";
+        private const string JumpActionName = "Jump";
+
+        // 0으로 두면 매 프레임 isGrounded가 흔들려서 점프 입력을 놓치므로 바닥에 살짝 눌러 둔다
+        private const float GroundedStickVelocity = -2f;
 
         [SerializeField] private InputActionAsset _inputActions;
         [SerializeField] private float _moveSpeed = 4f;
+        [SerializeField] private float _jumpHeight = 1.2f;
 
         private CharacterController _controller;
         private InputAction _moveAction;
+        private InputAction _jumpAction;
+        private float _verticalVelocity;
+
+        public void AddMoveSpeed(float amount)
+        {
+            _moveSpeed += amount;
+        }
 
         private void Awake()
         {
@@ -28,17 +40,20 @@ namespace ArenaBreak.Player
 
             InputActionMap map = _inputActions.FindActionMap(ActionMapName, true);
             _moveAction = map.FindAction(MoveActionName, true);
+            _jumpAction = map.FindAction(JumpActionName, true);
         }
 
         private void OnEnable()
         {
             // 맵 전체가 아니라 액션만 켠다. 다른 컴포넌트가 같은 맵의 액션을 쓰기 때문이다
             _moveAction.Enable();
+            _jumpAction.Enable();
         }
 
         private void OnDisable()
         {
             _moveAction?.Disable();
+            _jumpAction?.Disable();
         }
 
         private void Update()
@@ -48,8 +63,27 @@ namespace ArenaBreak.Player
             // 몸이 시점 yaw를 따라 돌기 때문에 몸 기준 축으로 움직이면 바라보는 방향이 앞이 된다
             Vector3 direction = transform.right * input.x + transform.forward * input.y;
 
-            // SimpleMove는 중력을 알아서 적용하고 속도를 초당 단위로 받는다
-            _controller.SimpleMove(direction * _moveSpeed);
+            if (_controller.isGrounded)
+            {
+                if (_verticalVelocity < 0f)
+                {
+                    _verticalVelocity = GroundedStickVelocity;
+                }
+
+                if (_jumpAction.WasPressedThisFrame())
+                {
+                    // 높이에서 초기 속도를 역산해야 중력을 바꿔도 점프 높이가 유지된다
+                    _verticalVelocity = Mathf.Sqrt(_jumpHeight * -2f * Physics.gravity.y);
+                }
+            }
+
+            _verticalVelocity += Physics.gravity.y * Time.deltaTime;
+
+            Vector3 velocity = direction * _moveSpeed;
+            velocity.y = _verticalVelocity;
+
+            // SimpleMove는 수직 속도를 받지 못해 점프할 수 없어서 Move로 직접 중력을 적용한다
+            _controller.Move(velocity * Time.deltaTime);
         }
     }
 }

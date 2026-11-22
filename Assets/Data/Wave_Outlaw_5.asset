@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6007d92bc2446de4b96e560ec2eca005, type: 3}
+  m_Name: Wave_Outlaw_5
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WaveData
+  _entries:
+  - _enemyPrefab: {fileID: 939344042944179532, guid: f7721e1d473137c4eb00a20e09b5dbfd, type: 3}
+    _count: 3
+  - _enemyPrefab: {fileID: 3280063090305715696, guid: 20a7128c3933b6d49be60947f1f625f8, type: 3}
+    _count: 3
+  - _enemyPrefab: {fileID: 2323644441845122055, guid: 990b54d13b4617e4c9517f1de583ec33, type: 3}
+    _count: 2
+  - _enemyPrefab: {fileID: 6050866961046909206, guid: 4e212f54c8c6d214ba051968ebda5747, type: 3}
+    _count: 2
+  - _enemyPrefab: {fileID: 5692560830494277734, guid: ceec657114c09ce4f9cb610c2b1ffd80, type: 3}
+    _count: 1
+  _spawnInterval: 0.6

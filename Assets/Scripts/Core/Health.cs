@@ -20,6 +20,30 @@ namespace ArenaBreak.Core
             Current = _maxHealth;
         }
 
+        // 최대치만 올리고 현재 체력은 그대로 두면 강화가 오히려 체력바를 비어 보이게 하므로 올린 만큼 채운다
+        public void IncreaseMax(int amount)
+        {
+            if (IsDead || amount <= 0)
+            {
+                return;
+            }
+
+            _maxHealth += amount;
+            Current += amount;
+            Changed?.Invoke(Current, _maxHealth);
+        }
+
+        public void Heal(int amount)
+        {
+            if (IsDead || amount <= 0)
+            {
+                return;
+            }
+
+            Current = Mathf.Min(_maxHealth, Current + amount);
+            Changed?.Invoke(Current, _maxHealth);
+        }
+
         public void TakeDamage(int amount)
         {
             // 사망 뒤에 들어온 피해로 Died가 두 번 나가면 사망 처리가 중복된다
