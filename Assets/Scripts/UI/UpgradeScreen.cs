@@ -126,7 +126,15 @@ namespace ArenaBreak.UI
         private void RollCards()
         {
             _rollBuffer.Clear();
-            _rollBuffer.AddRange(_cardPool);
+
+            // 이미 가진 무기 카드는 골라도 아무 효과가 없으므로 후보에서 뺀다
+            foreach (UpgradeData card in _cardPool)
+            {
+                if (_upgrades.CanApply(card))
+                {
+                    _rollBuffer.Add(card);
+                }
+            }
 
             for (int i = 0; i < _cardViews.Length; i++)
             {
@@ -147,6 +155,9 @@ namespace ArenaBreak.UI
         {
             _upgrades.Apply(upgrade);
             _pendingPicks--;
+
+            // 방금 얻은 무기의 탄약을 상점에서 바로 살 수 있어야 하므로 카드 선택 뒤에도 상점을 다시 그린다
+            RefreshShop();
 
             if (_pendingPicks > 0)
             {

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.UpgradeData
   _displayName: "\uB9AC\uBCFC\uBC84"
   _icon: {fileID: 21300000, guid: 0d9148dd0a370404eaaa6c5fa8072e53, type: 3}
-  _description: "\uB9AC\uBCFC\uBC84\uB97C \uD574\uAE08\uD55C\uB2E4"
+  _description: "\uC0C8 \uBB34\uAE30 \uD68D\uB4DD"
   _effect: 5
   _amount: 0
   _price: 25
