@@ -24,6 +24,9 @@ namespace ArenaBreak.Core
         public event Action<int> WaveCleared;
         public event Action AllWavesCleared;
 
+        // 미니맵 같은 표시 쪽이 매 프레임 적을 찾지 않고 생성 시점에 구독해서 추적할 수 있게 한다
+        public event Action<Health> EnemySpawned;
+
         private void Awake()
         {
             _waitAllDead = new WaitUntil(() => _aliveCount <= 0);
@@ -120,6 +123,8 @@ namespace ArenaBreak.Core
                 _aliveCount--;
             };
             health.Died += onDied;
+
+            EnemySpawned?.Invoke(health);
         }
     }
 }
