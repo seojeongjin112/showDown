@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7795041311727695205}
   - component: {fileID: 4361401226538532636}
   - component: {fileID: 3664377224646552946}
+  - component: {fileID: 1403027303117869139}
   m_Layer: 0
   m_Name: OutlawWagon
   m_TagString: Untagged
@@ -156,6 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyAI
   _target: {fileID: 0}
+  _eyeHeight: 1
+  _sightTargetHeight: 1.5
 --- !u!114 &2940885580864107943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,5 +277,22 @@ MonoBehaviour:
   _coinPrefab: {fileID: 1412816660463850402, guid: dd54ab7c34b20ba4e93a0752ed00868b, type: 3}
   _count: 10
   _scatterRadius: 2.5
+  _spawnHeight: 1
+  _snapDistance: 1.5
+--- !u!114 &1403027303117869139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f70aa7fba7dd374eb5be11bcfdcab98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.ExpDropper
+  _orbPrefab: {fileID: 6938508648487530255, guid: 3ec52b11a051f59439651a0bb40dddbe, type: 3}
+  _count: 15
+  _scatterRadius: 3
   _spawnHeight: 1
   _snapDistance: 1.5

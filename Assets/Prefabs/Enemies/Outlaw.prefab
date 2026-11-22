@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8368799943682655441}
   - component: {fileID: 7407030968312563170}
   - component: {fileID: 4637038975268805506}
+  - component: {fileID: 3330673129638376266}
   m_Layer: 0
   m_Name: Outlaw
   m_TagString: Untagged
@@ -84,6 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyAI
   _target: {fileID: 0}
+  _eyeHeight: 1
+  _sightTargetHeight: 1.5
 --- !u!114 &2292252427343013012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +185,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.CoinDropper
   _coinPrefab: {fileID: 1412816660463850402, guid: dd54ab7c34b20ba4e93a0752ed00868b, type: 3}
+  _count: 1
+  _scatterRadius: 1.2
+  _spawnHeight: 1
+  _snapDistance: 1.5
+--- !u!114 &3330673129638376266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f70aa7fba7dd374eb5be11bcfdcab98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.ExpDropper
+  _orbPrefab: {fileID: 6938508648487530255, guid: 3ec52b11a051f59439651a0bb40dddbe, type: 3}
   _count: 1
   _scatterRadius: 1.2
   _spawnHeight: 1

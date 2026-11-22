@@ -1,6 +1,5 @@
 using ArenaBreak.Core;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace ArenaBreak.Enemy
 {
@@ -43,14 +42,7 @@ namespace ArenaBreak.Enemy
 
             for (int i = 0; i < _count; i++)
             {
-                Vector2 offset = Random.insideUnitCircle * _scatterRadius;
-                Vector3 landing = origin + new Vector3(offset.x, 0f, offset.y);
-
-                // 벽 가까이서 죽어도 코인이 건물 안에 떨어져 못 줍는 일이 없도록 걸을 수 있는 바닥으로 옮긴다
-                if (NavMesh.SamplePosition(landing, out NavMeshHit hit, _snapDistance, NavMesh.AllAreas))
-                {
-                    landing = hit.position;
-                }
+                Vector3 landing = Pickup.ScatterPoint(origin, _scatterRadius, _snapDistance);
 
                 Coin coin = Instantiate(_coinPrefab, origin + Vector3.up * _spawnHeight, Quaternion.identity);
                 coin.Launch(landing);
