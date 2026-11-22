@@ -8,6 +8,7 @@ namespace ArenaBreak.UI
     public class HitMarkerHUD : MonoBehaviour
     {
         [SerializeField] private KnifeDamage _knife;
+        [SerializeField] private GunWeapon[] _guns;
         [SerializeField] private Image _marker;
         [SerializeField] private Sprite _hitSprite;
         [SerializeField] private Sprite _killSprite;
@@ -28,6 +29,11 @@ namespace ArenaBreak.UI
             {
                 _knife.Hit += OnHit;
             }
+
+            foreach (GunWeapon gun in _guns)
+            {
+                gun.Hit += OnHit;
+            }
         }
 
         private void OnDisable()
@@ -35,6 +41,11 @@ namespace ArenaBreak.UI
             if (_knife != null)
             {
                 _knife.Hit -= OnHit;
+            }
+
+            foreach (GunWeapon gun in _guns)
+            {
+                gun.Hit -= OnHit;
             }
         }
 

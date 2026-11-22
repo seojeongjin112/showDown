@@ -8,7 +8,10 @@ namespace ArenaBreak.Core
         Heal,
         MoveSpeed,
         KnifeDamage,
-        KnifeRange
+        KnifeRange,
+        // 저장된 에셋의 값이 밀리지 않도록 기존 항목 뒤에만 추가한다
+        UnlockWeapon,
+        AddAmmo
     }
 
     [CreateAssetMenu(fileName = "Upgrade", menuName = "ArenaBreak/Upgrade")]
@@ -22,6 +25,8 @@ namespace ArenaBreak.Core
         [SerializeField] private float _amount = 1f;
         // 레벨업 보상 카드는 무료이고, 상점에서만 가격이 쓰인다
         [SerializeField] private int _price;
+        [Tooltip("무기 해금과 탄약 구매일 때 대상이 되는 무기")]
+        [SerializeField] private WeaponData _weapon;
 
         public string DisplayName => _displayName;
         public Sprite Icon => _icon;
@@ -29,5 +34,6 @@ namespace ArenaBreak.Core
         public UpgradeEffect Effect => _effect;
         public float Amount => _amount;
         public int Price => _price;
+        public WeaponData Weapon => _weapon;
     }
 }

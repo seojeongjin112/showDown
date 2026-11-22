@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e091b1762979e44791aaab138a9d1e2, type: 3}
+  m_Name: Weapon_Revolver
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
+  _displayName: "\uB9AC\uBCFC\uBC84"
+  _icon: {fileID: 21300000, guid: 0d9148dd0a370404eaaa6c5fa8072e53, type: 3}
+  _ammoIcon: {fileID: 21300000, guid: 72476951902667c458634dc64ef29d5b, type: 3}
+  _damage: 2
+  _range: 40
+  _magazineSize: 6
+  _startReserve: 12
+  _maxReserve: 36
+  _fireFrames:
+  - {fileID: 21300000, guid: d92465bef46c5104895451a3807bbba2, type: 3}
+  - {fileID: 21300000, guid: aaa9024ba4edd6c459047cdc33994552, type: 3}
+  - {fileID: 21300000, guid: 771c58fb92aeece4a90ea06853345bd3, type: 3}
+  - {fileID: 21300000, guid: ef0d6f79f57e7694c9944fda0debc9e6, type: 3}
+  - {fileID: 21300000, guid: 31e8e396f40ee30499736daca05e8cf0, type: 3}
+  - {fileID: 21300000, guid: c79f2d689f6887c4e8aedbf9d4dc4f62, type: 3}
+  - {fileID: 21300000, guid: 0a2b31848113b5543870f8820e6bb2e3, type: 3}
+  - {fileID: 21300000, guid: 5a63667a36f6d554c8e30d585b4df4f1, type: 3}
+  - {fileID: 21300000, guid: a45522b25c00ecf449e4375f533ca89e, type: 3}
+  _reloadFrames:
+  - {fileID: 21300000, guid: 7b31d89dce461ba479aba1c89f9c2238, type: 3}
+  - {fileID: 21300000, guid: 7a43972ffae66f741b60bc7e0a787a55, type: 3}
+  - {fileID: 21300000, guid: 7b39a6bd324d55144bf76deb902c16d6, type: 3}
+  - {fileID: 21300000, guid: 7fb648b5b092fb84f847495de7bdb828, type: 3}
+  - {fileID: 21300000, guid: 691c1115e0dbe084cbd931a6a4096379, type: 3}
+  - {fileID: 21300000, guid: c36ba05469ef0e1479df7b7cc46e4e9d, type: 3}
+  - {fileID: 21300000, guid: 5e452a45663927a4f8dea95be92f345a, type: 3}
+  - {fileID: 21300000, guid: 122af5fbb527d8f41b5035af729efb69, type: 3}
+  - {fileID: 21300000, guid: 59aa7c94cead2d240b3ea457199da65d, type: 3}
+  - {fileID: 21300000, guid: d2e62aa3807db6b47b7dc223cb6bfa3a, type: 3}
+  - {fileID: 21300000, guid: 08b025d9c8fbd714382d9bc7ab592e1c, type: 3}
+  - {fileID: 21300000, guid: 93f6de728f463384981fb5abe19bcfc1, type: 3}
+  - {fileID: 21300000, guid: 981406e5e9fe57b4f974f5ef2e4d5740, type: 3}
+  - {fileID: 21300000, guid: b165ac6ecf0380942a4cc38bc0bec2a6, type: 3}
+  - {fileID: 21300000, guid: 6f63953cb1b696549bdc96fc990db30f, type: 3}
+  - {fileID: 21300000, guid: 77484b5592699cb4eb9047ceecf48803, type: 3}
+  - {fileID: 21300000, guid: 8810b0f6c23a4364ca27d9cad0d8d01a, type: 3}
+  _framesPerSecond: 18
