@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.ChaseMovement
   _moveSpeed: 2
   _repathInterval: 0.25
+  _strafeInRange: 1
 --- !u!114 &7337383022406211559
 MonoBehaviour:
   m_ObjectHideFlags: 0
