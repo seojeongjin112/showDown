@@ -13,6 +13,8 @@ namespace ArenaBreak.Player
         // 입력 에셋의 Player 맵에는 우클릭과 장전 액션이 없어서 여기서 직접 바인딩한다
         private const string FireBinding = "<Mouse>/rightButton";
         private const string ReloadBinding = "<Keyboard>/r";
+        // 한 광선이 겹쳐 지나는 콜라이더 수의 상한이라 넉넉히 잡는다
+        private const int HitBufferSize = 16;
 
         private enum State
         {
@@ -32,6 +34,7 @@ namespace ArenaBreak.Player
         private State _state;
         private Sprite[] _frames;
         private float _elapsed;
+        private readonly RaycastHit[] _hitBuffer = new RaycastHit[HitBufferSize];
 
         // 명중 표시(HUD)가 총 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
         public event Action<bool> Hit;
@@ -157,7 +160,7 @@ namespace ArenaBreak.Player
                 Vector2 jitter = Random.insideUnitCircle * _data.SpreadDegrees;
                 Vector3 direction = view.rotation * Quaternion.Euler(jitter.y, jitter.x, 0f) * Vector3.forward;
 
-                if (!Physics.Raycast(view.position, direction, out RaycastHit hit, _data.Range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+                if (!TryRaycastIgnoringSelf(view, direction, out RaycastHit hit))
                 {
                     continue;
                 }
@@ -179,6 +182,31 @@ namespace ArenaBreak.Player
             {
                 Hit?.Invoke(anyKill);
             }
+        }
+
+        // 아래를 보고 쏘면 광선이 플레이어 자신의 콜라이더를 먼저 맞아 자해가 되므로 자기 몸은 건너뛴다
+        private bool TryRaycastIgnoringSelf(Transform view, Vector3 direction, out RaycastHit nearest)
+        {
+            int count = Physics.RaycastNonAlloc(view.position, direction, _hitBuffer, _data.Range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+            nearest = default;
+            bool found = false;
+
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit candidate = _hitBuffer[i];
+                if (candidate.transform.IsChildOf(view.root))
+                {
+                    continue;
+                }
+
+                if (!found || candidate.distance < nearest.distance)
+                {
+                    nearest = candidate;
+                    found = true;
+                }
+            }
+
+            return found;
         }
 
         private void Play(State state, Sprite[] frames)
