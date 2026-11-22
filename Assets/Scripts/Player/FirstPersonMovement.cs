@@ -22,6 +22,11 @@ namespace ArenaBreak.Player
         private InputAction _jumpAction;
         private float _verticalVelocity;
 
+        public void AddMoveSpeed(float amount)
+        {
+            _moveSpeed += amount;
+        }
+
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();

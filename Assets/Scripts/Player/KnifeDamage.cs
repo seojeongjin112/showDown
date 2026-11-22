@@ -14,6 +14,16 @@ namespace ArenaBreak.Player
         [SerializeField] private float _hitRadius = 0.7f;
         [SerializeField] private int _damage = 1;
 
+        public void AddDamage(int amount)
+        {
+            _damage += amount;
+        }
+
+        public void AddRange(float amount)
+        {
+            _range += amount;
+        }
+
         // 명중 표시(HUD)가 칼 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
         public event Action<bool> Hit;
 

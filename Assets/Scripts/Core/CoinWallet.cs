@@ -20,5 +20,18 @@ namespace ArenaBreak.Core
             Count += amount;
             Changed?.Invoke(Count);
         }
+
+        // 부족하면 아무것도 깎지 않고 실패를 알려야 상점이 물건만 주고 값은 안 받는 일이 없다
+        public bool TrySpend(int amount)
+        {
+            if (amount < 0 || amount > Count)
+            {
+                return false;
+            }
+
+            Count -= amount;
+            Changed?.Invoke(Count);
+            return true;
+        }
     }
 }

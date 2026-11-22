@@ -51,7 +51,8 @@ namespace ArenaBreak.UI
         private IEnumerator Show()
         {
             _banner.SetActive(true);
-            yield return new WaitForSeconds(_showDuration);
+            // 레벨업 직후 강화 창이 시간을 멈추므로, 게임 시간으로 세면 창을 닫을 때까지 배너가 남는다
+            yield return new WaitForSecondsRealtime(_showDuration);
             _banner.SetActive(false);
             _showRoutine = null;
         }
