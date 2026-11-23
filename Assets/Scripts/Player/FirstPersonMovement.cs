@@ -21,6 +21,14 @@ namespace ArenaBreak.Player
         private InputAction _moveAction;
         private InputAction _jumpAction;
         private float _verticalVelocity;
+        private float _speedMultiplier = 1f;
+
+        // 얕은 물 같은 지형이 일시적으로 늦출 때 쓴다. 강화로 쌓이는 _moveSpeed와 섞이면 물을 벗어난 뒤 원래 속도로 돌릴 수 없어 따로 둔다
+        public float SpeedMultiplier
+        {
+            get => _speedMultiplier;
+            set => _speedMultiplier = Mathf.Max(0f, value);
+        }
 
         public void AddMoveSpeed(float amount)
         {
@@ -79,7 +87,7 @@ namespace ArenaBreak.Player
 
             _verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
-            Vector3 velocity = direction * _moveSpeed;
+            Vector3 velocity = direction * (_moveSpeed * _speedMultiplier);
             velocity.y = _verticalVelocity;
 
             // SimpleMove는 수직 속도를 받지 못해 점프할 수 없어서 Move로 직접 중력을 적용한다
