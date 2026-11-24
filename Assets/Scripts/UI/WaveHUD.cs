@@ -13,11 +13,14 @@ namespace ArenaBreak.UI
             public WaveArena Arena;
             public Action<int> OnStarted;
             public Action<int> OnCleared;
+            public Action OnAllCleared;
         }
 
         [SerializeField] private WaveSpawner _spawner;
         [Tooltip("구역형 웨이브(WaveArena). 스테이지마다 하나씩 넣으면 진행 중인 구역을 따라간다")]
         [SerializeField] private WaveArena[] _arenas;
+        [Tooltip("이 그룹의 투명도로 웨이브 UI를 숨기고 보인다. 웨이브 구역에 들어갔을 때만 보인다")]
+        [SerializeField] private CanvasGroup _group;
         [SerializeField] private Text _label;
         [Tooltip("왼쪽부터 웨이브 1칸씩. 꺼진 별은 프레임에 그려진 빈 슬롯이 보인다")]
         [SerializeField] private Image[] _stars;
@@ -46,6 +49,15 @@ namespace ArenaBreak.UI
 
             BindArenas();
             Refresh();
+            SetVisible(false);
+        }
+
+        private void SetVisible(bool visible)
+        {
+            if (_group != null)
+            {
+                _group.alpha = visible ? 1f : 0f;
+            }
         }
 
         private void OnDisable()
@@ -80,8 +92,11 @@ namespace ArenaBreak.UI
                 binding.OnStarted = wave => OnArenaWaveStarted(arena, wave);
                 binding.OnCleared = wave => OnArenaWaveCleared(arena, wave);
 
+                binding.OnAllCleared = () => OnArenaAllCleared(arena);
+
                 arena.WaveStarted += binding.OnStarted;
                 arena.WaveCleared += binding.OnCleared;
+                arena.AllWavesCleared += binding.OnAllCleared;
                 _bindings[i] = binding;
             }
         }
@@ -103,6 +118,7 @@ namespace ArenaBreak.UI
 
                 binding.Arena.WaveStarted -= binding.OnStarted;
                 binding.Arena.WaveCleared -= binding.OnCleared;
+                binding.Arena.AllWavesCleared -= binding.OnAllCleared;
             }
 
             _bindings = null;
@@ -118,7 +134,17 @@ namespace ArenaBreak.UI
             }
 
             _totalWaves = arena.TotalWaves;
+            SetVisible(true);
             OnWaveStarted(wave);
+        }
+
+        // 웨이브를 모두 끝내면 문이 열리므로 UI도 함께 사라진다
+        private void OnArenaAllCleared(WaveArena arena)
+        {
+            if (_activeArena == arena)
+            {
+                SetVisible(false);
+            }
         }
 
         private void OnArenaWaveCleared(WaveArena arena, int wave)

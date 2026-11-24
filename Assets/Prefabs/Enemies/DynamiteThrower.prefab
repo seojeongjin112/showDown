@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 8355849983784839062}
   - component: {fileID: 481773926268967880}
   - component: {fileID: 4706651274615174608}
-  - component: {fileID: 5503392339875865250}
   - component: {fileID: 7260077284877124824}
   - component: {fileID: 1014203488756174206}
   - component: {fileID: 6086528392146625615}
@@ -278,23 +277,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5503392339875865250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323644441845122055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a2a9803077cce4982563d3ccc6212c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.CoinDropper
-  _coinPrefab: {fileID: 1412816660463850402, guid: dd54ab7c34b20ba4e93a0752ed00868b, type: 3}
-  _count: 1
-  _scatterRadius: 1.2
-  _spawnHeight: 1
-  _snapDistance: 1.5
 --- !u!114 &7260077284877124824
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ArenaBreak.Core;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ namespace ArenaBreak.Player
         private const int MaxOverlaps = 8;
 
         private readonly Collider[] _overlaps = new Collider[MaxOverlaps];
+        private readonly RaycastHit[] _castHits = new RaycastHit[MaxOverlaps];
+        // 한 번 휘두르는 동안 이미 맞은 대상은 다시 맞지 않는다
+        private readonly HashSet<IDamageable> _hitThisSwing = new HashSet<IDamageable>();
         private KnifeAttackAnimation _animation;
 
         private void Awake()
@@ -59,14 +63,31 @@ namespace ArenaBreak.Player
             _animation.Swung -= OnSwung;
         }
 
-        // 트리거 콜라이더도 맞도록 명시한다. 플레이어 몸과 겹친 채 시작한 캐스트는 자기 몸을 맞히지 않는다
         private void OnSwung()
+        {
+            _hitThisSwing.Clear();
+            TryHit();
+        }
+
+        // 휘두르는 모션이 도는 처음부터 끝까지 판정을 이어 가서, 중간에 범위로 들어온 적도 맞는다
+        private void Update()
+        {
+            if (_animation.IsPlaying)
+            {
+                TryHit();
+            }
+        }
+
+        // 트리거 콜라이더도 맞도록 명시한다. 플레이어 몸과 겹친 채 시작한 캐스트는 자기 몸을 맞히지 않는다
+        private void TryHit()
         {
             IDamageable damageable = FindOverlappingTarget() ?? FindCastTarget();
             if (damageable == null)
             {
                 return;
             }
+
+            _hitThisSwing.Add(damageable);
 
             // 근접으로 쓰러뜨린 적만 탄약을 떨어뜨리므로 출처를 함께 알린다
             if (damageable is Health health)
@@ -97,7 +118,7 @@ namespace ArenaBreak.Player
                 }
 
                 IDamageable candidate = overlap.GetComponentInParent<IDamageable>();
-                if (candidate == null)
+                if (candidate == null || _hitThisSwing.Contains(candidate))
                 {
                     continue;
                 }
@@ -119,12 +140,43 @@ namespace ArenaBreak.Player
         private IDamageable FindCastTarget()
         {
             Transform view = _camera.transform;
-            if (!Physics.SphereCast(view.position, _hitRadius, view.forward, out RaycastHit hit, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+            int count = Physics.SphereCastNonAlloc(view.position, _hitRadius, view.forward, _castHits, _range, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+
+            IDamageable nearest = null;
+            float nearestDistance = float.MaxValue;
+            bool blocked = false;
+
+            for (int i = 0; i < count; i++)
             {
-                return null;
+                RaycastHit hit = _castHits[i];
+
+                // 자기 몸에서 시작한 구체는 자기 몸을 맞힌다
+                if (hit.distance >= nearestDistance || hit.collider.transform.IsChildOf(view.root))
+                {
+                    continue;
+                }
+
+                IDamageable candidate = hit.collider.GetComponentInParent<IDamageable>();
+
+                // 이미 맞은 대상은 없는 것처럼 지나쳐 뒤의 적을 벨 수 있게 한다
+                if (candidate != null && _hitThisSwing.Contains(candidate))
+                {
+                    continue;
+                }
+
+                // 조우 구역 같은 트리거 영역은 칼을 막지 않는다
+                if (candidate == null && hit.collider.isTrigger)
+                {
+                    continue;
+                }
+
+                // 건물 같은 장애물이 먼저 닿으면 그 뒤의 적은 벨 수 없다
+                nearestDistance = hit.distance;
+                nearest = candidate;
+                blocked = candidate == null;
             }
 
-            return hit.collider.GetComponentInParent<IDamageable>();
+            return blocked ? null : nearest;
         }
     }
 }

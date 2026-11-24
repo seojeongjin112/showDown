@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ArenaBreak.Core;
 using UnityEngine;
 
@@ -18,6 +19,16 @@ namespace ArenaBreak.Player
         public float ReloadSpeedMultiplier { get; private set; } = 1f;
         // 무기와 탄약이 떨어질 확률에 곱한다
         public float DropLuckMultiplier { get; private set; } = 1f;
+
+        private readonly Dictionary<UpgradeData, int> _levels = new Dictionary<UpgradeData, int>();
+
+        // HUD가 폴링하지 않고 구독해서 고른 강화 목록을 갱신하도록 강화와 그 강화의 현재 단계를 함께 넘긴다
+        public event System.Action<UpgradeData, int> Applied;
+
+        public int LevelOf(UpgradeData upgrade)
+        {
+            return _levels.TryGetValue(upgrade, out int level) ? level : 0;
+        }
 
         // 피해는 정수라서 곱한 뒤의 소수점은 그 확률로 올림한다. 피해 1짜리 개틀링도 평균적으로 강화가 반영된다
         public int ScaleRangedDamage(int baseDamage)
@@ -104,6 +115,10 @@ namespace ArenaBreak.Player
                     DropLuckMultiplier += upgrade.Amount;
                     break;
             }
+
+            int level = LevelOf(upgrade) + 1;
+            _levels[upgrade] = level;
+            Applied?.Invoke(upgrade, level);
         }
     }
 }

@@ -27,12 +27,10 @@ namespace ArenaBreak.Player
         [SerializeField] private Camera _camera;
 
         [Header("양손 (양손 리볼버만)")]
-        [Tooltip("비어 있으면 한 손 무기다. 있으면 오른손이 쏜 뒤 조금 있다가 이 손도 쏜다")]
+        [Tooltip("비어 있으면 한 손 무기다. 있으면 클릭할 때마다 오른손과 이 손이 번갈아 한 발씩 쏜다")]
         [SerializeField] private SpriteRenderer _offhandRenderer;
         [SerializeField] private Sprite[] _offhandFireFrames;
         [SerializeField] private Sprite[] _offhandReloadFrames;
-        [Tooltip("오른손이 쏜 뒤 이 손이 쏠 때까지의 시간. 두 발이 한 번에 터지면 한 발처럼 느껴져서 어긋나게 한다")]
-        [SerializeField] private float _offhandDelay = 0.12f;
 
         private SpriteRenderer _renderer;
         private PlayerUpgrades _upgrades;
@@ -46,8 +44,7 @@ namespace ArenaBreak.Player
         private Sprite _offhandIdleSprite;
         private Sprite[] _offhandFrames;
         private float _offhandElapsed;
-        private float _offhandWait;
-        private bool _offhandPending;
+        private bool _nextShotIsOffhand;
         private readonly RaycastHit[] _hitBuffer = new RaycastHit[HitBufferSize];
 
         // 명중 표시(HUD)가 총 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
@@ -66,7 +63,7 @@ namespace ArenaBreak.Player
             : _data.FramesPerSecond;
 
         // 한쪽 손의 동작이 끝나기 전에 다른 쪽 손이 이어서 움직이는 중이면 무기 전체를 아직 쓰는 중으로 본다
-        private bool IsOffhandBusy => _offhandPending || _offhandFrames != null;
+        private bool IsOffhandBusy => _offhandFrames != null;
 
         // 팔이 꺼져 있어도 탄약을 읽고 쓸 수 있도록 탄약 상태는 인벤토리가 만들어 넘겨 준다
         public void Bind(WeaponAmmo ammo)
@@ -134,6 +131,8 @@ namespace ArenaBreak.Player
         {
             if (_state == State.Idle)
             {
+                // 왼손만 쏜 경우 오른손 동작 상태가 없어서 왼손 그림은 여기서 따로 진행한다
+                AdvanceOffhand(Time.deltaTime);
                 ReadInput();
                 return;
             }
@@ -145,6 +144,12 @@ namespace ArenaBreak.Player
         {
             // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 발사로 쓰지 않는다
             if (_ammo == null || Cursor.lockState != CursorLockMode.Locked)
+            {
+                return;
+            }
+
+            // 양손 무기는 한 손이 동작 중이면 다음 클릭을 받지 않아 좌우가 번갈아 한 발씩만 나간다
+            if (IsOffhandBusy)
             {
                 return;
             }
@@ -171,18 +176,20 @@ namespace ArenaBreak.Player
                 return;
             }
 
+            // 양손 무기는 클릭 한 번에 한 발만 쏘고, 오른손과 왼손이 번갈아 쏜다
+            if (HasOffhand && _nextShotIsOffhand)
+            {
+                _nextShotIsOffhand = false;
+                FireOffhand();
+                return;
+            }
+
+            _nextShotIsOffhand = HasOffhand;
             _ammo.Consume();
             Shoot();
             Play(State.Firing, _data.FireFrames);
             Fired?.Invoke();
             FlashMuzzle(0.15f);
-
-            // 마지막 한 발이면 왼손은 쏠 탄이 없다
-            if (HasOffhand && _ammo.CanFire)
-            {
-                _offhandPending = true;
-                _offhandWait = _offhandDelay;
-            }
         }
 
         private void TryReload()
@@ -245,6 +252,12 @@ namespace ArenaBreak.Player
             {
                 RaycastHit candidate = _hitBuffer[i];
                 if (candidate.transform.IsChildOf(view.root))
+                {
+                    continue;
+                }
+
+                // 조우 구역·얕은 물 같은 트리거 영역은 물체가 아니라서 탄이 거기서 멈추면 안 된다. 피해를 받는 대상만 트리거여도 맞는다
+                if (candidate.collider.isTrigger && candidate.collider.GetComponentInParent<IDamageable>() == null)
                 {
                     continue;
                 }
@@ -314,16 +327,6 @@ namespace ArenaBreak.Player
                 return;
             }
 
-            if (_offhandPending)
-            {
-                _offhandWait -= delta;
-                if (_offhandWait <= 0f)
-                {
-                    _offhandPending = false;
-                    FireOffhand();
-                }
-            }
-
             if (_offhandFrames == null)
             {
                 return;
@@ -344,7 +347,6 @@ namespace ArenaBreak.Player
 
         private void FireOffhand()
         {
-            // 기다리는 사이에 탄이 바닥났을 수 있다
             if (!_ammo.CanFire)
             {
                 return;
@@ -380,7 +382,6 @@ namespace ArenaBreak.Player
         // 발사나 장전 도중에 무기를 바꿔도 다음에 꺼냈을 때 왼손이 중간 자세로 굳어 있지 않도록 되돌린다
         private void ResetOffhand()
         {
-            _offhandPending = false;
             _offhandFrames = null;
 
             if (HasOffhand)

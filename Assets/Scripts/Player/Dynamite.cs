@@ -10,6 +10,7 @@ namespace ArenaBreak.Player
     {
         private const string PlayerTag = "Player";
         private const int OverlapBufferSize = 32;
+        private const float PredictStep = 0.02f;
 
         // 폭발마다 배열을 새로 만들지 않도록 결과 버퍼를 재사용한다
         private static readonly Collider[] Overlaps = new Collider[OverlapBufferSize];
@@ -25,12 +26,51 @@ namespace ArenaBreak.Player
         private int _damage;
         private Action<bool> _onHit;
         private float _age;
+        private BombBlastMarker _marker;
+
+        [SerializeField] private Material _markerMaterial;
 
         public void Launch(Vector3 velocity, int damage, Action<bool> onHit)
         {
             _velocity = velocity;
             _damage = damage;
             _onHit = onHit;
+
+            ShowBlastMarker();
+        }
+
+        // 던진 순간의 궤적을 실제 이동과 같은 간격으로 미리 돌려 보아 떨어질 자리를 안다. 도중에 움직이는 적에게 닿으면 실제와 조금 다를 수 있다
+        private void ShowBlastMarker()
+        {
+            if (_markerMaterial == null)
+            {
+                return;
+            }
+
+            Vector3 position = transform.position;
+            Vector3 velocity = _velocity;
+            for (float time = 0f; time < _maxLifetime; time += PredictStep)
+            {
+                velocity += Physics.gravity * PredictStep;
+                Vector3 step = velocity * PredictStep;
+                float distance = step.magnitude;
+                if (distance > Mathf.Epsilon
+                    && Physics.Raycast(position, step / distance, out RaycastHit hit, distance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+                {
+                    _marker = BombBlastMarker.Spawn(_markerMaterial, hit.point, _blastRadius, time);
+                    return;
+                }
+
+                position += step;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_marker != null)
+            {
+                Destroy(_marker.gameObject);
+            }
         }
 
         private void Update()

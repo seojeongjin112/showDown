@@ -95,13 +95,19 @@ namespace ArenaBreak.Enemy
             bool tookDamage = _lastHealth >= 0 && current < _lastHealth;
             _lastHealth = current;
 
-            if (!tookDamage || current <= 0)
+            if (!tookDamage)
             {
                 return;
             }
 
+            // 한 방에 죽는 적도 맞은 순간 번쩍여야 해서 마지막 일격에도 보여 준다
             _renderer.color = _flashColor;
             _flashRemaining = _flashSeconds;
+
+            if (current <= 0)
+            {
+                return;
+            }
 
             if (_player != null && Time.time >= _nextKnockbackTime)
             {
@@ -116,11 +122,9 @@ namespace ArenaBreak.Enemy
             }
         }
 
-        // 죽은 뒤에 빨간 채로 남거나 시체가 밀리지 않도록 정리한다
+        // 시체가 밀리지 않도록 밀림만 끊고, 번쩍임은 타이머가 끝나면 스스로 원래 색으로 돌아간다
         private void OnDied()
         {
-            _renderer.color = _baseColor;
-            _flashRemaining = 0f;
             _knockbackRemaining = 0f;
         }
     }

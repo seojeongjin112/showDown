@@ -23,6 +23,8 @@ namespace ArenaBreak.Core
         private Health _playerHealth;
         private CharacterController _controller;
         private FirstPersonMovement _movement;
+        private WeaponInventory _weapons;
+        private int _weaponCursor = -1;
         private Transform _camera;
         private GUIStyle _style;
         private string _overlay = string.Empty;
@@ -51,6 +53,7 @@ namespace ArenaBreak.Core
             _playerHealth = player.GetComponent<Health>();
             _controller = player.GetComponent<CharacterController>();
             _movement = player.GetComponent<FirstPersonMovement>();
+            _weapons = player.GetComponent<WeaponInventory>();
 
             Camera main = Camera.main;
             _camera = main != null ? main.transform : null;
@@ -108,6 +111,11 @@ namespace ArenaBreak.Core
             if (keyboard.f7Key.wasPressedThisFrame)
             {
                 _showOverlay = !_showOverlay;
+            }
+
+            if (keyboard.f8Key.wasPressedThisFrame)
+            {
+                CycleWeapon();
             }
 
             if (_godMode && _playerHealth != null && !_playerHealth.IsDead && _playerHealth.Current < _playerHealth.Max)
@@ -190,6 +198,32 @@ namespace ArenaBreak.Core
                 {
                     all[i].TakeDamage(KillDamage);
                 }
+            }
+        }
+
+        // 같은 종류는 한 자루만 들 수 있어서 한 번에 다 줄 수 없다. 누를 때마다 다음 무기를 주고 들게 하며 탄약도 채운다
+        private void CycleWeapon()
+        {
+            if (_weapons == null || _weapons.Count == 0)
+            {
+                return;
+            }
+
+            _weaponCursor = (_weaponCursor + 1) % _weapons.Count;
+            WeaponData weapon = _weapons.WeaponAt(_weaponCursor);
+
+            if (_weapons.CanUnlock(weapon))
+            {
+                _weapons.Unlock(weapon);
+            }
+            else
+            {
+                _weapons.Select(_weaponCursor);
+            }
+
+            if (weapon.UsesAmmo)
+            {
+                _weapons.AddAmmo(weapon, weapon.MaxReserve);
             }
         }
 
@@ -296,7 +330,7 @@ namespace ArenaBreak.Core
             }
 
             _text.AppendLine();
-            _text.Append("[F4] 전체 처치  [F6] 배속  [F7] 표시");
+            _text.Append("[F4] 전체 처치  [F6] 배속  [F7] 표시  [F8] 다음 무기");
             _overlay = _text.ToString();
         }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Upgrade_ReloadSpeed
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.UpgradeData
   _displayName: "\uBE60\uB978 \uC190"
-  _icon: {fileID: 21300000, guid: 922cf4a1356c307498162810bede8c77, type: 3}
+  _icon: {fileID: 21300000, guid: f48b31f731512e44f89b0b17dd8da91b, type: 3}
   _description: "\uC7A5\uC804 \uC18D\uB3C4 +15%"
   _effect: 8
   _amount: 0.15

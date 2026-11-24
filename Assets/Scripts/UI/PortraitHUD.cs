@@ -15,6 +15,8 @@ namespace ArenaBreak.UI
         [SerializeField, Range(0f, 1f)] private float _hurtRatio = 0.6f;
         [SerializeField, Range(0f, 1f)] private float _criticalRatio = 0.3f;
 
+        private bool _started;
+
         private void OnEnable()
         {
             if (_health == null)
@@ -23,7 +25,22 @@ namespace ArenaBreak.UI
             }
 
             _health.Changed += Refresh;
-            Refresh(_health.Current, _health.Max);
+
+            // 첫 활성화 때는 Health가 아직 Awake 전이라 현재 체력이 0일 수 있다. 그 값으로 그리면 위독 초상화로 시작하므로 Start에서 그린다
+            if (_started)
+            {
+                Refresh(_health.Current, _health.Max);
+            }
+        }
+
+        private void Start()
+        {
+            _started = true;
+
+            if (_health != null)
+            {
+                Refresh(_health.Current, _health.Max);
+            }
         }
 
         private void OnDisable()

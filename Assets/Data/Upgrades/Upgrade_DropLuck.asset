@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Upgrade_DropLuck
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.UpgradeData
   _displayName: "\uD589\uC6B4"
-  _icon: {fileID: 21300000, guid: 804a3b264974ff24482d0ca964eae378, type: 3}
+  _icon: {fileID: 21300000, guid: 3ce91d0678b80ab42ada144d8a97f3f3, type: 3}
   _description: "\uBB34\uAE30\xB7\uD0C4\uC57D \uB4DC\uB78D +25%"
   _effect: 10
   _amount: 0.25

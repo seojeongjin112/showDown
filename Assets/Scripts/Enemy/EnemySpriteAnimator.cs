@@ -34,6 +34,10 @@ namespace ArenaBreak.Enemy
         // 마지막 사망 프레임에서 기준점(발밑)부터 몸 중심까지의 거리(스프라이트 로컬 단위)
         [SerializeField] private float _corpseCenterY;
 
+        // 공격 피해가 동작의 타격 프레임에 맞게 들어가도록 공격 쪽이 읽는다
+        public float FramesPerSecond => _framesPerSecond;
+        public float AttackSeconds => _shoot != null && _framesPerSecond > 0f ? _shoot.Length / _framesPerSecond : 0.5f;
+
         private IEnemyAttack _attack;
         private Health _health;
         private YawBillboard _billboard;

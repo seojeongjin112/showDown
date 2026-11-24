@@ -50,6 +50,7 @@ MonoBehaviour:
   _explosionPrefab: {fileID: 1079450014634260776, guid: f7dc781094ca8984aa01050ecfce9697, type: 3}
   _explosionSeconds: 0.5
   _maxLifetime: 5
+  _markerMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
 --- !u!114 &1994283281987888068
 MonoBehaviour:
   m_ObjectHideFlags: 0
