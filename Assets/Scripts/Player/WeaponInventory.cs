@@ -24,8 +24,10 @@ namespace ArenaBreak.Player
 
         // 입력 에셋에 무기 전환 액션이 없어서 숫자키와 휠을 직접 바인딩한다
         private const string ScrollBinding = "<Mouse>/scroll";
-        // 숫자키의 컨트롤 이름은 digit1이 아니라 1이라서 슬롯 번호를 그대로 쓴다
+        // 숫자키의 컨트롤 이름은 digit1이 아니라 1이라서 번호를 그대로 쓴다
         private const string KeyBindingFormat = "<Keyboard>/{0}";
+        // 근접·보조·주 무기 세 종류마다 숫자키 하나씩이다
+        private static readonly int SlotTypeCount = Enum.GetValues(typeof(WeaponSlotType)).Length;
 
         [SerializeField] private Slot[] _slots;
 
@@ -70,6 +72,20 @@ namespace ArenaBreak.Player
             return index >= 0 && _owned[index] && _ammo[index] != null && _ammo[index].CanAddReserve;
         }
 
+        // 그 종류로 지금 들고 있는 무기의 슬롯 번호. 없으면 -1
+        public int OwnedIndexIn(WeaponSlotType type)
+        {
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if (_owned[i] && _slots[i].Data.SlotType == type)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         public bool Unlock(WeaponData weapon)
         {
             if (!CanUnlock(weapon))
@@ -78,6 +94,15 @@ namespace ArenaBreak.Player
             }
 
             int index = IndexOf(weapon);
+
+            // 같은 종류는 한 자루만 들 수 있어서 기존 무기는 내려놓는다
+            int replaced = OwnedIndexIn(weapon.SlotType);
+            if (replaced >= 0)
+            {
+                _owned[replaced] = false;
+                OwnedChanged?.Invoke(replaced);
+            }
+
             _owned[index] = true;
             OwnedChanged?.Invoke(index);
 
@@ -111,7 +136,12 @@ namespace ArenaBreak.Player
         {
             _owned = new bool[_slots.Length];
             _ammo = new WeaponAmmo[_slots.Length];
-            _selectActions = new InputAction[_slots.Length];
+            _selectActions = new InputAction[SlotTypeCount];
+
+            for (int i = 0; i < SlotTypeCount; i++)
+            {
+                _selectActions[i] = new InputAction("WeaponType" + i, InputActionType.Button, string.Format(KeyBindingFormat, i + 1));
+            }
 
             for (int i = 0; i < _slots.Length; i++)
             {
@@ -122,13 +152,14 @@ namespace ArenaBreak.Player
                     _ammo[i] = new WeaponAmmo(_slots[i].Data);
 
                     // 팔 오브젝트가 꺼져 있어도 탄약 상태를 넘길 수 있다
-                    if (_slots[i].Viewmodel.TryGetComponent(out IAmmoWeapon weapon))
+                    // 양손 무기는 팔 둘을 묶은 빈 오브젝트 아래에 총 스크립트가 있어서 자식까지 찾는다
+                    IAmmoWeapon weapon = _slots[i].Viewmodel.GetComponentInChildren<IAmmoWeapon>(true);
+                    if (weapon != null)
                     {
                         weapon.Bind(_ammo[i]);
                     }
                 }
 
-                _selectActions[i] = new InputAction("Weapon" + i, InputActionType.Button, string.Format(KeyBindingFormat, i + 1));
                 _slots[i].Viewmodel.SetActive(i == SelectedIndex);
             }
 
@@ -181,7 +212,8 @@ namespace ArenaBreak.Player
             {
                 if (_selectActions[i].WasPressedThisFrame())
                 {
-                    Select(i);
+                    // 그 종류의 무기를 아직 못 얻었으면 아무 일도 없다
+                    Select(OwnedIndexIn((WeaponSlotType)i));
                     return;
                 }
             }

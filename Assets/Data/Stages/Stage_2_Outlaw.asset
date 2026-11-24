@@ -20,3 +20,4 @@ MonoBehaviour:
   _sunColor: {r: 1, g: 1, b: 1, a: 1}
   _sunIntensity: 1
   _sunEulerAngles: {x: 50, y: 330, z: 0}
+  _weaponDrops: {fileID: 11400000, guid: 4a7c4240bb16d1349bf29f49e270c41d, type: 2}

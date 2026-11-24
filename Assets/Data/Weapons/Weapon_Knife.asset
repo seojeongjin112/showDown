@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Weapon_Knife
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
   _displayName: "\uCE7C"
+  _slotType: 0
   _icon: {fileID: 21300000, guid: 4e20d834101649c48a28d4c6e3e21cfe, type: 3}
   _ammoIcon: {fileID: 0}
   _damage: 2
   _range: 40
+  _pellets: 1
+  _spreadDegrees: 0
   _magazineSize: 0
   _startReserve: 0
   _maxReserve: 0

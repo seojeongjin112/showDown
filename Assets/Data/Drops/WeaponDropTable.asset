@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9f625c7ff7ad04a97aa377b8fe241b, type: 3}
+  m_Name: WeaponDropTable
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponDropTable
+  _entries:
+  - _weapon: {fileID: 11400000, guid: 50eb16f4578b7ca44960e53a5531134c, type: 2}
+    _rarity: 0
+    _weight: 1
+    _ammoWhenOwned: 12
+    _dropFrames:
+    - {fileID: 21300000, guid: f19df42e3ce1c0b47a18d48f5beccd4f, type: 3}
+    - {fileID: 21300000, guid: eccc62cbba86eff46b09abfa77d2a7b6, type: 3}
+    - {fileID: 21300000, guid: 2c90934f854be9240b737ba31f515499, type: 3}
+    - {fileID: 21300000, guid: 0c444bfdb37ec264997c467d06a11f48, type: 3}
+    - {fileID: 21300000, guid: 6adda305feca5c8468d74f84855305b7, type: 3}
+    - {fileID: 21300000, guid: 64a01d9814b956a40b1fc4ffcd4f9cc6, type: 3}
+    - {fileID: 21300000, guid: 8c01dd0355a7fe04db6cd123a3aed388, type: 3}
+    - {fileID: 21300000, guid: 6b94d05046ac88f40be36807521e4245, type: 3}
+  - _weapon: {fileID: 11400000, guid: 0a1ba013390651a458184b093a5d38a3, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 8
+    _dropFrames:
+    - {fileID: 21300000, guid: b113e6aadaee90847849a8b03b7dc74d, type: 3}
+    - {fileID: 21300000, guid: 16fd162b2473b194d9e046da1b9fc853, type: 3}
+    - {fileID: 21300000, guid: 9c436f0a591b6464684e0bb6cba5bfa6, type: 3}
+    - {fileID: 21300000, guid: 3211e030a4728b64ba8fd705ffef216c, type: 3}
+    - {fileID: 21300000, guid: 8142a7ce033d2a04194c7cded012a2cc, type: 3}
+    - {fileID: 21300000, guid: 5840309542b30404ba6bf93355059382, type: 3}
+    - {fileID: 21300000, guid: 69e2eafe499f01741ac72b9e4f2add9d, type: 3}
+    - {fileID: 21300000, guid: df5f4fcf434d12a44884a91ee4a3e315, type: 3}
+  - _weapon: {fileID: 11400000, guid: 85709f1e4b1845c4b9b3e24a86a57ba1, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 10
+    _dropFrames:
+    - {fileID: 21300000, guid: d32ba1b8df471e44b910c271fcf8a0f1, type: 3}
+    - {fileID: 21300000, guid: 1ddf69622d9949d44b28e33d7f5d8b58, type: 3}
+    - {fileID: 21300000, guid: d42eca6f0c9caea489bcb810ccfe9c00, type: 3}
+    - {fileID: 21300000, guid: e0dfacead4be8114d9721fcd3760989e, type: 3}
+    - {fileID: 21300000, guid: fb6264620de3de94f98de3c625730852, type: 3}
+    - {fileID: 21300000, guid: 9119280910ed9b444831f4b8e8747a2a, type: 3}
+    - {fileID: 21300000, guid: 8a13bd7bca8009c4e84eb9ad04d746cb, type: 3}
+    - {fileID: 21300000, guid: ef1a5c8c155cc604b9bed1c787e903ce, type: 3}
+  - _weapon: {fileID: 11400000, guid: 8d958da78f3f4a649bc8be9c2aeea337, type: 2}
+    _rarity: 2
+    _weight: 1
+    _ammoWhenOwned: 3
+    _dropFrames:
+    - {fileID: 21300000, guid: a00a67ab28b086b4d890d55527c7e404, type: 3}
+    - {fileID: 21300000, guid: 6310a259aa4b740469f9bd97e1c4c236, type: 3}
+    - {fileID: 21300000, guid: a6e66407319ad4d46aa1af811649e815, type: 3}
+    - {fileID: 21300000, guid: e7e6df35265608f4281c1f127d31d346, type: 3}
+    - {fileID: 21300000, guid: 9ebbe6ee7674e1f4f84e7bbbb980a774, type: 3}
+    - {fileID: 21300000, guid: 2bf01681a6b9261458e9d2fafa6b2dd5, type: 3}
+    - {fileID: 21300000, guid: 75f8434a233ae3340a5bdcb4935141dc, type: 3}
+    - {fileID: 21300000, guid: 602413b4e8ac9384a9af58af206f9837, type: 3}
+  - _weapon: {fileID: 11400000, guid: 4ab500f701ecf1049b42d839e7c9ddb5, type: 2}
+    _rarity: 0
+    _weight: 0.5
+    _ammoWhenOwned: 0
+    _dropFrames:
+    - {fileID: 21300000, guid: 74679ef64d09a2c4cacfa22623b5ecab, type: 3}
+    - {fileID: 21300000, guid: 1a7273d619718424f8869ef61caa06bc, type: 3}
+    - {fileID: 21300000, guid: 98307e8d485e9a744a0e59cca5d10197, type: 3}
+    - {fileID: 21300000, guid: 423799968784366478acdb9001559d80, type: 3}
+    - {fileID: 21300000, guid: c4ed5c2bda5660e4dad2efcea0e0bd63, type: 3}
+    - {fileID: 21300000, guid: 294235304dda4f74d9b34e9c5a7f9f15, type: 3}
+    - {fileID: 21300000, guid: 761dd290d60335d418a745bf5c6e3816, type: 3}
+    - {fileID: 21300000, guid: 8aff51b11bd631043987bd38c63f234d, type: 3}
+  - _weapon: {fileID: 11400000, guid: 0cbfdc29297b4f14a931ec87d4c7137c, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 0
+    _dropFrames:
+    - {fileID: 21300000, guid: 47f8a48100eedbd41866a4260479d285, type: 3}
+    - {fileID: 21300000, guid: 30088e393c699a848adf92e68114d1be, type: 3}
+    - {fileID: 21300000, guid: 7c11d6005e7db6a428203f217e72b387, type: 3}
+    - {fileID: 21300000, guid: 7063afe7c26ead942853e7782a094c0b, type: 3}
+    - {fileID: 21300000, guid: 8831564992080db4982548ab09ad9086, type: 3}
+    - {fileID: 21300000, guid: b424edf1275dc6b48880d36319a68cdc, type: 3}
+    - {fileID: 21300000, guid: b712245275ac7144d9d54f5c0ddcf524, type: 3}
+    - {fileID: 21300000, guid: 68caf1bedd5f21446b4f4defa18450ba, type: 3}
+  - _weapon: {fileID: 11400000, guid: c370a5f98f9a88f48b6ab69fdc7b3afb, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 0
+    _dropFrames:
+    - {fileID: 21300000, guid: 0cecc9ea16d81d44e9b65c3a15347589, type: 3}
+    - {fileID: 21300000, guid: 6123ef98fa2485742a9567fe985a650d, type: 3}
+    - {fileID: 21300000, guid: 42f244677fdc39d48bd3cc32c30042e3, type: 3}
+    - {fileID: 21300000, guid: e3a02e73b23282440bfd079947ef0900, type: 3}
+    - {fileID: 21300000, guid: 96df68fa3fb332f4aa4bdc935a2f3492, type: 3}
+    - {fileID: 21300000, guid: 2024e4195f7f8bc4e9bf7ad15e0d9a02, type: 3}
+    - {fileID: 21300000, guid: e7fbbf7e475ea7d469b6650309742d7c, type: 3}
+    - {fileID: 21300000, guid: 3d90e4ac3eb80804d863665cbacfd6e8, type: 3}
+  - _weapon: {fileID: 11400000, guid: 52bfb754743338a4bb0bcfb48226c8db, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 4
+    _dropFrames:
+    - {fileID: 21300000, guid: eeb88c6d9fbf89d4b83c762c4d3f07db, type: 3}
+    - {fileID: 21300000, guid: 3bb0642399df4dd478b55fa699aaa9a8, type: 3}
+    - {fileID: 21300000, guid: b02ea01c36ac2ea40bd0032bf003b61f, type: 3}
+    - {fileID: 21300000, guid: de47214cdd7caf74d95fc72a9dd87065, type: 3}
+    - {fileID: 21300000, guid: ac1a8641242c94741b7aecc41d99376e, type: 3}
+    - {fileID: 21300000, guid: 8a3e6544cc9f7554c853c8560e13a212, type: 3}
+    - {fileID: 21300000, guid: 776aa44ba1b0d414090fbe41676cff08, type: 3}
+    - {fileID: 21300000, guid: 9171e1dd516301a41a00fe737cb61939, type: 3}
+  - _weapon: {fileID: 11400000, guid: fa028d07de3433245847a1dbd2e5eaee, type: 2}
+    _rarity: 2
+    _weight: 1
+    _ammoWhenOwned: 40
+    _dropFrames:
+    - {fileID: 21300000, guid: 4883200ed6fd63c4399c30400d2a624c, type: 3}
+    - {fileID: 21300000, guid: 5b8f90e2a1ad7244994a0d4375a72deb, type: 3}
+    - {fileID: 21300000, guid: de1fb4353c975c743b6374843fb77456, type: 3}
+    - {fileID: 21300000, guid: e18f5421252d9f24f8a8b2996d52bd39, type: 3}
+    - {fileID: 21300000, guid: f9eb863ce0dca8941a7c3cb961cd28d7, type: 3}
+    - {fileID: 21300000, guid: b817b8f41eb578c4383e09989fcbc843, type: 3}
+    - {fileID: 21300000, guid: da5d5c317c1c06d48a13fdca902cdc45, type: 3}
+    - {fileID: 21300000, guid: 8a802f585c7322844a7d47b6a079c289, type: 3}
+  - _weapon: {fileID: 11400000, guid: 0fbbbd662f409c143af4a32f12ca84b7, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 12
+    _dropFrames:
+    - {fileID: 21300000, guid: f19df42e3ce1c0b47a18d48f5beccd4f, type: 3}
+    - {fileID: 21300000, guid: eccc62cbba86eff46b09abfa77d2a7b6, type: 3}
+    - {fileID: 21300000, guid: 2c90934f854be9240b737ba31f515499, type: 3}
+    - {fileID: 21300000, guid: 0c444bfdb37ec264997c467d06a11f48, type: 3}
+    - {fileID: 21300000, guid: 6adda305feca5c8468d74f84855305b7, type: 3}
+    - {fileID: 21300000, guid: 64a01d9814b956a40b1fc4ffcd4f9cc6, type: 3}
+    - {fileID: 21300000, guid: 8c01dd0355a7fe04db6cd123a3aed388, type: 3}
+    - {fileID: 21300000, guid: 6b94d05046ac88f40be36807521e4245, type: 3}
+  - _weapon: {fileID: 11400000, guid: 15e73d817f1b45c4b95d57e06efb222a, type: 2}
+    _rarity: 0
+    _weight: 1
+    _ammoWhenOwned: 6
+    _dropFrames:
+    - {fileID: 21300000, guid: 9fb44cd3f3189d14e9f3583aae326886, type: 3}
+    - {fileID: 21300000, guid: 6228c1cd573a28a4b99a90fc78b2ed7f, type: 3}
+    - {fileID: 21300000, guid: 84f19b8116cf8b642983fabbdc0b52c6, type: 3}
+    - {fileID: 21300000, guid: d697546b4ff90444a9021ab47230510b, type: 3}
+    - {fileID: 21300000, guid: 2d16c4ead54df574aa229d512448c162, type: 3}
+    - {fileID: 21300000, guid: 86fa67beed380ea4ba8ce599f1106689, type: 3}
+    - {fileID: 21300000, guid: 0c5a6d9e07fb94c49ae3e7f794ed9bcf, type: 3}
+    - {fileID: 21300000, guid: 68b3d9bfe164bbd4e971232a1df738f1, type: 3}
+  - _weapon: {fileID: 11400000, guid: 76a220333b0cb874cad9dc5d6e717d98, type: 2}
+    _rarity: 1
+    _weight: 1
+    _ammoWhenOwned: 3
+    _dropFrames:
+    - {fileID: 21300000, guid: 6c2d98bac8145c4479ec8bf7c5901599, type: 3}
+    - {fileID: 21300000, guid: 3d8f9bcdccbb5e443b8b44b6e9eb3f05, type: 3}
+    - {fileID: 21300000, guid: 70d44d52c6e3fba488573efdef79f8e6, type: 3}
+    - {fileID: 21300000, guid: e777bea473771ea4487256999254c5ef, type: 3}
+    - {fileID: 21300000, guid: d701675e690092745aea3ef9bfbfe28b, type: 3}
+    - {fileID: 21300000, guid: 8326ad2afd5835540908fca9533b61a0, type: 3}
+    - {fileID: 21300000, guid: c644cc584222bfd48b5583cbe79f1386, type: 3}
+    - {fileID: 21300000, guid: f05db579bbb2c5c43a484fbc6c29917a, type: 3}
+  _commonWeight: 60
+  _rareWeight: 30
+  _legendaryWeight: 10
+  _unownedWeightMultiplier: 2
+  _ownedWeightMultiplier: 0.5
+  _firstDropGuaranteeKills: 15
+  _guaranteeKills: 30

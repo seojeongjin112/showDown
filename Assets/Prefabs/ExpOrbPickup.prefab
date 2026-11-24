@@ -49,6 +49,7 @@ MonoBehaviour:
   _pickupRadius: 1.5
   _flightTime: 0.5
   _restHeight: 0.4
+  _highlightPrefab: {fileID: 2190301760780564892, guid: f3f927cd62add9f4088e974a7e86c14f, type: 3}
   _value: 1
 --- !u!114 &2071753308483895422
 MonoBehaviour:

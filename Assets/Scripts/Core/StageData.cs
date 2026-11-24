@@ -25,7 +25,12 @@ namespace ArenaBreak.Core
         [SerializeField] private float _sunIntensity = 1f;
         [SerializeField] private Vector3 _sunEulerAngles = new Vector3(50f, -30f, 0f);
 
+        [Header("Drops")]
+        [Tooltip("이 스테이지에서 적이 떨어뜨릴 수 있는 무기 표")]
+        [SerializeField] private WeaponDropTable _weaponDrops;
+
         public string DisplayName => _displayName;
+        public WeaponDropTable WeaponDrops => _weaponDrops;
         public StageClearCondition ClearCondition => _clearCondition;
         public float SurviveSeconds => _surviveSeconds;
         public Material Skybox => _skybox;

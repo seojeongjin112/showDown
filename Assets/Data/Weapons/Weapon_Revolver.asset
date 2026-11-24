@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: Weapon_Revolver
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
   _displayName: "\uB9AC\uBCFC\uBC84"
+  _slotType: 1
   _icon: {fileID: 21300000, guid: 0d9148dd0a370404eaaa6c5fa8072e53, type: 3}
   _ammoIcon: {fileID: 21300000, guid: 72476951902667c458634dc64ef29d5b, type: 3}
   _damage: 2
   _range: 40
+  _pellets: 1
+  _spreadDegrees: 0
+  _automatic: 0
   _magazineSize: 6
   _startReserve: 12
   _maxReserve: 36
+  _ammoPackSize: 6
   _fireFrames:
   - {fileID: 21300000, guid: d92465bef46c5104895451a3807bbba2, type: 3}
   - {fileID: 21300000, guid: aaa9024ba4edd6c459047cdc33994552, type: 3}
@@ -49,3 +54,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 77484b5592699cb4eb9047ceecf48803, type: 3}
   - {fileID: 21300000, guid: 8810b0f6c23a4364ca27d9cad0d8d01a, type: 3}
   _framesPerSecond: 18
+  _reloadFramesPerSecond: 0

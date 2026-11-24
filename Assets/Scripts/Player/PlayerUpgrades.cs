@@ -9,7 +9,8 @@ namespace ArenaBreak.Player
     {
         private Health _health;
         private FirstPersonMovement _movement;
-        private KnifeDamage _knife;
+        // 근접 무기가 여러 자루라서 강화는 어느 것을 들든 적용되도록 전부에 준다
+        private KnifeDamage[] _melee;
         private WeaponInventory _weapons;
 
         private void Awake()
@@ -17,10 +18,10 @@ namespace ArenaBreak.Player
             _health = GetComponent<Health>();
             _movement = GetComponent<FirstPersonMovement>();
             _weapons = GetComponent<WeaponInventory>();
-            // 칼은 카메라 아래 팔 오브젝트에 붙어 있다
-            _knife = GetComponentInChildren<KnifeDamage>(true);
+            // 근접 무기는 카메라 아래 팔 오브젝트에 붙어 있고 꺼져 있을 수 있다
+            _melee = GetComponentsInChildren<KnifeDamage>(true);
 
-            if (_knife == null)
+            if (_melee.Length == 0)
             {
                 Debug.LogError("PlayerUpgrades: 자식에서 KnifeDamage를 찾지 못했습니다", this);
                 enabled = false;
@@ -57,10 +58,18 @@ namespace ArenaBreak.Player
                     _movement.AddMoveSpeed(upgrade.Amount);
                     break;
                 case UpgradeEffect.KnifeDamage:
-                    _knife.AddDamage(Mathf.RoundToInt(upgrade.Amount));
+                    foreach (KnifeDamage melee in _melee)
+                    {
+                        melee.AddDamage(Mathf.RoundToInt(upgrade.Amount));
+                    }
+
                     break;
                 case UpgradeEffect.KnifeRange:
-                    _knife.AddRange(upgrade.Amount);
+                    foreach (KnifeDamage melee in _melee)
+                    {
+                        melee.AddRange(upgrade.Amount);
+                    }
+
                     break;
                 case UpgradeEffect.UnlockWeapon:
                     _weapons.Unlock(upgrade.Weapon);

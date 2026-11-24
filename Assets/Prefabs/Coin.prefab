@@ -161,10 +161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9529831ab498c60428cbe35872ffdcfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Coin
-  _value: 1
   _pickupRadius: 1.5
   _flightTime: 0.5
   _restHeight: 0.4
+  _highlightPrefab: {fileID: 6403833185229507792, guid: de3dbef2371d87242a504478abb1da04, type: 3}
+  _value: 1
 --- !u!114 &8554923715076278346
 MonoBehaviour:
   m_ObjectHideFlags: 0

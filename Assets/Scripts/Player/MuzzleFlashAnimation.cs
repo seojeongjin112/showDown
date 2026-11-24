@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace ArenaBreak.Player
 {
-    [RequireComponent(typeof(GunWeapon))]
     public class MuzzleFlashAnimation : MonoBehaviour
     {
+        [Tooltip("비어 있으면 같은 오브젝트의 총을 쓴다. 왼손 팔은 총 스크립트가 오른손 팔에 있어서 직접 넣는다")]
+        [SerializeField] private GunWeapon _gun;
+        [Tooltip("켜면 오른손이 아니라 왼손이 쏠 때 터진다")]
+        [SerializeField] private bool _followOffhand;
         [SerializeField] private SpriteRenderer _flash;
         [SerializeField] private Sprite[] _frames;
         [SerializeField] private float _framesPerSecond = 30f;
@@ -13,17 +16,20 @@ namespace ArenaBreak.Player
         [SerializeField] private Sprite[] _armFrames;
         [SerializeField] private Vector2[] _muzzlePositions;
 
-        private GunWeapon _gun;
         private SpriteRenderer _arm;
         private float _elapsed;
         private bool _isPlaying;
 
         private void Awake()
         {
-            _gun = GetComponent<GunWeapon>();
+            if (_gun == null)
+            {
+                _gun = GetComponent<GunWeapon>();
+            }
+
             _arm = GetComponent<SpriteRenderer>();
 
-            if (_flash == null || _frames == null || _frames.Length == 0
+            if (_gun == null || _flash == null || _frames == null || _frames.Length == 0
                 || _armFrames == null || _muzzlePositions == null || _armFrames.Length != _muzzlePositions.Length)
             {
                 Debug.LogError("MuzzleFlashAnimation: 화염 렌더러, 프레임, 총구 위치 설정이 올바르지 않습니다", this);
@@ -36,12 +42,26 @@ namespace ArenaBreak.Player
 
         private void OnEnable()
         {
-            _gun.Fired += OnFired;
+            if (_followOffhand)
+            {
+                _gun.OffhandFired += OnFired;
+            }
+            else
+            {
+                _gun.Fired += OnFired;
+            }
         }
 
         private void OnDisable()
         {
-            _gun.Fired -= OnFired;
+            if (_followOffhand)
+            {
+                _gun.OffhandFired -= OnFired;
+            }
+            else
+            {
+                _gun.Fired -= OnFired;
+            }
 
             // 재생 도중에 무기를 바꾸면 화염이 다음에 꺼낼 때까지 남아 있지 않도록 끈다
             _isPlaying = false;

@@ -112,6 +112,8 @@ GameObject:
   - component: {fileID: 1403027303117869139}
   - component: {fileID: 6165159052903531330}
   - component: {fileID: 5584831561031516296}
+  - component: {fileID: 4187611566258929913}
+  - component: {fileID: 272326257013130316}
   m_Layer: 0
   m_Name: OutlawWagon
   m_TagString: Untagged
@@ -174,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c78549b6d515447b6a8e627f93351c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
-  _maxHealth: 30
+  _maxHealth: 60
 --- !u!136 &4314459921808018690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -391,3 +393,40 @@ MonoBehaviour:
   _knockbackDistance: 0.2
   _knockbackSeconds: 0.12
   _knockbackCooldown: 0.25
+--- !u!114 &4187611566258929913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b4c0a2dd2369943a531f1efa7e828d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.WeaponDropper
+  _fallbackTable: {fileID: 11400000, guid: e007f1e20accb644ba2f5e0456be7f15, type: 2}
+  _pickupPrefab: {fileID: 7107113757964465806, guid: cda7acd7fb207ca48b487f5271271592, type: 3}
+  _dropChance: 0.25
+  _rarityBoost: 2
+  _scatterRadius: 1.2
+  _spawnHeight: 1
+  _snapDistance: 1.5
+--- !u!114 &272326257013130316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9687cb85a1c5aba4da7f02234e565ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.AmmoDropper
+  _pickupPrefab: {fileID: 3795932435715384822, guid: 66fae007f293daf44894cb945e9b9680, type: 3}
+  _dropChance: 1
+  _otherKillMultiplier: 0.5
+  _scatterRadius: 1.2
+  _spawnHeight: 1
+  _snapDistance: 1.5

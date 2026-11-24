@@ -26,6 +26,14 @@ namespace ArenaBreak.Player
         [SerializeField] private WeaponData _data;
         [SerializeField] private Camera _camera;
 
+        [Header("양손 (양손 리볼버만)")]
+        [Tooltip("비어 있으면 한 손 무기다. 있으면 오른손이 쏜 뒤 조금 있다가 이 손도 쏜다")]
+        [SerializeField] private SpriteRenderer _offhandRenderer;
+        [SerializeField] private Sprite[] _offhandFireFrames;
+        [SerializeField] private Sprite[] _offhandReloadFrames;
+        [Tooltip("오른손이 쏜 뒤 이 손이 쏠 때까지의 시간. 두 발이 한 번에 터지면 한 발처럼 느껴져서 어긋나게 한다")]
+        [SerializeField] private float _offhandDelay = 0.12f;
+
         private SpriteRenderer _renderer;
         private InputAction _fireAction;
         private InputAction _reloadAction;
@@ -34,6 +42,11 @@ namespace ArenaBreak.Player
         private State _state;
         private Sprite[] _frames;
         private float _elapsed;
+        private Sprite _offhandIdleSprite;
+        private Sprite[] _offhandFrames;
+        private float _offhandElapsed;
+        private float _offhandWait;
+        private bool _offhandPending;
         private readonly RaycastHit[] _hitBuffer = new RaycastHit[HitBufferSize];
 
         // 명중 표시(HUD)가 총 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
@@ -41,6 +54,16 @@ namespace ArenaBreak.Player
 
         // 총구 화염처럼 발사 순간에 맞춰 재생하는 연출이 입력을 중복으로 읽지 않고 구독하도록 알린다
         public event Action Fired;
+
+        // 왼손이 쏠 때 따로 알린다. 총구 화염이 손마다 따로 터져야 해서 Fired와 나눴다
+        public event Action OffhandFired;
+
+        private bool HasOffhand => _offhandRenderer != null;
+
+        private float CurrentFramesPerSecond => _state == State.Reloading ? _data.ReloadFramesPerSecond : _data.FramesPerSecond;
+
+        // 한쪽 손의 동작이 끝나기 전에 다른 쪽 손이 이어서 움직이는 중이면 무기 전체를 아직 쓰는 중으로 본다
+        private bool IsOffhandBusy => _offhandPending || _offhandFrames != null;
 
         // 팔이 꺼져 있어도 탄약을 읽고 쓸 수 있도록 탄약 상태는 인벤토리가 만들어 넘겨 준다
         public void Bind(WeaponAmmo ammo)
@@ -52,6 +75,11 @@ namespace ArenaBreak.Player
         {
             _renderer = GetComponent<SpriteRenderer>();
             _idleSprite = _renderer.sprite;
+
+            if (_offhandRenderer != null)
+            {
+                _offhandIdleSprite = _offhandRenderer.sprite;
+            }
 
             if (_camera == null)
             {
@@ -88,6 +116,7 @@ namespace ArenaBreak.Player
             // 장전이나 발사 도중에 무기를 바꿔도 다음에 꺼냈을 때 중간 자세로 굳어 있지 않도록 되돌린다
             _state = State.Idle;
             _renderer.sprite = _idleSprite;
+            ResetOffhand();
         }
 
         private void OnDestroy()
@@ -115,7 +144,10 @@ namespace ArenaBreak.Player
                 return;
             }
 
-            if (_fireAction.WasPressedThisFrame())
+            // 연사 무기는 누르고 있는 동안 동작이 끝날 때마다 다음 발을 쏜다
+            bool firePressed = _data.Automatic ? _fireAction.IsPressed() : _fireAction.WasPressedThisFrame();
+
+            if (firePressed)
             {
                 TryFire();
             }
@@ -138,6 +170,13 @@ namespace ArenaBreak.Player
             Shoot();
             Play(State.Firing, _data.FireFrames);
             Fired?.Invoke();
+
+            // 마지막 한 발이면 왼손은 쏠 탄이 없다
+            if (HasOffhand && _ammo.CanFire)
+            {
+                _offhandPending = true;
+                _offhandWait = _offhandDelay;
+            }
         }
 
         private void TryReload()
@@ -145,6 +184,11 @@ namespace ArenaBreak.Player
             if (_ammo.CanReload)
             {
                 Play(State.Reloading, _data.ReloadFrames);
+
+                if (HasOffhand)
+                {
+                    StartOffhand(_offhandReloadFrames);
+                }
             }
         }
 
@@ -231,7 +275,15 @@ namespace ArenaBreak.Player
         private void Animate()
         {
             _elapsed += Time.deltaTime;
-            int frameIndex = (int)(_elapsed * _data.FramesPerSecond);
+            AdvanceOffhand(Time.deltaTime);
+            int frameIndex = (int)(_elapsed * CurrentFramesPerSecond);
+
+            if (frameIndex >= _frames.Length && IsOffhandBusy)
+            {
+                // 이 손은 끝났지만 다른 손이 아직 움직이는 중이라 마지막 자세로 기다린다
+                _renderer.sprite = _frames[_frames.Length - 1];
+                return;
+            }
 
             if (frameIndex >= _frames.Length)
             {
@@ -247,6 +299,79 @@ namespace ArenaBreak.Player
             }
 
             _renderer.sprite = _frames[frameIndex];
+        }
+
+        private void AdvanceOffhand(float delta)
+        {
+            if (!HasOffhand)
+            {
+                return;
+            }
+
+            if (_offhandPending)
+            {
+                _offhandWait -= delta;
+                if (_offhandWait <= 0f)
+                {
+                    _offhandPending = false;
+                    FireOffhand();
+                }
+            }
+
+            if (_offhandFrames == null)
+            {
+                return;
+            }
+
+            _offhandElapsed += delta;
+            int index = (int)(_offhandElapsed * CurrentFramesPerSecond);
+
+            if (index >= _offhandFrames.Length)
+            {
+                _offhandFrames = null;
+                _offhandRenderer.sprite = _offhandIdleSprite;
+                return;
+            }
+
+            _offhandRenderer.sprite = _offhandFrames[index];
+        }
+
+        private void FireOffhand()
+        {
+            // 기다리는 사이에 탄이 바닥났을 수 있다
+            if (!_ammo.CanFire)
+            {
+                return;
+            }
+
+            _ammo.Consume();
+            Shoot();
+            StartOffhand(_offhandFireFrames);
+            OffhandFired?.Invoke();
+        }
+
+        private void StartOffhand(Sprite[] frames)
+        {
+            if (frames == null || frames.Length == 0)
+            {
+                return;
+            }
+
+            _offhandFrames = frames;
+            _offhandElapsed = 0f;
+            _offhandRenderer.sprite = frames[0];
+        }
+
+        // 발사나 장전 도중에 무기를 바꿔도 다음에 꺼냈을 때 왼손이 중간 자세로 굳어 있지 않도록 되돌린다
+        private void ResetOffhand()
+        {
+            _offhandPending = false;
+            _offhandFrames = null;
+
+            if (HasOffhand)
+            {
+                _offhandRenderer.sprite = _offhandIdleSprite;
+            }
         }
     }
 }

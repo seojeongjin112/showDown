@@ -3,6 +3,13 @@ using UnityEngine;
 
 namespace ArenaBreak.Core
 {
+    // 어떤 공격이 마지막 일격이었는지 알려, 근접으로 처치했을 때만 탄약을 떨어뜨리는 규칙을 가능하게 한다
+    public enum DamageSource
+    {
+        Unknown,
+        Melee
+    }
+
     public class Health : MonoBehaviour, IDamageable
     {
         [SerializeField] private int _maxHealth = 10;
@@ -10,6 +17,7 @@ namespace ArenaBreak.Core
         public int Current { get; private set; }
         public int Max => _maxHealth;
         public bool IsDead => Current <= 0;
+        public DamageSource LastDamageSource { get; private set; }
 
         // HUD가 폴링하지 않고 구독해서 갱신하도록 현재/최대를 함께 넘긴다
         public event Action<int, int> Changed;
@@ -46,12 +54,18 @@ namespace ArenaBreak.Core
 
         public void TakeDamage(int amount)
         {
+            TakeDamage(amount, DamageSource.Unknown);
+        }
+
+        public void TakeDamage(int amount, DamageSource source)
+        {
             // 사망 뒤에 들어온 피해로 Died가 두 번 나가면 사망 처리가 중복된다
             if (IsDead || amount <= 0)
             {
                 return;
             }
 
+            LastDamageSource = source;
             Current = Mathf.Max(0, Current - amount);
             Changed?.Invoke(Current, _maxHealth);
 

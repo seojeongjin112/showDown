@@ -12,9 +12,12 @@ namespace ArenaBreak.Core
         [SerializeField] private float _flightTime = 0.5f;
         // 그림 중심이 바닥에 파묻히지 않도록 중심을 띄워 둔다
         [SerializeField] private float _restHeight = 0.4f;
+        // 멀리서도 떨어진 자리를 알아보게 하는 빛 기둥과 바닥링. 비어 있으면 표시하지 않는다
+        [SerializeField] private GameObject _highlightPrefab;
 
         private Vector3 _velocity;
         private bool _landed;
+        private GameObject _highlight;
 
         protected Transform Player { get; private set; }
 
@@ -87,6 +90,28 @@ namespace ArenaBreak.Core
                 position.y = _restHeight;
                 transform.position = position;
                 _landed = true;
+                SpawnHighlight(position);
+            }
+        }
+
+        // 아이템 중심은 바닥에서 _restHeight만큼 떠 있으므로 효과는 그만큼 내린 바닥에 놓는다
+        private void SpawnHighlight(Vector3 restPosition)
+        {
+            if (_highlightPrefab == null)
+            {
+                return;
+            }
+
+            Vector3 ground = restPosition - Vector3.up * _restHeight;
+            _highlight = Instantiate(_highlightPrefab, ground, Quaternion.identity);
+        }
+
+        // 주워서든 다른 이유로든 아이템이 사라지면 바닥에 효과만 남지 않게 함께 지운다
+        private void OnDestroy()
+        {
+            if (_highlight != null)
+            {
+                Destroy(_highlight);
             }
         }
     }

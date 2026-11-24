@@ -68,8 +68,16 @@ namespace ArenaBreak.Player
                 return;
             }
 
+            // 근접으로 쓰러뜨린 적만 탄약을 떨어뜨리므로 출처를 함께 알린다
+            if (damageable is Health health)
+            {
+                health.TakeDamage(_damage, DamageSource.Melee);
+                Hit?.Invoke(health.IsDead);
+                return;
+            }
+
             damageable.TakeDamage(_damage);
-            Hit?.Invoke(damageable is Health health && health.IsDead);
+            Hit?.Invoke(false);
         }
 
         // 적이 몸에 바짝 붙으면 스피어 시작 위치부터 겹쳐서 캐스트가 그 적을 건너뛰므로, 겹친 대상을 먼저 찾는다
