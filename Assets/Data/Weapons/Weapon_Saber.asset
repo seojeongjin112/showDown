@@ -17,12 +17,15 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 625a679d5c7141e45ac28eff78d1b8dd, type: 3}
   _ammoIcon: {fileID: 0}
   _damage: 2
-  _range: 5
+  _range: 2.1
   _pellets: 1
   _spreadDegrees: 0
+  _automatic: 0
   _magazineSize: 0
   _startReserve: 0
   _maxReserve: 0
+  _ammoPackSize: 4
   _fireFrames: []
   _reloadFrames: []
   _framesPerSecond: 18
+  _reloadFramesPerSecond: 0

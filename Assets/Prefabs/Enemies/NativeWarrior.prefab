@@ -276,10 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddfcdc76598d7c43ba92a1fce3752ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.MeleeAttack
-  _range: 1.5
-  _cooldown: 0.6
+  _range: 2.3
+  _cooldown: 0.9
   _damage: 2
-  _windupSeconds: 0.42
+  _windupSeconds: 0.8
   _escapeMargin: 1
   _missCooldown: 0.4
   _telegraphGrowth: 0.15
