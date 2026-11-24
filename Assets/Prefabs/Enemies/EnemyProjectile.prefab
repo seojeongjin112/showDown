@@ -103,5 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6583076040abade40b4d3d935b931038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyProjectile
-  _speed: 12
+  _speed: 20
   _lifetime: 4
+  _hitRadius: 0.6

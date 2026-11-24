@@ -243,9 +243,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.MeleeAttack
   _range: 1.4
-  _cooldown: 0.8
+  _cooldown: 0.48
   _damage: 1
-  _windupSeconds: 0.5
+  _windupSeconds: 0.25
   _escapeMargin: 1
   _missCooldown: 0.4
   _telegraphGrowth: 0.15

@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.RangedAttack
   _projectilePrefab: {fileID: 3336605078975533819, guid: 659bf068b5678a14f886b799ae3002da, type: 3}
   _range: 10
-  _cooldown: 2.2
+  _cooldown: 1.65
   _muzzleHeight: 1
   _aimHeight: 1.5
   _damage: 1

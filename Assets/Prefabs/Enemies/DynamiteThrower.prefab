@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.BombThrowAttack
   _bombPrefab: {fileID: 4272025279924318407, guid: 14200850feebdea4397775859fa885b6, type: 3}
   _range: 12
-  _cooldown: 3
+  _cooldown: 2.25
   _throwHeight: 1.2
   _flightTime: 1.2
   _damage: 3
