@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 1741732620637809003}
   - component: {fileID: 7311011076653057638}
   - component: {fileID: 5027384688942694792}
+  - component: {fileID: 2806490030177667009}
   m_Layer: 0
   m_Name: Outlaw
   m_TagString: Untagged
@@ -439,6 +440,24 @@ MonoBehaviour:
   _eyeHeight: 1
   _targetHeight: 1.5
   _repathInterval: 0.25
+--- !u!114 &2806490030177667009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ae75507f088a64c9a4608f524aaf20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyHitReaction
+  _renderer: {fileID: 472688816171654921}
+  _flashColor: {r: 1, g: 0.35, b: 0.35, a: 1}
+  _flashSeconds: 0.1
+  _knockbackDistance: 0.6
+  _knockbackSeconds: 0.12
+  _knockbackCooldown: 0.25
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0

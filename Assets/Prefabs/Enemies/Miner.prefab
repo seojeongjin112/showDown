@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3330673129638376266}
   - component: {fileID: 2572595126148236020}
   - component: {fileID: 3524093138660337054}
+  - component: {fileID: 8725579832895478131}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -262,6 +263,24 @@ MonoBehaviour:
   _range: 1.6
   _cooldown: 1
   _damage: 2
+--- !u!114 &8725579832895478131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ae75507f088a64c9a4608f524aaf20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemyHitReaction
+  _renderer: {fileID: 472688816171654921}
+  _flashColor: {r: 1, g: 0.35, b: 0.35, a: 1}
+  _flashSeconds: 0.1
+  _knockbackDistance: 0.6
+  _knockbackSeconds: 0.12
+  _knockbackCooldown: 0.25
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0
