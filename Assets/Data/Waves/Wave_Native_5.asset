@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WaveData
   _entries:
   - _enemyPrefab: {fileID: 939344042944179532, guid: bc3310dbd3023c245b9ddfd17d4b1f31, type: 3}
-    _count: 3
+    _count: 5
   - _enemyPrefab: {fileID: 939344042944179532, guid: 4036f5a720e28744093d8051ae44450f, type: 3}
-    _count: 3
+    _count: 5
   - _enemyPrefab: {fileID: 939344042944179532, guid: 7088ae588d1005a44abfe3cc074845c0, type: 3}
-    _count: 4
+    _count: 7
   - _enemyPrefab: {fileID: 939344042944179532, guid: 1b3533b856d2ce34896b4338b7e43850, type: 3}
-    _count: 1
+    _count: 2
   - _enemyPrefab: {fileID: 939344042944179532, guid: bc3310dbd3023c245b9ddfd17d4b1f31, type: 3}
-    _count: 3
+    _count: 5
   - _enemyPrefab: {fileID: 939344042944179532, guid: 4036f5a720e28744093d8051ae44450f, type: 3}
-    _count: 3
+    _count: 5
   - _enemyPrefab: {fileID: 939344042944179532, guid: 7088ae588d1005a44abfe3cc074845c0, type: 3}
-    _count: 4
+    _count: 7
   - _enemyPrefab: {fileID: 939344042944179532, guid: 1b3533b856d2ce34896b4338b7e43850, type: 3}
-    _count: 1
-  _spawnInterval: 0.7
+    _count: 2
+  _spawnInterval: 0.3

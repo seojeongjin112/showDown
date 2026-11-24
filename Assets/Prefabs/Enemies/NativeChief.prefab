@@ -108,6 +108,11 @@ MonoBehaviour:
   _moveSpeed: 4.5
   _repathInterval: 0.25
   _strafeInRange: 1
+  _flankRadius: 14
+  _weaveAmplitude: 3
+  _weaveFrequency: 1.6
+  _flankFullDistance: 40
+  _flankEndDistance: 10
 --- !u!114 &1866207233427788322
 MonoBehaviour:
   m_ObjectHideFlags: 0

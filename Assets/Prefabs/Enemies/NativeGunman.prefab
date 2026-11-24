@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5275218526245152875}
   - component: {fileID: 5994051977437355392}
   - component: {fileID: 7137402728145136717}
-  - component: {fileID: 2292252427343013012}
   - component: {fileID: 1866207233427788322}
   - component: {fileID: 4299840685292417975}
   - component: {fileID: 8368799943682655441}
@@ -22,6 +21,7 @@ GameObject:
   - component: {fileID: 2572595126148236020}
   - component: {fileID: 1741732620637809003}
   - component: {fileID: 7311011076653057638}
+  - component: {fileID: 6798069879791060815}
   m_Layer: 0
   m_Name: NativeGunman
   m_TagString: Untagged
@@ -93,21 +93,6 @@ MonoBehaviour:
   _target: {fileID: 0}
   _eyeHeight: 1
   _sightTargetHeight: 1.5
---- !u!114 &2292252427343013012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939344042944179532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7582c4f16dcfdbe4183a4dc9cda3f5bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.ChaseMovement
-  _moveSpeed: 2
-  _repathInterval: 0.25
-  _strafeInRange: 1
 --- !u!114 &1866207233427788322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +415,25 @@ MonoBehaviour:
   _startColor: {r: 1, g: 0.2, b: 0.2, a: 0.15}
   _endColor: {r: 1, g: 0.05, b: 0.05, a: 1}
   _width: 0.05
+--- !u!114 &6798069879791060815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd2c627e21d7c2448b2e492cf113a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.CoverMovement
+  _moveSpeed: 3
+  _searchRadius: 12
+  _sampleCount: 14
+  _decisionInterval: 0.6
+  _eyeHeight: 1
+  _targetHeight: 1.5
+  _repathInterval: 0.25
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0
