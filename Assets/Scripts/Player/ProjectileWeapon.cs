@@ -35,6 +35,7 @@ namespace ArenaBreak.Player
         [SerializeField] private bool _reloadAfterShot = true;
 
         private SpriteRenderer _renderer;
+        private PlayerUpgrades _upgrades;
         private InputAction _fireAction;
         private InputAction _reloadAction;
         private Sprite _idleSprite;
@@ -56,6 +57,7 @@ namespace ArenaBreak.Player
         {
             _renderer = GetComponent<SpriteRenderer>();
             _idleSprite = _renderer.sprite;
+            _upgrades = GetComponentInParent<PlayerUpgrades>();
 
             if (_camera == null)
             {
@@ -172,7 +174,9 @@ namespace ArenaBreak.Player
         private void Animate()
         {
             _elapsed += Time.deltaTime;
-            float fps = _state == State.Reloading ? _data.ReloadFramesPerSecond : _data.FramesPerSecond;
+            float fps = _state == State.Reloading
+                ? _data.ReloadFramesPerSecond * (_upgrades != null ? _upgrades.ReloadSpeedMultiplier : 1f)
+                : _data.FramesPerSecond;
             int frameIndex = (int)(_elapsed * fps);
 
             if (_state == State.Firing && !_released && frameIndex >= _releaseFrame)
@@ -217,7 +221,8 @@ namespace ArenaBreak.Player
             Vector3 origin = view.position + view.forward * _spawnDistance - view.up * _spawnDownOffset;
 
             PlayerProjectile projectile = Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(view.forward));
-            projectile.Launch(view.forward * _speed, _gravityScale, _data.Damage, OnProjectileHit);
+            int damage = _upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage;
+            projectile.Launch(view.forward * _speed, _gravityScale, damage, OnProjectileHit);
         }
 
         private void OnProjectileHit(bool killed)

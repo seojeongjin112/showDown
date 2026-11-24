@@ -24,6 +24,7 @@ namespace ArenaBreak.Enemy
 
         private Health _health;
         private WeaponInventory _inventory;
+        private PlayerUpgrades _upgrades;
 
         private void Awake()
         {
@@ -34,7 +35,10 @@ namespace ArenaBreak.Enemy
             {
                 Debug.LogError("AmmoDropper: 픽업 프리팹, 또는 Player의 WeaponInventory를 찾지 못했습니다", this);
                 enabled = false;
+                return;
             }
+
+            player.TryGetComponent(out _upgrades);
         }
 
         private void OnEnable()
@@ -50,6 +54,8 @@ namespace ArenaBreak.Enemy
         private void OnDied()
         {
             float chance = _health.LastDamageSource == DamageSource.Melee ? _dropChance : _dropChance * _otherKillMultiplier;
+            // 드랍 운 카드가 있으면 확률이 그만큼 오른다
+            chance *= _upgrades != null ? _upgrades.DropLuckMultiplier : 1f;
             if (Random.value >= chance)
             {
                 return;
@@ -114,7 +120,8 @@ namespace ArenaBreak.Enemy
                 return 0f;
             }
 
-            float missing = 1f - (float)_inventory.AmmoAt(index).Reserve / weapon.MaxReserve;
+            WeaponAmmo ammo = _inventory.AmmoAt(index);
+            float missing = 1f - (float)ammo.Reserve / ammo.MaxReserve;
             return MinimumWeight + missing;
         }
     }

@@ -111,6 +111,25 @@ namespace ArenaBreak.Player
             return true;
         }
 
+        // 예비 탄약 상한을 amount만큼(0.25면 25%) 늘리고, 지금 든 탄약 무기에는 탄약 한 꾸러미를 보태서 바로 체감되게 한다
+        public void IncreaseReserveCap(float amount)
+        {
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if (_ammo[i] == null)
+                {
+                    continue;
+                }
+
+                _ammo[i].RaiseCap(amount);
+
+                if (_owned[i])
+                {
+                    _ammo[i].AddReserve(_slots[i].Data.AmmoPackSize);
+                }
+            }
+        }
+
         public void AddAmmo(WeaponData weapon, int amount)
         {
             if (CanAddAmmo(weapon))

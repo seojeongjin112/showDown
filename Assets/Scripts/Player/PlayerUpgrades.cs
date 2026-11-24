@@ -13,6 +13,20 @@ namespace ArenaBreak.Player
         private KnifeDamage[] _melee;
         private WeaponInventory _weapons;
 
+        // 총·활·토마호크·다이너마이트에 곱하는 피해 배수. 근접 무기는 칼 피해 카드로 따로 오른다
+        public float RangedDamageMultiplier { get; private set; } = 1f;
+        public float ReloadSpeedMultiplier { get; private set; } = 1f;
+        // 무기와 탄약이 떨어질 확률에 곱한다
+        public float DropLuckMultiplier { get; private set; } = 1f;
+
+        // 피해는 정수라서 곱한 뒤의 소수점은 그 확률로 올림한다. 피해 1짜리 개틀링도 평균적으로 강화가 반영된다
+        public int ScaleRangedDamage(int baseDamage)
+        {
+            float scaled = baseDamage * RangedDamageMultiplier;
+            int whole = Mathf.FloorToInt(scaled);
+            return Random.value < scaled - whole ? whole + 1 : whole;
+        }
+
         private void Awake()
         {
             _health = GetComponent<Health>();
@@ -76,6 +90,18 @@ namespace ArenaBreak.Player
                     break;
                 case UpgradeEffect.AddAmmo:
                     _weapons.AddAmmo(upgrade.Weapon, Mathf.RoundToInt(upgrade.Amount));
+                    break;
+                case UpgradeEffect.GunDamage:
+                    RangedDamageMultiplier += upgrade.Amount;
+                    break;
+                case UpgradeEffect.ReloadSpeed:
+                    ReloadSpeedMultiplier += upgrade.Amount;
+                    break;
+                case UpgradeEffect.MaxAmmo:
+                    _weapons.IncreaseReserveCap(upgrade.Amount);
+                    break;
+                case UpgradeEffect.DropLuck:
+                    DropLuckMultiplier += upgrade.Amount;
                     break;
             }
         }

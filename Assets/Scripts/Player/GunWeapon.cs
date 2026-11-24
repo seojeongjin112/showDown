@@ -35,6 +35,7 @@ namespace ArenaBreak.Player
         [SerializeField] private float _offhandDelay = 0.12f;
 
         private SpriteRenderer _renderer;
+        private PlayerUpgrades _upgrades;
         private InputAction _fireAction;
         private InputAction _reloadAction;
         private Sprite _idleSprite;
@@ -60,7 +61,9 @@ namespace ArenaBreak.Player
 
         private bool HasOffhand => _offhandRenderer != null;
 
-        private float CurrentFramesPerSecond => _state == State.Reloading ? _data.ReloadFramesPerSecond : _data.FramesPerSecond;
+        private float CurrentFramesPerSecond => _state == State.Reloading
+            ? _data.ReloadFramesPerSecond * (_upgrades != null ? _upgrades.ReloadSpeedMultiplier : 1f)
+            : _data.FramesPerSecond;
 
         // 한쪽 손의 동작이 끝나기 전에 다른 쪽 손이 이어서 움직이는 중이면 무기 전체를 아직 쓰는 중으로 본다
         private bool IsOffhandBusy => _offhandPending || _offhandFrames != null;
@@ -75,6 +78,8 @@ namespace ArenaBreak.Player
         {
             _renderer = GetComponent<SpriteRenderer>();
             _idleSprite = _renderer.sprite;
+            // 팔은 플레이어 아래에 있어서 위로 올라가며 찾는다. 카드로 오른 피해와 장전 속도를 읽는다
+            _upgrades = GetComponentInParent<PlayerUpgrades>();
 
             if (_offhandRenderer != null)
             {
@@ -216,7 +221,7 @@ namespace ArenaBreak.Player
                     continue;
                 }
 
-                damageable.TakeDamage(_data.Damage);
+                damageable.TakeDamage(_upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage);
                 anyHit = true;
                 anyKill |= damageable is Health health && health.IsDead;
             }

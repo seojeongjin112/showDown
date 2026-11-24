@@ -26,6 +26,7 @@ namespace ArenaBreak.Enemy
 
         private Health _health;
         private WeaponInventory _inventory;
+        private PlayerUpgrades _upgrades;
 
         private void Awake()
         {
@@ -36,7 +37,10 @@ namespace ArenaBreak.Enemy
             {
                 Debug.LogError("WeaponDropper: 픽업 프리팹, 또는 Player의 WeaponInventory를 찾지 못했습니다", this);
                 enabled = false;
+                return;
             }
+
+            player.TryGetComponent(out _upgrades);
         }
 
         private void OnEnable()
@@ -52,7 +56,9 @@ namespace ArenaBreak.Enemy
         private void OnDied()
         {
             WeaponDropTable table = CurrentTable();
-            if (table == null || !table.TryRoll(_dropChance, _rarityBoost, _inventory, out WeaponDrop drop))
+            // 드랍 운 카드가 있으면 확률이 그만큼 오른다
+            float chance = Mathf.Min(1f, _dropChance * (_upgrades != null ? _upgrades.DropLuckMultiplier : 1f));
+            if (table == null || !table.TryRoll(chance, _rarityBoost, _inventory, out WeaponDrop drop))
             {
                 return;
             }

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 8707718374589665028}
   - component: {fileID: 8805306204109487378}
   - component: {fileID: 2775234401409209424}
+  - component: {fileID: 3879723143416050060}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -491,6 +492,27 @@ MonoBehaviour:
   _pickupPrefab: {fileID: 3795932435715384822, guid: 66fae007f293daf44894cb945e9b9680, type: 3}
   _dropChance: 0.4
   _otherKillMultiplier: 0
+  _scatterRadius: 1.2
+  _spawnHeight: 1
+  _snapDistance: 1.5
+--- !u!114 &3879723143416050060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050866961046909206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7746b1bd984724e864f3bbeee835fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.HealthDropper
+  _pickupPrefab: {fileID: 8877088029839978490, guid: 3b85f81fff1bcd345903f3dac4961eaa, type: 3}
+  _meleeChance: 0.4
+  _meleeHeal: 1
+  _otherChance: 0.08
+  _otherHeal: 1
+  _lowHealthBonus: 0
   _scatterRadius: 1.2
   _spawnHeight: 1
   _snapDistance: 1.5

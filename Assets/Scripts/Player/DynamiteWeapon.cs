@@ -23,6 +23,7 @@ namespace ArenaBreak.Player
         [SerializeField] private float _spawnDistance = 0.6f;
 
         private SpriteRenderer _renderer;
+        private PlayerUpgrades _upgrades;
         private InputAction _fireAction;
         private Sprite _idleSprite;
         private WeaponAmmo _ammo;
@@ -42,6 +43,7 @@ namespace ArenaBreak.Player
         {
             _renderer = GetComponent<SpriteRenderer>();
             _idleSprite = _renderer.sprite;
+            _upgrades = GetComponentInParent<PlayerUpgrades>();
 
             if (_camera == null)
             {
@@ -149,7 +151,8 @@ namespace ArenaBreak.Player
             Vector3 direction = (view.forward + view.up * _upwardBias).normalized;
 
             Dynamite dynamite = Instantiate(_dynamitePrefab, view.position + view.forward * _spawnDistance, Quaternion.identity);
-            dynamite.Launch(direction * _throwSpeed, _data.Damage, OnBlastHit);
+            int damage = _upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage;
+            dynamite.Launch(direction * _throwSpeed, damage, OnBlastHit);
         }
 
         private void OnBlastHit(bool killed)
