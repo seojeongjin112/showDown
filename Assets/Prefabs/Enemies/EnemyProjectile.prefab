@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1070206702753678143}
   - component: {fileID: 3336605078975533819}
   - component: {fileID: 6440243444944299560}
+  - component: {fileID: 1117935885491068286}
   m_Layer: 0
   m_Name: EnemyProjectile
   m_TagString: Untagged
@@ -168,6 +169,23 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1117935885491068286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200975734501247593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c924589a1dd3947b820aeebf454eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.ArenaLight
+  _color: {r: 1, g: 0.3, b: 0.15, a: 1}
+  _intensity: 1.2
+  _range: 5
+  _flicker: 0.1
+  _flickerSpeed: 7
 --- !u!1 &9099630532405435572
 GameObject:
   m_ObjectHideFlags: 0

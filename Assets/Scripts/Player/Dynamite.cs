@@ -85,6 +85,9 @@ namespace ArenaBreak.Player
                 anyKill |= damageable is Health health && health.IsDead;
             }
 
+            // 폭발 순간에 주변이 크게 환해진다
+            ArenaLighting.Flash(transform.position + Vector3.up * 0.8f, new Color(1f, 0.6f, 0.2f), 3.2f, _blastRadius * 3f, 0.35f);
+
             if (_explosionPrefab != null)
             {
                 GameObject effect = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);

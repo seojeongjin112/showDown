@@ -175,6 +175,7 @@ namespace ArenaBreak.Player
             Shoot();
             Play(State.Firing, _data.FireFrames);
             Fired?.Invoke();
+            FlashMuzzle(0.15f);
 
             // 마지막 한 발이면 왼손은 쏠 탄이 없다
             if (HasOffhand && _ammo.CanFire)
@@ -353,6 +354,15 @@ namespace ArenaBreak.Player
             Shoot();
             StartOffhand(_offhandFireFrames);
             OffhandFired?.Invoke();
+            FlashMuzzle(-0.15f);
+        }
+
+        // 쏘는 순간 주변 벽과 적이 잠깐 환해져 총소리와 함께 타격감을 준다
+        private void FlashMuzzle(float sideOffset)
+        {
+            Transform view = _camera.transform;
+            Vector3 position = view.position + view.forward * 1.5f + view.right * sideOffset;
+            ArenaLighting.Flash(position, new Color(1f, 0.75f, 0.35f), _data.Pellets > 1 ? 1.5f : 1.0f, 9f, 0.1f);
         }
 
         private void StartOffhand(Sprite[] frames)

@@ -1,4 +1,5 @@
 using System;
+using ArenaBreak.Core;
 using UnityEngine;
 
 namespace ArenaBreak.Enemy
@@ -121,6 +122,9 @@ namespace ArenaBreak.Enemy
         {
             Vector3 muzzle = GetMuzzle();
             Vector3 aimPoint = GetAimPoint(target);
+
+            // 적이 쏠 때도 총구 주변이 잠깐 붉게 밝아진다
+            ArenaLighting.Flash(muzzle, new Color(1f, 0.45f, 0.2f), 1.4f, 6f, 0.12f);
 
             EnemyProjectile projectile = Instantiate(_projectilePrefab, muzzle, Quaternion.identity);
             projectile.Launch(aimPoint - muzzle, target, _aimHeight, _damage);

@@ -15,9 +15,9 @@ MonoBehaviour:
   _displayName: "\uC2A4\uD14C\uC774\uC9C0 3 - \uB178\uC744"
   _clearCondition: 1
   _surviveSeconds: 120
-  _skybox: {fileID: 0}
-  _ambientColor: {r: 0.85, g: 0.5, b: 0.4, a: 1}
-  _sunColor: {r: 1, g: 0.5, b: 0.25, a: 1}
-  _sunIntensity: 0.9
+  _skybox: {fileID: 2100000, guid: bd94db725e539ce45a739a57a34a3a6a, type: 2}
+  _ambientColor: {r: 0.42, g: 0.28, b: 0.3, a: 1}
+  _sunColor: {r: 1, g: 0.55, b: 0.28, a: 1}
+  _sunIntensity: 0.6
   _sunEulerAngles: {x: 8, y: -30, z: 0}
   _weaponDrops: {fileID: 11400000, guid: e007f1e20accb644ba2f5e0456be7f15, type: 2}
