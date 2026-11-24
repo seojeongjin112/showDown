@@ -24,6 +24,7 @@ namespace ArenaBreak.Core
         [SerializeField] private float _spawnJitter = 2.5f;
 
         private readonly List<int> _candidates = new List<int>();
+        private readonly List<Health> _spawned = new List<Health>();
         private WaitUntil _waitBelowCap;
         private bool _triggered;
         private int _aliveCount;
@@ -69,6 +70,29 @@ namespace ArenaBreak.Core
             StartCoroutine(Spawn(other.transform));
         }
 
+        // 웨이브 구역에 들어서면 지나온 길의 적이 따라와 웨이브와 섞이므로, 이 구역이 낸 살아 있는 적을 치우고 더는 내지 않는다
+        public void DespawnAll()
+        {
+            StopAllCoroutines();
+
+            // 아직 밟지 않은 구역이 나중에 켜져서 웨이브 중에 적을 내보내지 않게 막는다
+            _triggered = true;
+
+            for (int i = 0; i < _spawned.Count; i++)
+            {
+                Health health = _spawned[i];
+
+                // 이미 죽어 쓰러지는 중인 적은 사망 연출이 끝나게 둔다
+                if (health != null && !health.IsDead)
+                {
+                    Destroy(health.gameObject);
+                }
+            }
+
+            _spawned.Clear();
+            _aliveCount = 0;
+        }
+
         private IEnumerator Spawn(Transform player)
         {
             var interval = new WaitForSeconds(_group.SpawnInterval);
@@ -106,6 +130,7 @@ namespace ArenaBreak.Core
             }
 
             _aliveCount++;
+            _spawned.Add(health);
 
             // 적은 한 번만 죽으므로 핸들러가 스스로 구독을 해제한다
             Action onDied = null;

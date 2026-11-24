@@ -16,6 +16,8 @@ namespace ArenaBreak.Core
         [SerializeField] private WaveGate _entranceGate;
         [SerializeField] private WaveGate _exitGate;
         [SerializeField] private float _timeBetweenWaves = 3f;
+        [Tooltip("웨이브가 시작될 때 이 구역들이 낸 적을 모두 치운다. 지나온 길의 적이 따라 들어와 웨이브와 섞이지 않게 한다")]
+        [SerializeField] private EncounterZone[] _clearOnStart;
 
         private int _aliveCount;
         private bool _started;
@@ -82,6 +84,8 @@ namespace ArenaBreak.Core
 
         private IEnumerator RunArena()
         {
+            ClearPreviousEnemies();
+
             if (_entranceGate != null)
             {
                 _entranceGate.Close();
@@ -111,6 +115,22 @@ namespace ArenaBreak.Core
             }
 
             AllWavesCleared?.Invoke();
+        }
+
+        private void ClearPreviousEnemies()
+        {
+            if (_clearOnStart == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < _clearOnStart.Length; i++)
+            {
+                if (_clearOnStart[i] != null)
+                {
+                    _clearOnStart[i].DespawnAll();
+                }
+            }
         }
 
         private IEnumerator SpawnWave(WaveData wave)
