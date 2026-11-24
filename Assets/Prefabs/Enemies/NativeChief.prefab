@@ -113,6 +113,9 @@ MonoBehaviour:
   _weaveFrequency: 1.6
   _flankFullDistance: 40
   _flankEndDistance: 10
+  _surroundWhenClose: 0
+  _surroundEngageDistance: 14
+  _ringSpacing: 1.2
 --- !u!114 &1866207233427788322
 MonoBehaviour:
   m_ObjectHideFlags: 0

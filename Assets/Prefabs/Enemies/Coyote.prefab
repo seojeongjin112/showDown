@@ -254,8 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.PackMovement
   _moveSpeed: 5
-  _circleRadius: 9
-  _circleSpeedRatio: 0.8
+  _engageDistance: 14
+  _surroundRadius: 5
+  _ringSpacing: 1.4
   _lungeSpeedMultiplier: 1.8
   _lungePeriod: 4
   _lungeWindow: 1.2

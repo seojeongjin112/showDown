@@ -259,6 +259,8 @@ MonoBehaviour:
   _maxDormantSeconds: 8
   _emergeSeconds: 0.25
   _repathInterval: 0.25
+  _surroundEngageDistance: 12
+  _ringSpacing: 1.2
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0

@@ -243,6 +243,14 @@ MonoBehaviour:
   _moveSpeed: 0
   _repathInterval: 0.25
   _strafeInRange: 1
+  _flankRadius: 0
+  _weaveAmplitude: 0
+  _weaveFrequency: 3
+  _flankFullDistance: 30
+  _flankEndDistance: 6
+  _surroundWhenClose: 0
+  _surroundEngageDistance: 14
+  _ringSpacing: 1.2
 --- !u!195 &4361401226538532636
 NavMeshAgent:
   m_ObjectHideFlags: 0
