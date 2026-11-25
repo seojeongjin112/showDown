@@ -39,7 +39,12 @@ namespace ArenaBreak.Enemy
         private void OnDied()
         {
             // 지연 동안 시체가 계속 공격하거나 칼에 또 맞지 않도록 먼저 끈다
-            _ai.enabled = false;
+            // 보스처럼 EnemyAI 없이 자체 AI를 쓰는 적도 있다
+            if (_ai != null)
+            {
+                _ai.enabled = false;
+            }
+
             _collider.enabled = false;
 
             // AI만 꺼도 조준 중이던 공격은 자체 Update로 계속 진행돼 시체가 레이저를 쏘고 발사까지 한다

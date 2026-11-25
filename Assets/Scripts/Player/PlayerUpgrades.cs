@@ -33,6 +33,12 @@ namespace ArenaBreak.Player
         // 피해는 정수라서 곱한 뒤의 소수점은 그 확률로 올림한다. 피해 1짜리 개틀링도 평균적으로 강화가 반영된다
         public int ScaleRangedDamage(int baseDamage)
         {
+            return ScaleRangedDamage((float)baseDamage);
+        }
+
+        // 거리별로 줄어든 소수 피해도 같은 규칙(소수점은 확률로 올림)으로 정수로 만든다
+        public int ScaleRangedDamage(float baseDamage)
+        {
             float scaled = baseDamage * RangedDamageMultiplier;
             int whole = Mathf.FloorToInt(scaled);
             return Random.value < scaled - whole ? whole + 1 : whole;

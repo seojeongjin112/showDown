@@ -24,6 +24,13 @@ namespace ArenaBreak.Core
         [SerializeField] private Sprite _ammoIcon;
         [SerializeField] private int _damage = 2;
         [SerializeField] private float _range = 40f;
+        [Tooltip("켜면 거리에 따라 피해가 줄어든다. 가까이서 쏠수록 위 피해 그대로 들어가고 멀수록 아래 최소 피해까지 줄어든다")]
+        [SerializeField] private bool _distanceFalloff;
+        [Tooltip("이 거리까지는 피해가 줄지 않는다")]
+        [SerializeField] private float _falloffStartDistance = 4f;
+        [Tooltip("이 거리 이상에서는 최소 피해가 들어간다")]
+        [SerializeField] private float _falloffEndDistance = 16f;
+        [SerializeField] private float _minDamage = 1f;
         [Tooltip("한 발에 나가는 알갱이 수. 산탄총은 여러 개, 나머지는 1")]
         [SerializeField] private int _pellets = 1;
         [Tooltip("알갱이가 조준선에서 퍼지는 최대 각도(도). 0이면 정확히 조준선으로 나간다")]
@@ -47,6 +54,18 @@ namespace ArenaBreak.Core
         public Sprite AmmoIcon => _ammoIcon;
         public int Damage => _damage;
         public float Range => _range;
+
+        // 거리별 피해는 정수가 아닐 수 있어서 소수로 돌려주고, 올림·내림은 받는 쪽이 정한다
+        public float DamageAt(float distance)
+        {
+            if (!_distanceFalloff)
+            {
+                return _damage;
+            }
+
+            float t = Mathf.InverseLerp(_falloffStartDistance, Mathf.Max(_falloffEndDistance, _falloffStartDistance + 0.01f), distance);
+            return Mathf.Lerp(_damage, Mathf.Min(_minDamage, _damage), t);
+        }
         public int Pellets => _pellets;
         public float SpreadDegrees => _spreadDegrees;
         public bool Automatic => _automatic;

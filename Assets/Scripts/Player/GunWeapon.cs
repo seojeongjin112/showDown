@@ -229,7 +229,9 @@ namespace ArenaBreak.Player
                     continue;
                 }
 
-                damageable.TakeDamage(_upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage);
+                // 산탄총은 가까울수록 알갱이 피해가 크다. 다른 총은 거리별 피해가 꺼져 있어 항상 기본 피해다
+                float damage = _data.DamageAt(hit.distance);
+                damageable.TakeDamage(_upgrades != null ? _upgrades.ScaleRangedDamage(damage) : Mathf.Max(1, Mathf.RoundToInt(damage)));
                 anyHit = true;
                 anyKill |= damageable is Health health && health.IsDead;
             }
