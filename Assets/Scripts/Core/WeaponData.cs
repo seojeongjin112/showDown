@@ -35,6 +35,10 @@ namespace ArenaBreak.Core
         [SerializeField] private int _pellets = 1;
         [Tooltip("알갱이가 조준선에서 퍼지는 최대 각도(도). 0이면 정확히 조준선으로 나간다")]
         [SerializeField] private float _spreadDegrees;
+        [Tooltip("켜면 사격하는 동안 이동 속도가 느려지고 점프할 수 없다. 개틀링 같은 무거운 무기용")]
+        [SerializeField] private bool _slowWhileFiring;
+        [Tooltip("사격 중 이동 속도에 곱한다. 사격을 멈추고 잠깐 뒤에 원래 속도로 돌아온다")]
+        [SerializeField, Range(0.1f, 1f)] private float _firingMoveMultiplier = 0.4f;
         [Tooltip("켜면 발사 버튼을 누르고 있는 동안 계속 쏜다. 끄면 누를 때마다 한 발")]
         [SerializeField] private bool _automatic;
         [SerializeField] private int _magazineSize;
@@ -68,6 +72,8 @@ namespace ArenaBreak.Core
         }
         public int Pellets => _pellets;
         public float SpreadDegrees => _spreadDegrees;
+        public bool SlowWhileFiring => _slowWhileFiring;
+        public float FiringMoveMultiplier => _firingMoveMultiplier;
         public bool Automatic => _automatic;
         public int MagazineSize => _magazineSize;
         public int StartReserve => _startReserve;

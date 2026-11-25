@@ -18,8 +18,14 @@ MonoBehaviour:
   _ammoIcon: {fileID: 21300000, guid: a07de637c26ce4a43abd19233bc38ea8, type: 3}
   _damage: 1
   _range: 50
+  _distanceFalloff: 0
+  _falloffStartDistance: 4
+  _falloffEndDistance: 16
+  _minDamage: 1
   _pellets: 1
   _spreadDegrees: 3
+  _slowWhileFiring: 1
+  _firingMoveMultiplier: 0.4
   _automatic: 1
   _magazineSize: 60
   _startReserve: 120

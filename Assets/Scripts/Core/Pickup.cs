@@ -60,6 +60,18 @@ namespace ArenaBreak.Core
 
         protected abstract void OnPickedUp();
 
+        // 줍기 전에 확인이 필요한 아이템(무기 교체 등)이 거절할 수 있게 한다. 기본은 닿으면 바로 줍는다
+        protected virtual bool TryPickUp()
+        {
+            OnPickedUp();
+            return true;
+        }
+
+        // 플레이어가 줍는 거리 밖에 있는 동안 불린다. 확인 중이던 상태를 접는 데 쓴다
+        protected virtual void OnOutOfRange()
+        {
+        }
+
         private void Update()
         {
             if (!_landed)
@@ -74,8 +86,14 @@ namespace ArenaBreak.Core
 
             if (toPlayer.sqrMagnitude <= _pickupRadius * _pickupRadius)
             {
-                OnPickedUp();
-                Destroy(gameObject);
+                if (TryPickUp())
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                OnOutOfRange();
             }
         }
 

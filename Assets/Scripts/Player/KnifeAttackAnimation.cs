@@ -7,8 +7,8 @@ namespace ArenaBreak.Player
     [RequireComponent(typeof(SpriteRenderer))]
     public class KnifeAttackAnimation : MonoBehaviour
     {
-        // 입력 에셋의 Player 맵에는 우클릭 액션이 없어서 여기서 직접 바인딩한다
-        private const string AttackBinding = "<Mouse>/rightButton";
+        // 입력 에셋의 Player 맵에는 공격 액션이 없어서 여기서 직접 바인딩한다
+        private const string AttackBinding = "<Mouse>/leftButton";
 
         [SerializeField] private Sprite[] _frames;
         [SerializeField] private float _framesPerSecond = 18f;
@@ -72,7 +72,7 @@ namespace ArenaBreak.Player
             if (!_isPlaying)
             {
                 // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 공격으로 쓰지 않는다
-                if (_attackAction.WasPressedThisFrame() && Cursor.lockState == CursorLockMode.Locked)
+                if (_attackAction.WasPressedThisFrame() && FirstPersonLook.AttackAllowed)
                 {
                     _isPlaying = true;
                     _elapsed = 0f;

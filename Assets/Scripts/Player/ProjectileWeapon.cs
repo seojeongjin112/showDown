@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 namespace ArenaBreak.Player
 {
-    // 활과 토마호크처럼 손을 떠나는 순간에 비행체를 내보내는 무기. 우클릭으로 쏘고 R로 장전한다
+    // 활과 토마호크처럼 손을 떠나는 순간에 비행체를 내보내는 무기. 좌클릭으로 쏘고 R로 장전한다
     [RequireComponent(typeof(SpriteRenderer))]
     public class ProjectileWeapon : MonoBehaviour, IAmmoWeapon
     {
-        // 입력 에셋의 Player 맵에는 우클릭과 장전 액션이 없어서 여기서 직접 바인딩한다
-        private const string FireBinding = "<Mouse>/rightButton";
+        // 입력 에셋의 Player 맵에는 공격과 장전 액션이 없어서 여기서 직접 바인딩한다
+        private const string FireBinding = "<Mouse>/leftButton";
         private const string ReloadBinding = "<Keyboard>/r";
 
         private enum State
@@ -116,7 +116,7 @@ namespace ArenaBreak.Player
         private void ReadInput()
         {
             // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 발사로 쓰지 않는다
-            if (_ammo == null || Cursor.lockState != CursorLockMode.Locked)
+            if (_ammo == null || !FirstPersonLook.AttackAllowed)
             {
                 return;
             }

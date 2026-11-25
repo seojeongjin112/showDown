@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,15 @@ namespace ArenaBreak.Player
             get => _speedMultiplier;
             set => _speedMultiplier = Mathf.Max(0f, value);
         }
+
+        // 무거운 무기를 쏘는 동안의 감속은 지형 감속과 겹쳐 곱해지도록 따로 둔다
+        public float FiringSpeedMultiplier { get; set; } = 1f;
+
+        // 사격 중에는 뛰어오를 수 없다
+        public bool JumpBlocked { get; set; }
+
+        // 튜토리얼처럼 점프를 감지해야 하는 쪽이 입력을 따로 읽지 않고 구독한다
+        public event Action Jumped;
 
         public void AddMoveSpeed(float amount)
         {
@@ -78,16 +88,17 @@ namespace ArenaBreak.Player
                     _verticalVelocity = GroundedStickVelocity;
                 }
 
-                if (_jumpAction.WasPressedThisFrame())
+                if (_jumpAction.WasPressedThisFrame() && !JumpBlocked)
                 {
                     // 높이에서 초기 속도를 역산해야 중력을 바꿔도 점프 높이가 유지된다
                     _verticalVelocity = Mathf.Sqrt(_jumpHeight * -2f * Physics.gravity.y);
+                    Jumped?.Invoke();
                 }
             }
 
             _verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
-            Vector3 velocity = direction * (_moveSpeed * _speedMultiplier);
+            Vector3 velocity = direction * (_moveSpeed * _speedMultiplier * FiringSpeedMultiplier);
             velocity.y = _verticalVelocity;
 
             // SimpleMove는 수직 속도를 받지 못해 점프할 수 없어서 Move로 직접 중력을 적용한다

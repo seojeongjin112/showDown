@@ -6,12 +6,12 @@ using Random = UnityEngine.Random;
 
 namespace ArenaBreak.Player
 {
-    // 칼의 우클릭 입력과 같은 방식으로 발사하고, R로 장전한다
+    // 칼의 좌클릭 입력과 같은 방식으로 발사하고, R로 장전한다
     [RequireComponent(typeof(SpriteRenderer))]
     public class GunWeapon : MonoBehaviour, IAmmoWeapon
     {
-        // 입력 에셋의 Player 맵에는 우클릭과 장전 액션이 없어서 여기서 직접 바인딩한다
-        private const string FireBinding = "<Mouse>/rightButton";
+        // 입력 에셋의 Player 맵에는 공격과 장전 액션이 없어서 여기서 직접 바인딩한다
+        private const string FireBinding = "<Mouse>/leftButton";
         private const string ReloadBinding = "<Keyboard>/r";
         // 한 광선이 겹쳐 지나는 콜라이더 수의 상한이라 넉넉히 잡는다
         private const int HitBufferSize = 16;
@@ -38,6 +38,10 @@ namespace ArenaBreak.Player
         private InputAction _reloadAction;
         private Sprite _idleSprite;
         private WeaponAmmo _ammo;
+        private const float FireSlowHoldSeconds = 0.3f;
+
+        private FirstPersonMovement _movement;
+        private float _slowUntil;
         private State _state;
         private Sprite[] _frames;
         private float _elapsed;
@@ -77,6 +81,7 @@ namespace ArenaBreak.Player
             _idleSprite = _renderer.sprite;
             // 팔은 플레이어 아래에 있어서 위로 올라가며 찾는다. 카드로 오른 피해와 장전 속도를 읽는다
             _upgrades = GetComponentInParent<PlayerUpgrades>();
+            _movement = GetComponentInParent<FirstPersonMovement>();
 
             if (_offhandRenderer != null)
             {
@@ -115,6 +120,14 @@ namespace ArenaBreak.Player
             _fireAction.Disable();
             _reloadAction.Disable();
 
+            // 사격 중에 무기를 바꾸면 느린 속도와 점프 금지가 남지 않도록 되돌린다
+            _slowUntil = 0f;
+            if (_movement != null)
+            {
+                _movement.FiringSpeedMultiplier = 1f;
+                _movement.JumpBlocked = false;
+            }
+
             // 장전이나 발사 도중에 무기를 바꿔도 다음에 꺼냈을 때 중간 자세로 굳어 있지 않도록 되돌린다
             _state = State.Idle;
             _renderer.sprite = _idleSprite;
@@ -129,10 +142,20 @@ namespace ArenaBreak.Player
 
         private void Update()
         {
+            ApplyFiringSlow();
+
             if (_state == State.Idle)
             {
                 // 왼손만 쏜 경우 오른손 동작 상태가 없어서 왼손 그림은 여기서 따로 진행한다
                 AdvanceOffhand(Time.deltaTime);
+
+                // 탄창이 비면 따로 누르지 않아도 장전한다. 예비 탄약이 없으면 장전할 수 없어서 아무 일도 없다
+                if (_ammo != null && !_ammo.CanFire && _ammo.CanReload && !IsOffhandBusy)
+                {
+                    TryReload();
+                    return;
+                }
+
                 ReadInput();
                 return;
             }
@@ -140,10 +163,23 @@ namespace ArenaBreak.Player
             Animate();
         }
 
+        // 연사 사이의 짧은 틈에도 속도가 들쭉날쭉하지 않도록 마지막 발사 뒤 잠깐은 느린 채로 둔다
+        private void ApplyFiringSlow()
+        {
+            if (_movement == null)
+            {
+                return;
+            }
+
+            bool slowed = _data.SlowWhileFiring && Time.time < _slowUntil;
+            _movement.FiringSpeedMultiplier = slowed ? _data.FiringMoveMultiplier : 1f;
+            _movement.JumpBlocked = slowed;
+        }
+
         private void ReadInput()
         {
             // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 발사로 쓰지 않는다
-            if (_ammo == null || Cursor.lockState != CursorLockMode.Locked)
+            if (_ammo == null || !FirstPersonLook.AttackAllowed)
             {
                 return;
             }
@@ -186,6 +222,7 @@ namespace ArenaBreak.Player
 
             _nextShotIsOffhand = HasOffhand;
             _ammo.Consume();
+            _slowUntil = Time.time + FireSlowHoldSeconds;
             Shoot();
             Play(State.Firing, _data.FireFrames);
             Fired?.Invoke();
