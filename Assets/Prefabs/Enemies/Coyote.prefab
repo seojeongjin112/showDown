@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 6270512538484095756}
   - component: {fileID: 8835817370355292491}
   - component: {fileID: 3780715517011855055}
-  - component: {fileID: 953775826621761575}
   m_Layer: 0
   m_Name: Coyote
   m_TagString: Untagged
@@ -355,19 +354,6 @@ MonoBehaviour:
   _endScale: 0.85
   _shake: 0.06
   _shakeHz: 30
---- !u!114 &953775826621761575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939344042944179532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
-  _target: 1
 --- !u!1 &2043079368430547393
 GameObject:
   m_ObjectHideFlags: 0

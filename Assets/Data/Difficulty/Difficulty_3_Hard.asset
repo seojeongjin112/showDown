@@ -15,6 +15,3 @@ MonoBehaviour:
   _displayName: "\uC5B4\uB824\uC6C0"
   _description: "\uC801\uC774 \uB2E8\uB2E8\uD558\uACE0 \uBC1B\uB294 \uD53C\uD574\uAC00
     \uB298\uC5B4\uB09C\uB2E4."
-  _enemyHealthMultiplier: 1.4
-  _incomingDamageMultiplier: 1.5
-  _playerHealthMultiplier: 0.8
