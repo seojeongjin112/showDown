@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6622158910731049803}
   - component: {fileID: 185665762945437266}
   - component: {fileID: 8776200535829137938}
-  - component: {fileID: 3390045565440058950}
   m_Layer: 0
   m_Name: OutlawWagonBoss
   m_TagString: Untagged
@@ -66,16 +65,3 @@ MonoBehaviour:
   - _prefab: {fileID: 5692560830494277734, guid: 23e5c9da61c926644ab7bea17fe79d35, type: 3}
     _spawnDelay: 1
     _endsAtHealthRatio: 0
---- !u!114 &3390045565440058950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3856481354797600449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
-  _target: 1

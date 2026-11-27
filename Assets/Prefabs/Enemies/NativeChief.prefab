@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 1464105229831535711}
   - component: {fileID: 5378779185909998124}
   - component: {fileID: 6566836601632914969}
-  - component: {fileID: 661914823441734280}
   m_Layer: 0
   m_Name: NativeChief
   m_TagString: Untagged
@@ -602,19 +601,6 @@ MonoBehaviour:
   _scatterRadius: 1.2
   _spawnHeight: 1
   _snapDistance: 1.5
---- !u!114 &661914823441734280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939344042944179532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
-  _target: 1
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyData
   _displayName: "\uBCF4\uD1B5"
   _description: "\uAE30\uBCF8 \uBC38\uB7F0\uC2A4."
-  _enemyHealthMultiplier: 1
-  _incomingDamageMultiplier: 1
-  _playerHealthMultiplier: 1
