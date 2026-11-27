@@ -13,6 +13,8 @@ namespace ArenaBreak.Core
     public class Health : MonoBehaviour, IDamageable
     {
         [SerializeField] private int _maxHealth = 10;
+        [Tooltip("보스(보스 루트와 각 단계)는 난이도의 보스 체력 배율을 한 번 더 받는다")]
+        [SerializeField] private bool _isBoss;
 
         public int Current { get; private set; }
         public int Max => _maxHealth;
@@ -25,7 +27,28 @@ namespace ArenaBreak.Core
 
         private void Awake()
         {
+            ApplyDifficulty();
             Current = _maxHealth;
+        }
+
+        // 난이도는 체력이 정해지기 전에 한 번만 반영한다. 보스 루트와 단계가 같은 값을 받아야 체력바가 맞는다
+        private void ApplyDifficulty()
+        {
+            if (CompareTag("Player"))
+            {
+                if (Difficulty.PlayerMaxHealth > 0)
+                {
+                    _maxHealth = Difficulty.PlayerMaxHealth;
+                }
+
+                return;
+            }
+
+            float multiplier = Difficulty.EnemyHealth * (_isBoss ? Difficulty.BossHealth : 1f);
+            if (!Mathf.Approximately(multiplier, 1f))
+            {
+                _maxHealth = Difficulty.Scale(_maxHealth, multiplier);
+            }
         }
 
         // 최대치만 올리고 현재 체력은 그대로 두면 강화가 오히려 체력바를 비어 보이게 하므로 올린 만큼 채운다
@@ -63,6 +86,12 @@ namespace ArenaBreak.Core
             if (IsDead || amount <= 0)
             {
                 return;
+            }
+
+            // 플레이어가 받는 피해만 난이도 배율을 받는다
+            if (CompareTag("Player"))
+            {
+                amount = Difficulty.ScaleDamageTaken(amount);
             }
 
             LastDamageSource = source;
