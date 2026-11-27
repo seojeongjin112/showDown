@@ -20,6 +20,10 @@ namespace ArenaBreak.Core
         public int Max => _maxHealth;
         public bool IsDead => Current <= 0;
         public DamageSource LastDamageSource { get; private set; }
+        public bool IsBoss => _isBoss;
+
+        // 기록판처럼 모든 죽음을 세야 하는 쪽이 적마다 구독하지 않고 한 곳에서 듣는다
+        public static event Action<Health> AnyDied;
 
         // HUD가 폴링하지 않고 구독해서 갱신하도록 현재/최대를 함께 넘긴다
         public event Action<int, int> Changed;
@@ -100,6 +104,8 @@ namespace ArenaBreak.Core
 
             if (IsDead)
             {
+                // 기록판이 먼저 세야 한다. 마지막 보스의 Died로 승리 화면이 기록을 멈추면 그 처치가 빠진다
+                AnyDied?.Invoke(this);
                 Died?.Invoke();
             }
         }

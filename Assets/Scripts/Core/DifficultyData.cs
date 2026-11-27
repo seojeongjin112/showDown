@@ -13,7 +13,7 @@ namespace ArenaBreak.Core
         [Header("플레이어")]
         [Tooltip("시작 최대 체력. 0이면 플레이어 프리팹의 값을 그대로 쓴다")]
         [SerializeField] private int _playerMaxHealth;
-        [Tooltip("플레이어가 받는 피해에 곱한다")]
+        [Tooltip("적 공격력 배율. 근접·총알·폭탄·보스 등 적의 모든 공격이 플레이어에게 주는 피해에 곱한다. 플레이어 쪽에서 한 번에 곱해서 적마다 따로 고칠 필요가 없다. 위험 지역 피해도 함께 바뀐다")]
         [SerializeField] private float _damageTakenMultiplier = 1f;
         [Tooltip("적이 체력 회복 아이템을 떨어뜨릴 확률에 곱한다")]
         [SerializeField] private float _healDropMultiplier = 1f;
