@@ -50,6 +50,12 @@ namespace ArenaBreak.UI
 
         private void Show()
         {
+            // 승리 화면이 이미 떴으면(같은 순간 마지막 보스와 함께 쓰러진 경우) 패배를 띄우지 않는다
+            if (_stats != null && _stats.Stopped)
+            {
+                return;
+            }
+
             // 죽은 순간의 기록으로 멈춰 둔다. 사망 모션을 보는 동안 시간이 더 쌓이지 않게 한다
             if (_stats != null)
             {

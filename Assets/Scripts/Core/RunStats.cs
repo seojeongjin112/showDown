@@ -10,6 +10,9 @@ namespace ArenaBreak.Core
 
         public int Kills => _kills;
 
+        // 승리·패배 중 먼저 뜬 쪽이 기록을 멈추므로, 나중 쪽은 이걸 보고 뜨지 않는다
+        public bool Stopped => _endTime >= 0f;
+
         // 레벨업 카드를 고르는 동안처럼 시간이 멈춘 구간은 빼고 센다
         public float ElapsedSeconds => _endTime >= 0f ? _endTime : Time.timeSinceLevelLoad;
 

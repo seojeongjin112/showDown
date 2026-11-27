@@ -83,7 +83,8 @@ namespace ArenaBreak.UI
         private void Show()
         {
             // 보스 처치와 스테이지 전체 클리어가 겹쳐도 한 번만 띄운다
-            if (_shown)
+            // 패배 화면이 이미 떴으면 승리를 띄우지 않는다
+            if (_shown || (_stats != null && _stats.Stopped))
             {
                 return;
             }

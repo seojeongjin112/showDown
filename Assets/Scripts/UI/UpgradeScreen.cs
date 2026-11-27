@@ -23,6 +23,8 @@ namespace ArenaBreak.UI
         private readonly List<UpgradeData> _rollBuffer = new List<UpgradeData>();
         private int _pendingPicks;
         private bool _isOpen;
+        // 결과 화면처럼 다른 쪽이 먼저 꺼 둔 조작을 창을 닫으며 다시 켜지 않도록, 열 때 켜져 있던 것만 기억한다
+        private readonly System.Collections.Generic.List<Behaviour> _disabledByMe = new System.Collections.Generic.List<Behaviour>();
 
         private void Awake()
         {
@@ -63,9 +65,14 @@ namespace ArenaBreak.UI
         {
             _isOpen = true;
 
+            _disabledByMe.Clear();
             foreach (Behaviour behaviour in _disableWhileOpen)
             {
-                behaviour.enabled = false;
+                if (behaviour != null && behaviour.enabled)
+                {
+                    behaviour.enabled = false;
+                    _disabledByMe.Add(behaviour);
+                }
             }
 
             foreach (GameObject target in _hideWhileOpen)
@@ -101,13 +108,15 @@ namespace ArenaBreak.UI
                 }
             }
 
-            foreach (Behaviour behaviour in _disableWhileOpen)
+            foreach (Behaviour behaviour in _disabledByMe)
             {
                 if (behaviour != null)
                 {
                     behaviour.enabled = true;
                 }
             }
+
+            _disabledByMe.Clear();
         }
 
         // 뽑은 후보는 목록에서 빼야 같은 강화가 한 번에 두 장 나오지 않는다
