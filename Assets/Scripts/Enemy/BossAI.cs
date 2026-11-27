@@ -117,6 +117,8 @@ namespace ArenaBreak.Enemy
 
         private void Awake()
         {
+            // 난이도가 높을수록 패턴 사이에 쉬는 시간이 짧다
+            _chaseSeconds *= Difficulty.BossPatternInterval;
             _agent = GetComponent<NavMeshAgent>();
             _health = GetComponent<Health>();
             _animator = GetComponent<BossSpriteAnimator>();

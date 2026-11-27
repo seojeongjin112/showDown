@@ -146,7 +146,8 @@ namespace ArenaBreak.Core
                     continue;
                 }
 
-                for (int n = 0; n < entry.Count; n++)
+                int count = Difficulty.Scale(entry.Count, Difficulty.EnemyCount);
+                for (int n = 0; n < count; n++)
                 {
                     SpawnEnemy(entry.EnemyPrefab);
                     yield return interval;

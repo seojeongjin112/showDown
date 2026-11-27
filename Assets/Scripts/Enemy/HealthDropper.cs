@@ -54,7 +54,7 @@ namespace ArenaBreak.Enemy
         private void OnDied()
         {
             bool melee = _health.LastDamageSource == DamageSource.Melee;
-            float chance = melee ? _meleeChance : _otherChance;
+            float chance = (melee ? _meleeChance : _otherChance) * Difficulty.HealDrop;
             int heal = melee ? _meleeHeal : _otherHeal;
 
             float missing = 1f - (float)_playerHealth.Current / _playerHealth.Max;

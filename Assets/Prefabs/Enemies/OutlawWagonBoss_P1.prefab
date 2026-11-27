@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 140
+  _isBoss: 1
 --- !u!136 &4314459921808018690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -637,3 +638,8 @@ MonoBehaviour:
   _throwHeight: 2.2
   _flightTime: 1.2
   _bombDamage: 3
+  _longBarrageSeconds: 8
+  _longBarrageWindup: 1.2
+  _longShotInterval: 0.45
+  _longBombInterval: 2
+  _longBombDamage: 2

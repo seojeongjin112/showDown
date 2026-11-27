@@ -33,7 +33,10 @@ namespace ArenaBreak.Core
             {
                 Debug.LogError("KillGate: 문 또는 조우 구역이 비어 있다.", this);
                 enabled = false;
+                return;
             }
+
+            _requiredKills = Difficulty.Scale(_requiredKills, Difficulty.KillGoal);
         }
 
         private void OnEnable()
