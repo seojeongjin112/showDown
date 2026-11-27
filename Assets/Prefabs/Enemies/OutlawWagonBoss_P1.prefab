@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 7157203071244052638}
   - component: {fileID: 2515151773151916670}
   - component: {fileID: 4769314411200725040}
+  - component: {fileID: 6866684370179105023}
   m_Layer: 0
   m_Name: OutlawWagonBoss_P1
   m_TagString: Untagged
@@ -637,3 +638,21 @@ MonoBehaviour:
   _throwHeight: 2.2
   _flightTime: 1.2
   _bombDamage: 3
+  _longBarrageSeconds: 8
+  _longBarrageWindup: 1.2
+  _longShotInterval: 0.45
+  _longBombInterval: 2
+  _longBombDamage: 2
+--- !u!114 &6866684370179105023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
+  _target: 1

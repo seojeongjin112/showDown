@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5035295855928174054}
   - component: {fileID: 4838861722118706062}
   - component: {fileID: 1300203994007773270}
+  - component: {fileID: 8291611809003092346}
   m_Layer: 0
   m_Name: NativeGrandChiefBoss
   m_TagString: Untagged
@@ -62,3 +63,16 @@ MonoBehaviour:
   - _prefab: {fileID: 939344042944179532, guid: c3447f4343ee7dd4e8416adf1a262408, type: 3}
     _spawnDelay: 0
     _endsAtHealthRatio: 0
+--- !u!114 &8291611809003092346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491564939142385173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
+  _target: 1

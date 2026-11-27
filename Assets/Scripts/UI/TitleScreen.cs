@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ArenaBreak.UI
@@ -8,31 +7,33 @@ namespace ArenaBreak.UI
     {
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _quitButton;
-        [SerializeField] private string _gameSceneName = "Game";
+        // 난이도 패널이 떠 있는 동안 뒤에서 시작·종료 버튼이 눌리지 않게 함께 숨긴다
+        [SerializeField] private GameObject _titleButtons;
+        [SerializeField] private DifficultySelectScreen _difficultyScreen;
 
         private void OnEnable()
         {
-            _startButton.onClick.AddListener(StartGame);
+            _startButton.onClick.AddListener(OpenDifficultySelect);
             _quitButton.onClick.AddListener(QuitGame);
+            _difficultyScreen.BackRequested += ShowTitleButtons;
         }
 
         private void OnDisable()
         {
-            _startButton.onClick.RemoveListener(StartGame);
+            _startButton.onClick.RemoveListener(OpenDifficultySelect);
             _quitButton.onClick.RemoveListener(QuitGame);
+            _difficultyScreen.BackRequested -= ShowTitleButtons;
         }
 
-        private void StartGame()
+        private void OpenDifficultySelect()
         {
-            if (!Application.CanStreamedLevelBeLoaded(_gameSceneName))
-            {
-                Debug.LogError($"TitleScreen: '{_gameSceneName}' 씬이 Build Profiles의 Scene List에 없어서 불러올 수 없습니다", this);
-                return;
-            }
+            _titleButtons.SetActive(false);
+            _difficultyScreen.Open();
+        }
 
-            // 게임오버 화면이 timeScale을 0으로 둔 채 타이틀로 돌아오는 경우를 대비해 되돌린다
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(_gameSceneName);
+        private void ShowTitleButtons()
+        {
+            _titleButtons.SetActive(true);
         }
 
         private void QuitGame()

@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 4187611566258929913}
   - component: {fileID: 272326257013130316}
   - component: {fileID: 287852989447489390}
+  - component: {fileID: 6007935950516305577}
   m_Layer: 0
   m_Name: OutlawWagon
   m_TagString: Untagged
@@ -525,3 +526,16 @@ MonoBehaviour:
   _scatterRadius: 1.2
   _spawnHeight: 1
   _snapDistance: 1.5
+--- !u!114 &6007935950516305577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9cebbfb02390648a1c0d9d22072fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.DifficultyScaler
+  _target: 1
