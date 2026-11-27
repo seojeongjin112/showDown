@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Weapon_Winchester
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
   _displayName: "\uC708\uCCB4\uC2A4\uD130"
+  _slotType: 2
   _icon: {fileID: 21300000, guid: 9aee8f38b30e37f41b2520994a594bde, type: 3}
   _ammoIcon: {fileID: 21300000, guid: 68b94086fb03a2d4facf884c5485f7da, type: 3}
   _damage: 4
   _range: 80
   _pellets: 1
   _spreadDegrees: 0
+  _automatic: 0
   _magazineSize: 5
   _startReserve: 15
   _maxReserve: 40
+  _ammoPackSize: 5
   _fireFrames:
   - {fileID: 21300000, guid: fea0194be94a50b45b167e930b38feb8, type: 3}
   - {fileID: 21300000, guid: 29714ac0c199cf745bd1667f112b156a, type: 3}
@@ -51,3 +54,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3037ea2d53cf9eb45b8c25ac7dd754ae, type: 3}
   - {fileID: 21300000, guid: d700eb3adc1d99e41bdabdfde3b0cf52, type: 3}
   _framesPerSecond: 14
+  _reloadFramesPerSecond: 0

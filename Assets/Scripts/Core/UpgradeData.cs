@@ -11,7 +11,12 @@ namespace ArenaBreak.Core
         KnifeRange,
         // 저장된 에셋의 값이 밀리지 않도록 기존 항목 뒤에만 추가한다
         UnlockWeapon,
-        AddAmmo
+        AddAmmo,
+        // 아래는 총과 탄약, 드랍을 강화하는 레벨업 카드용이다
+        GunDamage,
+        ReloadSpeed,
+        MaxAmmo,
+        DropLuck
     }
 
     [CreateAssetMenu(fileName = "Upgrade", menuName = "ArenaBreak/Upgrade")]

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980a8ab27e178b645b420271692ddaee, type: 3}
   m_Name: Upgrade_KnifeDamage
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.UpgradeData
-  _displayName: "\uCE7C \uAC15\uD654"
-  _icon: {fileID: 21300000, guid: 9b3cba54dc2ff114085615179a5959c0, type: 3}
-  _description: "\uCE7C \uD53C\uD574 +1"
+  _displayName: "\uADFC\uC811 \uAC15\uD654"
+  _icon: {fileID: 21300000, guid: 9c0cb81b8e686d748b56cef5498e757f, type: 3}
+  _description: "\uADFC\uC811 \uBB34\uAE30 \uD53C\uD574 +1"
   _effect: 3
   _amount: 1
   _price: 12
+  _weapon: {fileID: 0}

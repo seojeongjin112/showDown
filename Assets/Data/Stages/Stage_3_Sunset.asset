@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb4d45e9314a9d4c802a653c1f27a8f, type: 3}
+  m_Name: Stage_3_Sunset
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.StageData
+  _displayName: "\uC2A4\uD14C\uC774\uC9C0 3 - \uB178\uC744"
+  _clearCondition: 1
+  _surviveSeconds: 120
+  _skybox: {fileID: 2100000, guid: bd94db725e539ce45a739a57a34a3a6a, type: 2}
+  _ambientColor: {r: 0.42, g: 0.28, b: 0.3, a: 1}
+  _sunColor: {r: 1, g: 0.55, b: 0.28, a: 1}
+  _sunIntensity: 0.6
+  _sunEulerAngles: {x: 8, y: -30, z: 0}
+  _weaponDrops: {fileID: 11400000, guid: e007f1e20accb644ba2f5e0456be7f15, type: 2}

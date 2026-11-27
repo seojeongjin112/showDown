@@ -21,6 +21,10 @@ namespace ArenaBreak.UI
         private const int ShapeEdge = 1;
 
         [SerializeField] private WaveSpawner _spawner;
+        [Tooltip("구역형 웨이브(WaveArena)가 내는 적도 표시한다. 스테이지마다 하나씩 넣는다")]
+        [SerializeField] private WaveArena[] _arenas;
+        [Tooltip("길 위의 조우 지점(EncounterZone)이 내는 적도 표시한다")]
+        [SerializeField] private EncounterZone[] _encounters;
         [SerializeField] private Transform _player;
         [Tooltip("적 아이콘이 놓이는 원형 영역. Mask가 붙은 오브젝트의 자식이어야 가장자리에서 잘린다")]
         [SerializeField] private RectTransform _iconRoot;
@@ -46,6 +50,28 @@ namespace ArenaBreak.UI
             {
                 _spawner.EnemySpawned += OnEnemySpawned;
             }
+
+            if (_arenas != null)
+            {
+                for (int i = 0; i < _arenas.Length; i++)
+                {
+                    if (_arenas[i] != null)
+                    {
+                        _arenas[i].EnemySpawned += OnEnemySpawned;
+                    }
+                }
+            }
+
+            if (_encounters != null)
+            {
+                for (int i = 0; i < _encounters.Length; i++)
+                {
+                    if (_encounters[i] != null)
+                    {
+                        _encounters[i].EnemySpawned += OnEnemySpawned;
+                    }
+                }
+            }
         }
 
         private void OnDisable()
@@ -53,6 +79,28 @@ namespace ArenaBreak.UI
             if (_spawner != null)
             {
                 _spawner.EnemySpawned -= OnEnemySpawned;
+            }
+
+            if (_arenas != null)
+            {
+                for (int i = 0; i < _arenas.Length; i++)
+                {
+                    if (_arenas[i] != null)
+                    {
+                        _arenas[i].EnemySpawned -= OnEnemySpawned;
+                    }
+                }
+            }
+
+            if (_encounters != null)
+            {
+                for (int i = 0; i < _encounters.Length; i++)
+                {
+                    if (_encounters[i] != null)
+                    {
+                        _encounters[i].EnemySpawned -= OnEnemySpawned;
+                    }
+                }
             }
 
             for (int i = _markers.Count - 1; i >= 0; i--)

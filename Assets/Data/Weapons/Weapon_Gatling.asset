@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e091b1762979e44791aaab138a9d1e2, type: 3}
+  m_Name: Weapon_Gatling
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
+  _displayName: "\uAC1C\uD2C0\uB9C1"
+  _slotType: 2
+  _icon: {fileID: 21300000, guid: 30531d7d7f3bab8479fe2ad398690001, type: 3}
+  _ammoIcon: {fileID: 21300000, guid: a07de637c26ce4a43abd19233bc38ea8, type: 3}
+  _damage: 1
+  _range: 50
+  _distanceFalloff: 0
+  _falloffStartDistance: 4
+  _falloffEndDistance: 16
+  _minDamage: 1
+  _pellets: 1
+  _spreadDegrees: 3
+  _slowWhileFiring: 1
+  _firingMoveMultiplier: 0.4
+  _automatic: 1
+  _magazineSize: 60
+  _startReserve: 120
+  _maxReserve: 300
+  _ammoPackSize: 30
+  _fireFrames:
+  - {fileID: 21300000, guid: 2dcc3fa36bc0c934f97df3af2d18a368, type: 3}
+  - {fileID: 21300000, guid: d7eb15f14f60f194aa876fcc18d79edc, type: 3}
+  - {fileID: 21300000, guid: dbc2eac425c126c4dbfc2bfefd0e3ad8, type: 3}
+  - {fileID: 21300000, guid: d9ef6251ad677a24caebe6604642dbe2, type: 3}
+  - {fileID: 21300000, guid: dcafff37309662e45858f61bc8f6780b, type: 3}
+  - {fileID: 21300000, guid: abfc718752a938c45a124de449bb74a6, type: 3}
+  - {fileID: 21300000, guid: 8cc2dd0c852ad4d41868c2dab9f823c7, type: 3}
+  - {fileID: 21300000, guid: 63434421c4c111a4ba0d7fde15b7ba44, type: 3}
+  - {fileID: 21300000, guid: 5d60346e2d12fb9469b3c17465c48f3f, type: 3}
+  _reloadFrames:
+  - {fileID: 21300000, guid: f3a91eb7fce843442aad5166b4f00ce4, type: 3}
+  - {fileID: 21300000, guid: 87cf5a64a88dca04485ee0627d36847f, type: 3}
+  - {fileID: 21300000, guid: a15fa6a1020b4ca41b2c1eabe6d33268, type: 3}
+  - {fileID: 21300000, guid: 8fd016234f83cf64fa652bad9aac877f, type: 3}
+  - {fileID: 21300000, guid: 514aed390452c8d49831e311c67ac7b2, type: 3}
+  - {fileID: 21300000, guid: c15541a7331f15f439eeea94800a21fe, type: 3}
+  - {fileID: 21300000, guid: 0a35f09b27603764d94c103ce67c5a1c, type: 3}
+  - {fileID: 21300000, guid: 3abd05e3ed1cc9e4ca4ab7a121c953b0, type: 3}
+  - {fileID: 21300000, guid: 8da1167f1ee72a74689bb4e7169c5edc, type: 3}
+  - {fileID: 21300000, guid: 3d473763093206f48a597a80e44bc037, type: 3}
+  - {fileID: 21300000, guid: 362fa1bf4f83b954baa4a1b7f7d04dc4, type: 3}
+  - {fileID: 21300000, guid: 03ca8fdf74392294293963d81624bc3d, type: 3}
+  - {fileID: 21300000, guid: 05bc5fd8d5eed7540a3b424d03e4a3a3, type: 3}
+  - {fileID: 21300000, guid: dbd00562710802e489e7841ceb25ee14, type: 3}
+  - {fileID: 21300000, guid: 0b6c1c3a0fbf52c45813e58cfce0d9bf, type: 3}
+  - {fileID: 21300000, guid: ecdf73953b5d5d043900b1c47eebc173, type: 3}
+  - {fileID: 21300000, guid: af95eb45c6919214fa2981264b3778d0, type: 3}
+  _framesPerSecond: 60
+  _reloadFramesPerSecond: 10

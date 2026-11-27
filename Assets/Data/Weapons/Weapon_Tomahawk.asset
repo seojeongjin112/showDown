@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e091b1762979e44791aaab138a9d1e2, type: 3}
+  m_Name: Weapon_Tomahawk
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
+  _displayName: "\uD1A0\uB9C8\uD638\uD06C"
+  _slotType: 1
+  _icon: {fileID: 21300000, guid: 7869ed41102289e4fbcdda8883d52400, type: 3}
+  _ammoIcon: {fileID: 21300000, guid: e4dfe70ffe678834b9e7431f09f8548a, type: 3}
+  _damage: 8
+  _range: 60
+  _pellets: 1
+  _spreadDegrees: 0
+  _automatic: 0
+  _magazineSize: 1
+  _startReserve: 6
+  _maxReserve: 12
+  _ammoPackSize: 3
+  _fireFrames:
+  - {fileID: 21300000, guid: 1ee4267d0ffca7948906e90043c5c7aa, type: 3}
+  - {fileID: 21300000, guid: 44994d8553af5e844abbeb8edc450924, type: 3}
+  - {fileID: 21300000, guid: 0f5b8be006e9a604eabea9e80d58cf1a, type: 3}
+  - {fileID: 21300000, guid: b61886425f288d049ad5270f32f5838f, type: 3}
+  - {fileID: 21300000, guid: bab32109e3a6ab34fa6ede5279c323eb, type: 3}
+  - {fileID: 21300000, guid: 7b9fbcde9bc1b5c4bbfd555f3e2d5789, type: 3}
+  - {fileID: 21300000, guid: 242baecb706d5fd47b7eab895be89346, type: 3}
+  - {fileID: 21300000, guid: 5f7a40a3ca7e7b5408191ecace4d3bd7, type: 3}
+  - {fileID: 21300000, guid: 5d3d91f135f8c7d46bea7d8c86eddb92, type: 3}
+  _reloadFrames:
+  - {fileID: 21300000, guid: df3a378441d1d0a48bf9719416662b9b, type: 3}
+  - {fileID: 21300000, guid: 1125cbc096a77784685f34258367da46, type: 3}
+  - {fileID: 21300000, guid: 3b82203ad42ad00498df822221af8876, type: 3}
+  - {fileID: 21300000, guid: 954a5cb33219ff74da2c3531e4229334, type: 3}
+  - {fileID: 21300000, guid: ea3aeeb12aa3f2a42b7a9495dc619a8b, type: 3}
+  - {fileID: 21300000, guid: 1c3d7719b2ec772448b00ca5054bd8f8, type: 3}
+  - {fileID: 21300000, guid: 4730264fea0e5854999d57d90b6d6b50, type: 3}
+  - {fileID: 21300000, guid: 8947fc5994d91e94f8cacd75dd07e4d3, type: 3}
+  - {fileID: 21300000, guid: ac2557079203088458e03a7914c086aa, type: 3}
+  - {fileID: 21300000, guid: d10497744991f644a8e3cc2c17f7f302, type: 3}
+  - {fileID: 21300000, guid: e0eb3bf1e5dcbb445b6049d8f65e36ea, type: 3}
+  - {fileID: 21300000, guid: a392a1e551687ff4dbc4b4057391d260, type: 3}
+  - {fileID: 21300000, guid: 280cc127c2185094c97e9ff28959ac8a, type: 3}
+  _framesPerSecond: 18
+  _reloadFramesPerSecond: 0

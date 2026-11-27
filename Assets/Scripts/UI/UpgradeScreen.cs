@@ -6,20 +6,15 @@ using UnityEngine.UI;
 
 namespace ArenaBreak.UI
 {
-    // 레벨업 때 게임을 멈추고 무료 강화 카드 한 장 고르기와 코인 상점을 한 창에 보여 준다
+    // 레벨업 때 게임을 멈추고 무료 강화 카드 한 장을 고르게 한다
     public class UpgradeScreen : MonoBehaviour
     {
         [SerializeField] private Experience _experience;
-        [SerializeField] private CoinWallet _wallet;
         [SerializeField] private PlayerUpgrades _upgrades;
         [SerializeField] private GameObject _root;
         [SerializeField] private UpgradeData[] _cardPool;
         [SerializeField] private UpgradeCardView[] _cardViews;
-        [SerializeField] private UpgradeData[] _shopItems;
-        [SerializeField] private ShopItemView[] _shopViews;
         [SerializeField] private Button _closeButton;
-        [SerializeField] private Text _coinLabel;
-        [SerializeField] private string _coinLabelFormat = "코인 {0}";
         // 시점·공격 입력을 꺼야 한다. 시점 스크립트는 끄면 커서가 풀리고 다시 켜면 잠긴다
         [SerializeField] private Behaviour[] _disableWhileOpen;
         // 커서가 풀린 동안 화면 중앙에 조준점이 남으면 마우스 포인터와 겹쳐 보인다
@@ -28,34 +23,23 @@ namespace ArenaBreak.UI
         private readonly List<UpgradeData> _rollBuffer = new List<UpgradeData>();
         private int _pendingPicks;
         private bool _isOpen;
+        // 결과 화면처럼 다른 쪽이 먼저 꺼 둔 조작을 창을 닫으며 다시 켜지 않도록, 열 때 켜져 있던 것만 기억한다
+        private readonly System.Collections.Generic.List<Behaviour> _disabledByMe = new System.Collections.Generic.List<Behaviour>();
 
         private void Awake()
         {
             _root.SetActive(false);
-
-            for (int i = 0; i < _shopViews.Length; i++)
-            {
-                bool hasItem = i < _shopItems.Length;
-                _shopViews[i].gameObject.SetActive(hasItem);
-
-                if (hasItem)
-                {
-                    _shopViews[i].Show(_shopItems[i], Buy);
-                }
-            }
         }
 
         private void OnEnable()
         {
             _experience.LeveledUp += OnLeveledUp;
-            _wallet.Changed += OnCoinsChanged;
             _closeButton.onClick.AddListener(Close);
         }
 
         private void OnDisable()
         {
             _experience.LeveledUp -= OnLeveledUp;
-            _wallet.Changed -= OnCoinsChanged;
             _closeButton.onClick.RemoveListener(Close);
 
             // 열린 채로 꺼지면 시간이 멈추고 커서가 풀린 채로 남는다
@@ -81,9 +65,14 @@ namespace ArenaBreak.UI
         {
             _isOpen = true;
 
+            _disabledByMe.Clear();
             foreach (Behaviour behaviour in _disableWhileOpen)
             {
-                behaviour.enabled = false;
+                if (behaviour != null && behaviour.enabled)
+                {
+                    behaviour.enabled = false;
+                    _disabledByMe.Add(behaviour);
+                }
             }
 
             foreach (GameObject target in _hideWhileOpen)
@@ -95,7 +84,6 @@ namespace ArenaBreak.UI
             Time.timeScale = 0f;
 
             RollCards();
-            RefreshShop();
             RefreshClose();
         }
 
@@ -111,15 +99,24 @@ namespace ArenaBreak.UI
             _root.SetActive(false);
             Time.timeScale = 1f;
 
+            // 열린 채로 플레이를 끝내면 대상이 먼저 파괴되어 있을 수 있어서 비어 있는지 본다
             foreach (GameObject target in _hideWhileOpen)
             {
-                target.SetActive(true);
+                if (target != null)
+                {
+                    target.SetActive(true);
+                }
             }
 
-            foreach (Behaviour behaviour in _disableWhileOpen)
+            foreach (Behaviour behaviour in _disabledByMe)
             {
-                behaviour.enabled = true;
+                if (behaviour != null)
+                {
+                    behaviour.enabled = true;
+                }
             }
+
+            _disabledByMe.Clear();
         }
 
         // 뽑은 후보는 목록에서 빼야 같은 강화가 한 번에 두 장 나오지 않는다
@@ -156,9 +153,6 @@ namespace ArenaBreak.UI
             _upgrades.Apply(upgrade);
             _pendingPicks--;
 
-            // 방금 얻은 무기의 탄약을 상점에서 바로 살 수 있어야 하므로 카드 선택 뒤에도 상점을 다시 그린다
-            RefreshShop();
-
             if (_pendingPicks > 0)
             {
                 RollCards();
@@ -172,41 +166,6 @@ namespace ArenaBreak.UI
             }
 
             RefreshClose();
-        }
-
-        private void Buy(UpgradeData item)
-        {
-            if (!_upgrades.CanApply(item))
-            {
-                return;
-            }
-
-            if (_wallet.TrySpend(item.Price))
-            {
-                _upgrades.Apply(item);
-
-                // 코인이 줄 때의 갱신은 효과를 적용하기 전이라, 적용 뒤의 체력 상태를 반영하려면 한 번 더 그린다
-                RefreshShop();
-            }
-        }
-
-        private void OnCoinsChanged(int coins)
-        {
-            if (_isOpen)
-            {
-                RefreshShop();
-            }
-        }
-
-        private void RefreshShop()
-        {
-            int coins = _wallet.Count;
-            _coinLabel.text = string.Format(_coinLabelFormat, coins);
-
-            foreach (ShopItemView view in _shopViews)
-            {
-                view.Refresh(coins, view.Data != null && _upgrades.CanApply(view.Data));
-            }
         }
 
         private void RefreshClose()

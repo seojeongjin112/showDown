@@ -13,15 +13,22 @@ MonoBehaviour:
   m_Name: Weapon_Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
   _displayName: "\uC0F7\uAC74"
+  _slotType: 2
   _icon: {fileID: 21300000, guid: 6cacb93f3e7fcee498f79374d8a6e53a, type: 3}
   _ammoIcon: {fileID: 21300000, guid: dde1bda08f8d46f49829d4664cec9c60, type: 3}
-  _damage: 1
+  _damage: 3
   _range: 25
+  _distanceFalloff: 1
+  _falloffStartDistance: 4
+  _falloffEndDistance: 16
+  _minDamage: 1
   _pellets: 7
   _spreadDegrees: 5
+  _automatic: 0
   _magazineSize: 2
   _startReserve: 8
   _maxReserve: 24
+  _ammoPackSize: 4
   _fireFrames:
   - {fileID: 21300000, guid: 8fa2dd902a01ce6419110710be8e5f51, type: 3}
   - {fileID: 21300000, guid: 48202e7d64ba55d49846456162060a20, type: 3}
@@ -51,3 +58,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c3560fb291424d740a720899ec078c37, type: 3}
   - {fileID: 21300000, guid: c763994809dcbee4cbe1225dee477eb3, type: 3}
   _framesPerSecond: 12
+  _reloadFramesPerSecond: 0

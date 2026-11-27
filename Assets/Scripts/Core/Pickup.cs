@@ -12,11 +12,16 @@ namespace ArenaBreak.Core
         [SerializeField] private float _flightTime = 0.5f;
         // 그림 중심이 바닥에 파묻히지 않도록 중심을 띄워 둔다
         [SerializeField] private float _restHeight = 0.4f;
+        // 멀리서도 떨어진 자리를 알아보게 하는 빛 기둥과 바닥링. 비어 있으면 표시하지 않는다
+        [SerializeField] private GameObject _highlightPrefab;
 
         private Vector3 _velocity;
         private bool _landed;
+        private GameObject _highlight;
 
         protected Transform Player { get; private set; }
+
+        private Health _playerHealth;
 
         protected virtual void Awake()
         {
@@ -29,6 +34,7 @@ namespace ArenaBreak.Core
             }
 
             Player = player.transform;
+            _playerHealth = player.GetComponent<Health>();
         }
 
         // 벽 가까이서 죽어도 떨어진 것이 건물 안에 박혀 못 줍는 일이 없도록 걸을 수 있는 바닥으로 옮긴 착지 지점을 구한다
@@ -57,11 +63,29 @@ namespace ArenaBreak.Core
 
         protected abstract void OnPickedUp();
 
+        // 줍기 전에 확인이 필요한 아이템(무기 교체 등)이 거절할 수 있게 한다. 기본은 닿으면 바로 줍는다
+        protected virtual bool TryPickUp()
+        {
+            OnPickedUp();
+            return true;
+        }
+
+        // 플레이어가 줍는 거리 밖에 있는 동안 불린다. 확인 중이던 상태를 접는 데 쓴다
+        protected virtual void OnOutOfRange()
+        {
+        }
+
         private void Update()
         {
             if (!_landed)
             {
                 Fall();
+                return;
+            }
+
+            // 죽은 뒤 쓰러지는 동안 경험치를 주워 레벨업 창이 뜨면, 창을 닫을 때 꺼 둔 조작이 다시 켜져 결과 화면 버튼을 누를 수 없게 된다
+            if (_playerHealth != null && _playerHealth.IsDead)
+            {
                 return;
             }
 
@@ -71,8 +95,14 @@ namespace ArenaBreak.Core
 
             if (toPlayer.sqrMagnitude <= _pickupRadius * _pickupRadius)
             {
-                OnPickedUp();
-                Destroy(gameObject);
+                if (TryPickUp())
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                OnOutOfRange();
             }
         }
 
@@ -87,6 +117,28 @@ namespace ArenaBreak.Core
                 position.y = _restHeight;
                 transform.position = position;
                 _landed = true;
+                SpawnHighlight(position);
+            }
+        }
+
+        // 아이템 중심은 바닥에서 _restHeight만큼 떠 있으므로 효과는 그만큼 내린 바닥에 놓는다
+        private void SpawnHighlight(Vector3 restPosition)
+        {
+            if (_highlightPrefab == null)
+            {
+                return;
+            }
+
+            Vector3 ground = restPosition - Vector3.up * _restHeight;
+            _highlight = Instantiate(_highlightPrefab, ground, Quaternion.identity);
+        }
+
+        // 주워서든 다른 이유로든 아이템이 사라지면 바닥에 효과만 남지 않게 함께 지운다
+        private void OnDestroy()
+        {
+            if (_highlight != null)
+            {
+                Destroy(_highlight);
             }
         }
     }

@@ -7,6 +7,8 @@ namespace ArenaBreak.Core
     public class WeaponAmmo
     {
         private readonly WeaponData _data;
+        // 레벨업 카드로 예비 탄약 상한이 늘어난 배수
+        private float _capMultiplier = 1f;
 
         public WeaponAmmo(WeaponData data)
         {
@@ -20,7 +22,14 @@ namespace ArenaBreak.Core
 
         public bool CanFire => Magazine > 0;
         public bool CanReload => Magazine < _data.MagazineSize && Reserve > 0;
-        public bool CanAddReserve => Reserve < _data.MaxReserve;
+        public int MaxReserve => Mathf.RoundToInt(_data.MaxReserve * _capMultiplier);
+        public bool CanAddReserve => Reserve < MaxReserve;
+
+        public void RaiseCap(float amount)
+        {
+            _capMultiplier += amount;
+            Changed?.Invoke(Magazine, Reserve);
+        }
 
         // HUD가 폴링하지 않고 구독해서 갱신하도록 탄창과 예비 탄약을 함께 넘긴다
         public event Action<int, int> Changed;
@@ -56,7 +65,7 @@ namespace ArenaBreak.Core
                 return;
             }
 
-            Reserve = Mathf.Min(_data.MaxReserve, Reserve + amount);
+            Reserve = Mathf.Min(MaxReserve, Reserve + amount);
             Changed?.Invoke(Magazine, Reserve);
         }
     }

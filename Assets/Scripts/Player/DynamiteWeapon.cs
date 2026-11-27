@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 namespace ArenaBreak.Player
 {
-    // 우클릭으로 던지고, 손을 떠나는 프레임에 투척물을 만든다
+    // 좌클릭으로 던지고, 손을 떠나는 프레임에 투척물을 만든다
     [RequireComponent(typeof(SpriteRenderer))]
     public class DynamiteWeapon : MonoBehaviour, IAmmoWeapon
     {
-        // 입력 에셋의 Player 맵에는 우클릭 액션이 없어서 여기서 직접 바인딩한다
-        private const string FireBinding = "<Mouse>/rightButton";
+        // 입력 에셋의 Player 맵에는 공격 액션이 없어서 여기서 직접 바인딩한다
+        private const string FireBinding = "<Mouse>/leftButton";
 
         [SerializeField] private WeaponData _data;
         [SerializeField] private Camera _camera;
@@ -23,6 +23,7 @@ namespace ArenaBreak.Player
         [SerializeField] private float _spawnDistance = 0.6f;
 
         private SpriteRenderer _renderer;
+        private PlayerUpgrades _upgrades;
         private InputAction _fireAction;
         private Sprite _idleSprite;
         private WeaponAmmo _ammo;
@@ -42,6 +43,7 @@ namespace ArenaBreak.Player
         {
             _renderer = GetComponent<SpriteRenderer>();
             _idleSprite = _renderer.sprite;
+            _upgrades = GetComponentInParent<PlayerUpgrades>();
 
             if (_camera == null)
             {
@@ -98,7 +100,7 @@ namespace ArenaBreak.Player
                 }
 
                 // 커서가 풀린 동안의 클릭은 시점 재잠금용이므로 던지기로 쓰지 않는다
-                if (_ammo.CanFire && Cursor.lockState == CursorLockMode.Locked && _fireAction.WasPressedThisFrame())
+                if (_ammo.CanFire && FirstPersonLook.AttackAllowed && _fireAction.WasPressedThisFrame())
                 {
                     _isThrowing = true;
                     _released = false;
@@ -149,7 +151,8 @@ namespace ArenaBreak.Player
             Vector3 direction = (view.forward + view.up * _upwardBias).normalized;
 
             Dynamite dynamite = Instantiate(_dynamitePrefab, view.position + view.forward * _spawnDistance, Quaternion.identity);
-            dynamite.Launch(direction * _throwSpeed, _data.Damage, OnBlastHit);
+            int damage = _upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage;
+            dynamite.Launch(direction * _throwSpeed, damage, OnBlastHit);
         }
 
         private void OnBlastHit(bool killed)

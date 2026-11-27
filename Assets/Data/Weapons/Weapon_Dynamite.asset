@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Weapon_Dynamite
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.WeaponData
   _displayName: "\uB2E4\uC774\uB108\uB9C8\uC774\uD2B8"
+  _slotType: 1
   _icon: {fileID: 21300000, guid: 86c7c11ab062fdb479a0dcd0fb8a703a, type: 3}
   _ammoIcon: {fileID: 21300000, guid: dbc2bd87106a8dd438bec82e8b382efd, type: 3}
   _damage: 6
   _range: 40
   _pellets: 1
   _spreadDegrees: 0
+  _automatic: 0
   _magazineSize: 1
   _startReserve: 4
   _maxReserve: 12
+  _ammoPackSize: 2
   _fireFrames:
   - {fileID: 21300000, guid: fb3d556cf788fb6438de70ee00a2e2cd, type: 3}
   - {fileID: 21300000, guid: 73b562a1ab7e70d4b89e1399ac3b3f76, type: 3}
@@ -36,3 +39,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 193ba0fad513d784ab62ed5354f733b9, type: 3}
   _reloadFrames: []
   _framesPerSecond: 18
+  _reloadFramesPerSecond: 0

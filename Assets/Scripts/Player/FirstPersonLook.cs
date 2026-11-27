@@ -73,8 +73,16 @@ namespace ArenaBreak.Player
             _cameraTransform.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
         }
 
+        // 커서를 다시 잠그는 왼쪽 클릭이 같은 순간 공격으로도 읽히면 안 되어서, 잠근 직후 잠깐은 공격을 막는다
+        private const float AttackBlockAfterLockSeconds = 0.15f;
+
+        private static float s_lockTime = -1f;
+
+        public static bool AttackAllowed => Cursor.lockState == CursorLockMode.Locked && Time.unscaledTime - s_lockTime > AttackBlockAfterLockSeconds;
+
         private static void LockCursor()
         {
+            s_lockTime = Time.unscaledTime;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
