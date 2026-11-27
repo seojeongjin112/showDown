@@ -57,5 +57,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3729fe7423798fc4990fcbddf7100eab, type: 3}
   _framesPerSecond: 18
   _reloadFramesPerSecond: 0
-  _attackSound: {fileID: 8300000, guid: ea86060952059fc40900aa81c072e1ed, type: 3}
-  _reloadSound: {fileID: 8300000, guid: 1fe54b1691ee0034ab533d27bd840b09, type: 3}
+  _attackSound: {fileID: 8300000, guid: 68efd55259c975242b3387e66d4247ce, type: 3}
+  _reloadSound: {fileID: 8300000, guid: 3b164bd7c0fcfe84c8df2a016ad7dd4e, type: 3}

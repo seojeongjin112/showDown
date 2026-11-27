@@ -1,0 +1,27 @@
+showDown 사운드 출처
+=====================
+
+모두 CC0(퍼블릭 도메인)이라 상업적 이용 가능, 출처 표기 의무 없음.
+그래도 어디서 온 소리인지 팀이 알 수 있게 적어 둔다. 새 음원을 넣으면 여기에 추가할 것.
+
+[SFX/Weapons/Gun_*.wav]
+  "Gunshot Sounds" - OpenGameArt.org (CC0)
+  https://opengameart.org/content/gunshot-sounds
+  원본(cz/mosin/sks/shotty.wav)은 한 파일에 여러 발이 녹음돼 있어서 한 발씩 잘라 모노로 바꾸고 음량을 맞췄다.
+    Gun_Pistol      <- cz.wav (CZ-52 권총)
+    Gun_Rifle       <- sks.wav (SKS 반자동 소총)
+    Gun_RifleShort  <- sks.wav (개틀링 연사용으로 짧게)
+    Gun_RifleHeavy  <- mosin.wav (모신나강 볼트액션 소총)
+    Gun_Shotgun     <- shotty.wav
+
+[SFX/Weapons/*.ogg (chop, cloth3, drawKnife1, knifeSlice, knifeSlice2, metalClick, metalLatch)]
+  "RPG Audio" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/rpg-audio
+
+[SFX/Weapons/pluck_002.ogg]
+  "Interface Sounds" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/interface-sounds
+
+[SFX/Impacts/*.ogg]
+  "Impact Sounds" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/impact-sounds

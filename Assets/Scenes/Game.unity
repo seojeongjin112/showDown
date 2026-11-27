@@ -1332828,6 +1332828,7 @@ GameObject:
   - component: {fileID: 727522012}
   - component: {fileID: 727522013}
   - component: {fileID: 727522019}
+  - component: {fileID: 727522021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1333018,6 +1333019,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &727522021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d931c6ace5985841bc648ddc844c519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.WeaponSounds
+  _attackVolume: 0.8
+  _reloadVolume: 0.6
+  _hitSound: {fileID: 8300000, guid: bdc7cd204b100fe47a8f90b394a217f0, type: 3}
+  _killSound: {fileID: 8300000, guid: d76d6cf7ebe200648a08c4088b3d2b37, type: 3}
+  _hitVolume: 0.7
 --- !u!1 &727604718
 GameObject:
   m_ObjectHideFlags: 0
