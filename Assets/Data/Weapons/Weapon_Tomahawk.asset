@@ -18,8 +18,14 @@ MonoBehaviour:
   _ammoIcon: {fileID: 21300000, guid: e4dfe70ffe678834b9e7431f09f8548a, type: 3}
   _damage: 8
   _range: 60
+  _distanceFalloff: 0
+  _falloffStartDistance: 4
+  _falloffEndDistance: 16
+  _minDamage: 1
   _pellets: 1
   _spreadDegrees: 0
+  _slowWhileFiring: 0
+  _firingMoveMultiplier: 0.4
   _automatic: 0
   _magazineSize: 1
   _startReserve: 6
@@ -51,3 +57,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 280cc127c2185094c97e9ff28959ac8a, type: 3}
   _framesPerSecond: 18
   _reloadFramesPerSecond: 0
+  _attackSound: {fileID: 8300000, guid: d6e06003cc9b04446a6ddf0285afe0e6, type: 3}
+  _reloadSound: {fileID: 0}

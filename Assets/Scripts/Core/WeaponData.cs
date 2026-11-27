@@ -52,7 +52,15 @@ namespace ArenaBreak.Core
         [Tooltip("0이면 발사와 같은 속도. 연사 무기는 발사를 빠르게 돌리면 장전도 빨라져서 따로 정한다")]
         [SerializeField] private float _reloadFramesPerSecond;
 
+        // 무기 종류마다 스크립트가 달라도(총·근접·활·투척) 소리는 데이터 한 곳에서 고르게 한다
+        [Header("Sound")]
+        [Tooltip("총은 사격, 근접 무기는 휘두르기, 활과 투척 무기는 던지는 소리")]
+        [SerializeField] private AudioClip _attackSound;
+        [SerializeField] private AudioClip _reloadSound;
+
         public string DisplayName => _displayName;
+        public AudioClip AttackSound => _attackSound;
+        public AudioClip ReloadSound => _reloadSound;
         public WeaponSlotType SlotType => _slotType;
         public Sprite Icon => _icon;
         public Sprite AmmoIcon => _ammoIcon;

@@ -60,6 +60,9 @@ namespace ArenaBreak.Player
         // 왼손이 쏠 때 따로 알린다. 총구 화염이 손마다 따로 터져야 해서 Fired와 나눴다
         public event Action OffhandFired;
 
+        // 장전 소리처럼 장전 시작에 맞춰야 하는 연출이 상태를 폴링하지 않고 구독하도록 알린다
+        public event Action ReloadStarted;
+
         private bool HasOffhand => _offhandRenderer != null;
 
         private float CurrentFramesPerSecond => _state == State.Reloading
@@ -239,6 +242,8 @@ namespace ArenaBreak.Player
                 {
                     StartOffhand(_offhandReloadFrames);
                 }
+
+                ReloadStarted?.Invoke();
             }
         }
 

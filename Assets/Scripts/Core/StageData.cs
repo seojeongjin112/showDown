@@ -29,7 +29,15 @@ namespace ArenaBreak.Core
         [Tooltip("이 스테이지에서 적이 떨어뜨릴 수 있는 무기 표")]
         [SerializeField] private WeaponDropTable _weaponDrops;
 
+        // 조명처럼 음악도 스테이지마다 달라서 같은 데이터에 둔다
+        [Header("Music")]
+        [SerializeField] private AudioClip _music;
+        [Tooltip("비워 두면 보스전에도 스테이지 음악을 그대로 튼다")]
+        [SerializeField] private AudioClip _bossMusic;
+
         public string DisplayName => _displayName;
+        public AudioClip Music => _music;
+        public AudioClip BossMusic => _bossMusic;
         public WeaponDropTable WeaponDrops => _weaponDrops;
         public StageClearCondition ClearCondition => _clearCondition;
         public float SurviveSeconds => _surviveSeconds;

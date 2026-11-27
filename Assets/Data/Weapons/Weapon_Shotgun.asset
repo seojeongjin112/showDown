@@ -24,6 +24,8 @@ MonoBehaviour:
   _minDamage: 1
   _pellets: 7
   _spreadDegrees: 5
+  _slowWhileFiring: 0
+  _firingMoveMultiplier: 0.4
   _automatic: 0
   _magazineSize: 2
   _startReserve: 8
@@ -59,3 +61,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c763994809dcbee4cbe1225dee477eb3, type: 3}
   _framesPerSecond: 12
   _reloadFramesPerSecond: 0
+  _attackSound: {fileID: 8300000, guid: 448091e2b150ef8499e87af5208cfb09, type: 3}
+  _reloadSound: {fileID: 8300000, guid: 5b26a6ae03f19f849a46b3974259683f, type: 3}

@@ -18,8 +18,14 @@ MonoBehaviour:
   _ammoIcon: {fileID: 0}
   _damage: 4
   _range: 1.4
+  _distanceFalloff: 0
+  _falloffStartDistance: 4
+  _falloffEndDistance: 16
+  _minDamage: 1
   _pellets: 1
   _spreadDegrees: 0
+  _slowWhileFiring: 0
+  _firingMoveMultiplier: 0.4
   _automatic: 0
   _magazineSize: 0
   _startReserve: 0
@@ -29,3 +35,5 @@ MonoBehaviour:
   _reloadFrames: []
   _framesPerSecond: 18
   _reloadFramesPerSecond: 0
+  _attackSound: {fileID: 8300000, guid: 0ab76d17760c85b4faeca2da90aaab82, type: 3}
+  _reloadSound: {fileID: 0}
