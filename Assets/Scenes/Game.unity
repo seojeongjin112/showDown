@@ -1332829,6 +1332829,7 @@ GameObject:
   - component: {fileID: 727522013}
   - component: {fileID: 727522019}
   - component: {fileID: 727522021}
+  - component: {fileID: 727522022}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1333036,6 +1333037,26 @@ MonoBehaviour:
   _hitSound: {fileID: 8300000, guid: bdc7cd204b100fe47a8f90b394a217f0, type: 3}
   _killSound: {fileID: 8300000, guid: d76d6cf7ebe200648a08c4088b3d2b37, type: 3}
   _hitVolume: 0.7
+--- !u!114 &727522022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5a959f019f13940852ca057deaeefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Player.PlayerSounds
+  _hurt:
+  - {fileID: 8300000, guid: 4be643718215b5744a7b87ab1fd769ae, type: 3}
+  - {fileID: 8300000, guid: 2c3e9bdbfe63e1d4ab370d905f67ab06, type: 3}
+  - {fileID: 8300000, guid: 00e03da9875d52443b6a8c5cdaeb4fed, type: 3}
+  _jump: {fileID: 8300000, guid: 780f12f3d9b06644191e1e8ea60cc0b7, type: 3}
+  _death: {fileID: 8300000, guid: 38552f71d03df1a4a97861823c7f6bc4, type: 3}
+  _volume: 0.8
+  _hurtCooldown: 0.35
 --- !u!1 &727604718
 GameObject:
   m_ObjectHideFlags: 0
