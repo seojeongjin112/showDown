@@ -85,6 +85,12 @@ namespace ArenaBreak.Enemy
 
         private void OnDisable()
         {
+            // 설정이 비어 Awake에서 꺼진 경우에도 OnDisable은 불려서, 구독한 적이 없으면 그냥 나간다
+            if (_attack == null || _health == null)
+            {
+                return;
+            }
+
             _attack.Attacked -= OnAttacked;
             _health.Died -= OnDied;
         }

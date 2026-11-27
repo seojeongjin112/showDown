@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.Health
   _maxHealth: 140
+  _isBoss: 1
 --- !u!114 &8776200535829137938
 MonoBehaviour:
   m_ObjectHideFlags: 0

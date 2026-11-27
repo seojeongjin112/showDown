@@ -28,6 +28,8 @@ namespace ArenaBreak.Core
 
         protected Transform Player { get; private set; }
 
+        private Health _playerHealth;
+
         protected virtual void Awake()
         {
             GameObject player = GameObject.FindWithTag(PlayerTag);
@@ -39,6 +41,7 @@ namespace ArenaBreak.Core
             }
 
             Player = player.transform;
+            _playerHealth = player.GetComponent<Health>();
         }
 
         // 벽 가까이서 죽어도 떨어진 것이 건물 안에 박혀 못 줍는 일이 없도록 걸을 수 있는 바닥으로 옮긴 착지 지점을 구한다
@@ -84,6 +87,12 @@ namespace ArenaBreak.Core
             if (!_landed)
             {
                 Fall();
+                return;
+            }
+
+            // 죽은 뒤 쓰러지는 동안 경험치를 주워 레벨업 창이 뜨면, 창을 닫을 때 꺼 둔 조작이 다시 켜져 결과 화면 버튼을 누를 수 없게 된다
+            if (_playerHealth != null && _playerHealth.IsDead)
+            {
                 return;
             }
 

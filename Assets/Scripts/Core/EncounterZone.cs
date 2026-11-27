@@ -39,6 +39,7 @@ namespace ArenaBreak.Core
 
         private void Awake()
         {
+            _maxAlive = Difficulty.Scale(_maxAlive, Difficulty.MaxAlive);
             _waitBelowCap = new WaitUntil(() => _aliveCount < _maxAlive);
         }
 
@@ -106,7 +107,8 @@ namespace ArenaBreak.Core
                     continue;
                 }
 
-                for (int n = 0; n < entry.Count; n++)
+                int count = Difficulty.Scale(entry.Count, Difficulty.EnemyCount);
+                for (int n = 0; n < count; n++)
                 {
                     // 한꺼번에 몰리지 않도록 살아 있는 수가 상한 아래일 때만 다음 적을 낸다
                     yield return _waitBelowCap;
