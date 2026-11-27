@@ -1333055,6 +1333055,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 00e03da9875d52443b6a8c5cdaeb4fed, type: 3}
   _jump: {fileID: 8300000, guid: 780f12f3d9b06644191e1e8ea60cc0b7, type: 3}
   _death: {fileID: 8300000, guid: 38552f71d03df1a4a97861823c7f6bc4, type: 3}
+  _levelUp: {fileID: 8300000, guid: cd36ecaf8ab0b1e4e903df6072687f5a, type: 3}
   _volume: 0.8
   _hurtCooldown: 0.35
 --- !u!1 &727604718

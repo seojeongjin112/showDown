@@ -11,19 +11,24 @@ namespace ArenaBreak.Player
         [SerializeField] private AudioClip[] _hurt;
         [SerializeField] private AudioClip _jump;
         [SerializeField] private AudioClip _death;
+        [SerializeField] private AudioClip _levelUp;
         [SerializeField, Range(0f, 1f)] private float _volume = 0.8f;
         [Tooltip("연속으로 맞아도 신음이 겹쳐 나지 않게 하는 간격")]
         [SerializeField] private float _hurtCooldown = 0.35f;
 
         private Health _health;
         private FirstPersonMovement _movement;
+        private Experience _experience;
         private int _lastHealth;
         private float _nextHurtTime;
+        private int _lastLevelUpFrame = -1;
 
         private void Awake()
         {
             _health = GetComponent<Health>();
             _movement = GetComponent<FirstPersonMovement>();
+            // 튜토리얼 씬처럼 경험치가 없는 플레이어도 있을 수 있어 없으면 레벨업 소리만 건너뛴다
+            _experience = GetComponent<Experience>();
         }
 
         private void OnEnable()
@@ -31,6 +36,11 @@ namespace ArenaBreak.Player
             _health.Changed += OnHealthChanged;
             _health.Died += OnDied;
             _movement.Jumped += OnJumped;
+
+            if (_experience != null)
+            {
+                _experience.LeveledUp += OnLeveledUp;
+            }
         }
 
         private void OnDisable()
@@ -38,6 +48,11 @@ namespace ArenaBreak.Player
             _health.Changed -= OnHealthChanged;
             _health.Died -= OnDied;
             _movement.Jumped -= OnJumped;
+
+            if (_experience != null)
+            {
+                _experience.LeveledUp -= OnLeveledUp;
+            }
         }
 
         private void Start()
@@ -69,6 +84,18 @@ namespace ArenaBreak.Player
         private void OnDied()
         {
             SfxPlayer.Play2D(_death, _volume);
+        }
+
+        // 큰 경험치를 한 번에 얻으면 같은 프레임에 레벨이 여러 번 올라 소리가 겹겹이 쌓이므로 한 번만 낸다
+        private void OnLeveledUp(int level)
+        {
+            if (Time.frameCount == _lastLevelUpFrame)
+            {
+                return;
+            }
+
+            _lastLevelUpFrame = Time.frameCount;
+            SfxPlayer.Play2D(_levelUp, _volume);
         }
     }
 }

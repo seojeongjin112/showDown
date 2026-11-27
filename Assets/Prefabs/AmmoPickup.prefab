@@ -141,6 +141,9 @@ MonoBehaviour:
   _flightTime: 0.5
   _restHeight: 0.4
   _highlightPrefab: {fileID: 0}
+  _landSound: {fileID: 0}
+  _pickupSound: {fileID: 8300000, guid: ce0a261696af6114fa7f215c9ecca506, type: 3}
+  _volume: 0.8
   _icon: {fileID: 8263259765499158540}
   _iconSize: 0.9
 --- !u!114 &9081345505439747096

@@ -50,6 +50,9 @@ MonoBehaviour:
   _flightTime: 0.5
   _restHeight: 0.4
   _highlightPrefab: {fileID: 2190301760780564892, guid: f3f927cd62add9f4088e974a7e86c14f, type: 3}
+  _landSound: {fileID: 0}
+  _pickupSound: {fileID: 8300000, guid: a9443d73f16225f47846bf53f0561a88, type: 3}
+  _volume: 0.8
   _value: 1
 --- !u!114 &2071753308483895422
 MonoBehaviour:

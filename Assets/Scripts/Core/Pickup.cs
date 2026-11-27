@@ -15,6 +15,13 @@ namespace ArenaBreak.Core
         // 멀리서도 떨어진 자리를 알아보게 하는 빛 기둥과 바닥링. 비어 있으면 표시하지 않는다
         [SerializeField] private GameObject _highlightPrefab;
 
+        // 종류마다 스크립트는 달라도 떨어지고 줍는 흐름은 여기 하나라서 소리도 여기서 낸다
+        [Header("Sound")]
+        [Tooltip("바닥에 떨어진 순간. 무기처럼 좋은 아이템만 넣어서 떨어졌다는 걸 알린다")]
+        [SerializeField] private AudioClip _landSound;
+        [SerializeField] private AudioClip _pickupSound;
+        [SerializeField, Range(0f, 1f)] private float _volume = 0.8f;
+
         private Vector3 _velocity;
         private bool _landed;
         private GameObject _highlight;
@@ -88,6 +95,8 @@ namespace ArenaBreak.Core
             {
                 if (TryPickUp())
                 {
+                    // 줍는 사람 귀에서 나는 소리라 2D로 낸다. 무기 교체를 거절하면 주운 게 아니라서 소리도 없다
+                    SfxPlayer.Play2D(_pickupSound, _volume);
                     Destroy(gameObject);
                 }
             }
@@ -109,6 +118,7 @@ namespace ArenaBreak.Core
                 transform.position = position;
                 _landed = true;
                 SpawnHighlight(position);
+                SfxPlayer.PlayAt(_landSound, position, _volume);
             }
         }
 
