@@ -10,6 +10,9 @@ namespace ArenaBreak.UI
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _quitButton;
         [SerializeField] private string _gameSceneName = "Game";
+        [Tooltip("연습(튜토리얼) 씬으로 가는 버튼. 비워 두면 쓰지 않는다")]
+        [SerializeField] private Button _practiceButton;
+        [SerializeField] private string _practiceSceneName = "Practice";
 
         [Header("난이도 선택")]
         [Tooltip("시작을 누르면 켜지는 난이도 버튼 묶음. 비워 두면 난이도를 묻지 않고 바로 시작한다")]
@@ -27,6 +30,11 @@ namespace ArenaBreak.UI
         {
             _startButton.onClick.AddListener(OnStartPressed);
             _quitButton.onClick.AddListener(QuitGame);
+
+            if (_practiceButton != null)
+            {
+                _practiceButton.onClick.AddListener(StartPractice);
+            }
 
             if (_backButton != null)
             {
@@ -51,6 +59,11 @@ namespace ArenaBreak.UI
         {
             _startButton.onClick.RemoveListener(OnStartPressed);
             _quitButton.onClick.RemoveListener(QuitGame);
+
+            if (_practiceButton != null)
+            {
+                _practiceButton.onClick.RemoveListener(StartPractice);
+            }
 
             if (_backButton != null)
             {
@@ -101,17 +114,29 @@ namespace ArenaBreak.UI
             StartGame();
         }
 
+        // 연습은 난이도와 상관없이 기본값으로 한다
+        private void StartPractice()
+        {
+            Difficulty.Current = null;
+            LoadScene(_practiceSceneName);
+        }
+
         private void StartGame()
         {
-            if (!Application.CanStreamedLevelBeLoaded(_gameSceneName))
+            LoadScene(_gameSceneName);
+        }
+
+        private void LoadScene(string sceneName)
+        {
+            if (!Application.CanStreamedLevelBeLoaded(sceneName))
             {
-                Debug.LogError($"TitleScreen: '{_gameSceneName}' 씬이 Build Profiles의 Scene List에 없어서 불러올 수 없습니다", this);
+                Debug.LogError($"TitleScreen: '{sceneName}' 씬이 Build Profiles의 Scene List에 없어서 불러올 수 없습니다", this);
                 return;
             }
 
             // 게임오버 화면이 timeScale을 0으로 둔 채 타이틀로 돌아오는 경우를 대비해 되돌린다
             Time.timeScale = 1f;
-            SceneManager.LoadScene(_gameSceneName);
+            SceneManager.LoadScene(sceneName);
         }
 
         private void QuitGame()
