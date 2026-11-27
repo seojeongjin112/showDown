@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 6725229165925081371}
   - component: {fileID: 7704845374704494544}
   - component: {fileID: 7191147296459423043}
+  - component: {fileID: 5587402506646120244}
   m_Layer: 0
   m_Name: ArmoredOutlaw
   m_TagString: Untagged
@@ -362,6 +363,21 @@ MonoBehaviour:
   _endScale: 0.85
   _shake: 0.06
   _shakeHz: 30
+--- !u!114 &5587402506646120244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969c4f0cb99bdf48880138a8fee346e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySounds
+  _sounds: {fileID: 11400000, guid: 5f5d402c657020c4985c4e6db3d3d595, type: 2}
+  _hurtCooldown: 0.25
+  _voiceGap: 0.6
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0

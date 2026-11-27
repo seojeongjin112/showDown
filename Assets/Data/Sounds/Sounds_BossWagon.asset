@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0d9421f4c68864aa51a3f50bda5a6c, type: 3}
+  m_Name: Sounds_BossWagon
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.EnemySoundSet
+  _attack:
+  - {fileID: 8300000, guid: 76874f8b49390f443a52f39ee55eaaf1, type: 3}
+  _attackVoice:
+  - {fileID: 8300000, guid: f0306ce376b826f49bff3688518b452f, type: 3}
+  - {fileID: 8300000, guid: 9c6d7a7b3ccc70347b3064a83c11ad1b, type: 3}
+  - {fileID: 8300000, guid: 49ba33d745e6b6445a3344cb48ce06ec, type: 3}
+  _attackVoiceChance: 0.3
+  _alert:
+  - {fileID: 8300000, guid: c33e00aa0760b7d429a8e77008f7519c, type: 3}
+  _alertChance: 1
+  _hurt:
+  - {fileID: 8300000, guid: 94933bf15cc5b03449eed20ce60ec6c1, type: 3}
+  - {fileID: 8300000, guid: 8ae3f419c034c314ba81fffeda2eacec, type: 3}
+  _death:
+  - {fileID: 8300000, guid: 8aeb062e0850b8749ba7eac2c26231e2, type: 3}
+  _volume: 0.9

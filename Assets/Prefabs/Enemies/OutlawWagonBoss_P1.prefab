@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 7157203071244052638}
   - component: {fileID: 2515151773151916670}
   - component: {fileID: 4769314411200725040}
+  - component: {fileID: 7824089932751875830}
   m_Layer: 0
   m_Name: OutlawWagonBoss_P1
   m_TagString: Untagged
@@ -637,3 +638,23 @@ MonoBehaviour:
   _throwHeight: 2.2
   _flightTime: 1.2
   _bombDamage: 3
+  _longBarrageSeconds: 8
+  _longBarrageWindup: 1.2
+  _longShotInterval: 0.45
+  _longBombInterval: 2
+  _longBombDamage: 2
+--- !u!114 &7824089932751875830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692560830494277734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969c4f0cb99bdf48880138a8fee346e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySounds
+  _sounds: {fileID: 11400000, guid: db9a6d6bf92b8c14bb287dcc798c6612, type: 2}
+  _hurtCooldown: 0.25
+  _voiceGap: 0.6

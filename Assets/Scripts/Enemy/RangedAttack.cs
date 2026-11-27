@@ -32,6 +32,9 @@ namespace ArenaBreak.Enemy
         // 사격 애니메이션 시작 시점에 나간다. 총알은 _fireDelay 뒤 화염 프레임에 맞춰 나간다
         public event Action<Transform> Attacked;
 
+        // Attacked는 쏘는 동작을 시작할 때라 실제 발사보다 이르다. 총소리처럼 발사 순간에 맞춰야 하는 연출용이다
+        public event Action Fired;
+
         private float AimTime => _aimLaser == null ? 0f : _aimDuration;
 
         private void Awake()
@@ -128,6 +131,7 @@ namespace ArenaBreak.Enemy
 
             EnemyProjectile projectile = Instantiate(_projectilePrefab, muzzle, Quaternion.identity);
             projectile.Launch(aimPoint - muzzle, target, _aimHeight, _damage);
+            Fired?.Invoke();
         }
     }
 }
