@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4113314804897449906}
   - component: {fileID: 1036266009706249340}
   - component: {fileID: 1994283281987888068}
+  - component: {fileID: 6132615570486943244}
   m_Layer: 0
   m_Name: DynamiteProjectile
   m_TagString: Untagged
@@ -63,6 +64,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7372d3380a50c694689a37c995a81ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.YawBillboard
+--- !u!114 &6132615570486943244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900795068219320141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8443662db84cea54f92021745783d116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.SpawnSound
+  _clips:
+  - {fileID: 8300000, guid: e81a6b36cf6a3bc4f910ba87e8f43909, type: 3}
+  _volume: 0.6
 --- !u!1 &3347135655046154826
 GameObject:
   m_ObjectHideFlags: 0

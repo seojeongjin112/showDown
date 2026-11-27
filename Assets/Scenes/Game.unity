@@ -1676,6 +1676,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 63}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!1 &65
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1830,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 68}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!1 &70
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309420,6 +1309426,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 517757925}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!1 &517831849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357394,6 +1357403,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 937199240}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!65 &937199240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1359876,6 +1359888,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 958746220}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!1 &959259174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384956,6 +1384971,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 1185860943}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!65 &1185860943
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1403335,6 +1403353,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 1359825330}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!65 &1359825330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1407490,6 +1407511,7 @@ GameObject:
   - component: {fileID: 1391496618}
   - component: {fileID: 1391496617}
   - component: {fileID: 1391496616}
+  - component: {fileID: 1391496620}
   m_Layer: 0
   m_Name: HUD_Canvas
   m_TagString: Untagged
@@ -1407598,6 +1407620,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1391496620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391496615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673c6d2db57c3e64d87705499ddd4d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.UI.ButtonSounds
+  _click: {fileID: 8300000, guid: 17a13e1006ec10145a195c086db6e327, type: 3}
+  _back: {fileID: 8300000, guid: fb1a2410b78b278409e7471790c8e9f3, type: 3}
+  _backButtons:
+  - {fileID: 1065569705}
+  _confirm: {fileID: 8300000, guid: 0f4656d93f0609740aa8a06a6ff6cd33, type: 3}
+  _confirmButtons:
+  - {fileID: 701057130}
+  - {fileID: 756609489}
+  - {fileID: 405086382}
+  _volume: 0.7
 --- !u!1 &1392283360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465742,6 +1465786,9 @@ MonoBehaviour:
   _framesPerSecond: 10
   _blocker: {fileID: 1891770715}
   _startsOpen: 0
+  _openSound: {fileID: 8300000, guid: ae80133f58550bc4c88a2b3dd8e55d9d, type: 3}
+  _closeSound: {fileID: 8300000, guid: b7feb98939fbb2646879b85f4cde5386, type: 3}
+  _volume: 0.9
 --- !u!65 &1891770715
 BoxCollider:
   m_ObjectHideFlags: 0

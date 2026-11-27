@@ -14,9 +14,10 @@ showDown 사운드 출처
     Gun_RifleHeavy  <- mosin.wav (모신나강 볼트액션 소총)
     Gun_Shotgun     <- shotty.wav
 
-[SFX/Weapons/*.ogg (chop, drawKnife1, knifeSlice, knifeSlice2, metalClick, metalLatch)]
+[SFX/Weapons/*.ogg (chop, drawKnife1, knifeSlice, knifeSlice2, metalClick, metalLatch), SFX/World/Gate_Open.ogg, Gate_Close.ogg]
   "RPG Audio" - Kenney (kenney.nl) (CC0)
   https://kenney.nl/assets/rpg-audio
+    Gate_Open <- creak1, Gate_Close <- doorClose_4
 
 [SFX/Weapons/pluck_002.ogg, SFX/UI/*.ogg]
   "Interface Sounds" - Kenney (kenney.nl) (CC0)

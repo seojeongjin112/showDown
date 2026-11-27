@@ -1405,6 +1405,7 @@ GameObject:
   - component: {fileID: 1231261375}
   - component: {fileID: 1231261374}
   - component: {fileID: 1231261379}
+  - component: {fileID: 1231261380}
   m_Layer: 5
   m_Name: TitleCanvas
   m_TagString: Untagged
@@ -1540,6 +1541,28 @@ MonoBehaviour:
     _difficulty: {fileID: 11400000, guid: fb167edfcb46b454aaaed188dd17f38a, type: 2}
   _backButton: {fileID: 430079109}
   _gameSceneName: Game
+--- !u!114 &1231261380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231261373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673c6d2db57c3e64d87705499ddd4d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.UI.ButtonSounds
+  _click: {fileID: 8300000, guid: 17a13e1006ec10145a195c086db6e327, type: 3}
+  _back: {fileID: 8300000, guid: fb1a2410b78b278409e7471790c8e9f3, type: 3}
+  _backButtons:
+  - {fileID: 430079109}
+  _confirm: {fileID: 8300000, guid: 0f4656d93f0609740aa8a06a6ff6cd33, type: 3}
+  _confirmButtons:
+  - {fileID: 1564482906}
+  - {fileID: 249607684}
+  - {fileID: 546697928}
+  _volume: 0.7
 --- !u!1 &1318799351
 GameObject:
   m_ObjectHideFlags: 0
