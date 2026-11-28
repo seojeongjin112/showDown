@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 6489974245203695399}
   - component: {fileID: 6460557824482801646}
   - component: {fileID: 3229750816809318247}
+  - component: {fileID: 3358247257036795625}
   m_Layer: 0
   m_Name: NativeGunman
   m_TagString: Untagged
@@ -506,6 +507,21 @@ MonoBehaviour:
   _scatterRadius: 1.2
   _spawnHeight: 1
   _snapDistance: 1.5
+--- !u!114 &3358247257036795625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969c4f0cb99bdf48880138a8fee346e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySounds
+  _sounds: {fileID: 11400000, guid: 1235915729b8748469584afdfa7bac63, type: 2}
+  _hurtCooldown: 0.25
+  _voiceGap: 0.6
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0

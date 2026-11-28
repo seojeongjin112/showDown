@@ -34,6 +34,9 @@ namespace ArenaBreak.Player
         // 명중 표시(HUD)가 던지기 구현을 몰라도 구독할 수 있게 열어 둔다. 인자는 처치 여부
         public event Action<bool> Hit;
 
+        // 던지는 소리가 손을 떠나는 순간에 맞도록 실제로 던진 시점에 알린다
+        public event Action Thrown;
+
         public void Bind(WeaponAmmo ammo)
         {
             _ammo = ammo;
@@ -153,6 +156,7 @@ namespace ArenaBreak.Player
             Dynamite dynamite = Instantiate(_dynamitePrefab, view.position + view.forward * _spawnDistance, Quaternion.identity);
             int damage = _upgrades != null ? _upgrades.ScaleRangedDamage(_data.Damage) : _data.Damage;
             dynamite.Launch(direction * _throwSpeed, damage, OnBlastHit);
+            Thrown?.Invoke();
         }
 
         private void OnBlastHit(bool killed)

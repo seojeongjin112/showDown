@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 673457576801921849}
   - component: {fileID: 5611962085296478373}
+  - component: {fileID: 3569903331265153349}
   m_Layer: 0
   m_Name: DynamiteExplosion
   m_TagString: Untagged
@@ -45,6 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7372d3380a50c694689a37c995a81ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.YawBillboard
+--- !u!114 &3569903331265153349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079450014634260776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8443662db84cea54f92021745783d116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Core.SpawnSound
+  _clips:
+  - {fileID: 8300000, guid: 311cc80cf8c246a42970bfc5757a255e, type: 3}
+  - {fileID: 8300000, guid: 8266b53f2d4d87a46b08045b8583baaf, type: 3}
+  _volume: 1
 --- !u!1 &3948334777941336908
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,11 @@ namespace ArenaBreak.Core
         [SerializeField] private Collider _blocker;
         [SerializeField] private bool _startsOpen = true;
 
+        [Header("Sound")]
+        [SerializeField] private AudioClip _openSound;
+        [SerializeField] private AudioClip _closeSound;
+        [SerializeField, Range(0f, 1f)] private float _volume = 0.9f;
+
         private SpriteRenderer _renderer;
         private Sprite[] _playing;
         private float _elapsed;
@@ -80,6 +85,9 @@ namespace ArenaBreak.Core
 
             // 열리는 순간부터 통과할 수 있어야 하고, 닫을 때는 연출 중에도 이미 막혀 있어야 끼이지 않는다
             _blocker.enabled = !open;
+
+            // 시작 상태를 맞추는 ApplyState와 달리 실제로 여닫힐 때만 이곳을 지나므로 씬을 열자마자 소리가 나지 않는다
+            SfxPlayer.PlayAt(open ? _openSound : _closeSound, transform.position, _volume);
 
             if (frames == null || frames.Length == 0)
             {

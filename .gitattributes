@@ -63,3 +63,6 @@ tools/*.sh  text eol=lf
 *.ogg   binary
 *.ttf   binary
 *.otf   binary
+
+# NavMesh data is always serialized in binary by Unity; never apply text/EOL conversion
+**/NavMesh*.asset binary

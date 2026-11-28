@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 6270512538484095756}
   - component: {fileID: 8835817370355292491}
   - component: {fileID: 3780715517011855055}
+  - component: {fileID: 8615567772880228971}
   m_Layer: 0
   m_Name: Coyote
   m_TagString: Untagged
@@ -354,6 +355,21 @@ MonoBehaviour:
   _endScale: 0.85
   _shake: 0.06
   _shakeHz: 30
+--- !u!114 &8615567772880228971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969c4f0cb99bdf48880138a8fee346e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySounds
+  _sounds: {fileID: 11400000, guid: ebdd7fe47363d5542ab61f8c7f5966b1, type: 2}
+  _hurtCooldown: 0.25
+  _voiceGap: 0.6
 --- !u!1 &2043079368430547393
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,72 @@
+showDown 사운드 출처
+=====================
+
+모두 CC0(퍼블릭 도메인)이라 상업적 이용 가능, 출처 표기 의무 없음.
+그래도 어디서 온 소리인지 팀이 알 수 있게 적어 둔다. 새 음원을 넣으면 여기에 추가할 것.
+
+[SFX/Weapons/Gun_*.wav]
+  "Gunshot Sounds" - OpenGameArt.org (CC0)
+  https://opengameart.org/content/gunshot-sounds
+  원본(cz/mosin/sks/shotty.wav)은 한 파일에 여러 발이 녹음돼 있어서 한 발씩 잘라 모노로 바꾸고 음량을 맞췄다.
+    Gun_Pistol      <- cz.wav (CZ-52 권총)
+    Gun_Rifle       <- sks.wav (SKS 반자동 소총)
+    Gun_RifleShort  <- sks.wav (개틀링 연사용으로 짧게)
+    Gun_RifleHeavy  <- mosin.wav (모신나강 볼트액션 소총)
+    Gun_Shotgun     <- shotty.wav
+
+[SFX/Weapons/*.ogg (chop, drawKnife1, knifeSlice, knifeSlice2, metalClick, metalLatch), SFX/World/Gate_Open.ogg, Gate_Close.ogg]
+  "RPG Audio" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/rpg-audio
+    Gate_Open <- creak1, Gate_Close <- doorClose_4
+
+[SFX/Weapons/pluck_002.ogg, SFX/UI/*.ogg]
+  "Interface Sounds" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/interface-sounds
+    UI_Click <- click_002, UI_Confirm <- confirmation_001, UI_Back <- back_001
+
+[SFX/Impacts/*.ogg]
+  "Impact Sounds" - Kenney (kenney.nl) (CC0)
+  https://kenney.nl/assets/impact-sounds
+
+[SFX/Weapons/Throw_Light.wav, Throw_Heavy.wav]
+  "Swishes Sound Pack" - OpenGameArt.org (CC0)  https://opengameart.org/content/swishes-sound-pack
+    swish-9, swish-7
+
+아래 OpenGameArt.org 음원은 모두 CC0이다. *.wav로 끝나는 것은 원본에서 필요한 부분만 잘라 모노로 바꾸고 음량을 맞췄다.
+
+[SFX/Enemies/Coyote_*]
+  "Dog Growl"                https://opengameart.org/content/dog-growl                 Coyote_Growl
+  "Dog Snarl Grunt Grumble"  https://opengameart.org/content/dog-snarl-grunt-grumble   Coyote_Bite_1(dog-snarl), Coyote_Bite_2(dog-grumble)
+  "Dog sounds"               https://opengameart.org/content/dog-sounds                Coyote_Hurt(Dog Bark 1), Coyote_Death(Sad Dog)
+  "80 CC0 creature SFX"      https://opengameart.org/content/80-cc0-creature-sfx       Coyote_Howl(howl)
+
+[SFX/Enemies/Native_*, Outlaw_*, Boss_*]
+  "Male Grunt/Yelling sounds" (OGA-BY 3.0 / CC0 중 CC0 선택)
+                             https://opengameart.org/content/male-gruntyelling-sounds
+    Native_WarCry_1(3yell1), Native_WarCry_2(yell10), Native_Yell_1~3(1yell4, 1yell5, 3yell12),
+    Native_Hurt_1~2(3grunt3, 3grunt5), Outlaw_Yell_1~3(2yell3, 2yell9, 2yell11),
+    Boss_Chief_Roar(3yell16), Boss_Wagon_Yell(yell1)
+  "grunts of male death and pain"  https://opengameart.org/content/grunts-male-death-and-pain
+    Native_Death_1~3, Outlaw_Death_2~3, Boss_Chief_Death (한 파일에서 구간별로 잘라냄)
+  "5 Hit Sounds + Dying"     https://opengameart.org/content/5-hit-sounds-dying        Outlaw_Hurt_1~2(hit1, hit3), Outlaw_Death_1(die1)
+
+[SFX/Enemies/Snake_*]
+  "80 CC0 creature SFX"      https://opengameart.org/content/80-cc0-creature-sfx       Snake_Hiss(spit_01), Snake_Hurt(hurt_04)
+  "80 CC0 RPG SFX"           https://opengameart.org/content/80-cc0-rpg-sfx            Snake_Death(creature_die_01)
+
+[SFX/Player/*]
+  "15 vocal male strain/hurt/pain/jump sounds"
+                             https://opengameart.org/content/15-vocal-male-strainhurtpainjump-sounds
+    원본 FLAC을 WAV로 바꿈. Player_Hurt_1~3(02, 08, 12), Player_Jump(11), Player_Death(15)
+
+[SFX/Pickups/*]
+  "Chimey UI Sounds"         https://opengameart.org/content/chimey-ui-sounds          LevelUp(Chime_LevelUp)
+  "New thing get!"           https://opengameart.org/content/new-thing-get             Drop_Rare
+  "80 CC0 RPG SFX"           https://opengameart.org/content/80-cc0-rpg-sfx
+    Pickup_Exp(item_gem_02), Pickup_Health(item_misc_02), Pickup_Ammo(metal_02),
+    Pickup_Weapon(blade_01), Gate_Unlock(lock_01)
+
+[SFX/World/*]
+  "25 CC0 bang / firework SFX"  https://opengameart.org/content/25-cc0-bang-firework-sfx  Explosion_1(cannon_01), Explosion_2(bang_04)
+  "Simple Fuse Sound"        https://opengameart.org/content/simple-fuse-sound         Fuse
+  "Horse Trotting"           https://opengameart.org/content/horse-trotting            Wagon_Trot

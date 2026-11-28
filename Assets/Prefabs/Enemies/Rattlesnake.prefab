@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 6542674064086077210}
   - component: {fileID: 2482363848307341532}
   - component: {fileID: 1730093053360116449}
+  - component: {fileID: 7036459410356954058}
   m_Layer: 0
   m_Name: Rattlesnake
   m_TagString: Untagged
@@ -353,6 +354,21 @@ MonoBehaviour:
   _endScale: 0.85
   _shake: 0.06
   _shakeHz: 30
+--- !u!114 &7036459410356954058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939344042944179532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969c4f0cb99bdf48880138a8fee346e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaBreak.Enemy.EnemySounds
+  _sounds: {fileID: 11400000, guid: a45f0b70b661dd549ac421f36f4d0bce, type: 2}
+  _hurtCooldown: 0.25
+  _voiceGap: 0.6
 --- !u!1 &2640938940982725905
 GameObject:
   m_ObjectHideFlags: 0
